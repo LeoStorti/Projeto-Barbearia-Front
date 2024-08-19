@@ -1,0 +1,37 @@
+/* src/app/components/tela-de-login/tela-de-login.component.css */
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+#toggle-password {
+  margin-left: -2.5rem;
+}

@@ -1,0 +1,91 @@
+<div class="header">
+  <h1>Menu de Vendas - Novo Pedido</h1>
+  <div class="user-info">
+    <span>Usuário: {{ login }}</span>
+    <span>Tempo logado: {{ sessionDuration }}</span>
+  </div>
+</div>
+
+<div class="tabcontrol">
+  <mat-tab-group [(selectedIndex)]="activeTabIndex" (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Consulta">
+      <!-- Conteúdo da aba de consulta -->
+    </mat-tab>
+    <mat-tab label="Novo Pedido">
+      <div class="cadastro">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome do Cliente</mat-label>
+            <mat-select [(ngModel)]="clienteSelecionado" (selectionChange)="selecionarCliente($event.value)">
+              <mat-option *ngFor="let c of clientes" [value]="c">
+                {{ c.nomeCliente }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="clienteSelecionado">
+            <mat-form-field appearance="outline">
+              <mat-label>Cliente ID</mat-label>
+              <input matInput [(ngModel)]="clienteSelecionado.clienteId" placeholder="Cliente ID" disabled>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nome do Produto</mat-label>
+            <mat-select [(ngModel)]="produtoSelecionado" (selectionChange)="selecionarProduto($event.value)">
+              <mat-option *ngFor="let p of produtosDisponiveis" [value]="p">
+                {{ p.nomeProduto }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="produtoSelecionado">
+            <mat-form-field appearance="outline">
+              <mat-label>Quantidade do Produto</mat-label>
+              <input matInput type="number" [(ngModel)]="produtoSelecionado.quantidade" placeholder="Digite a quantidade do produto">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Valor Unitário do Produto</mat-label>
+              <input matInput [(ngModel)]="produtoSelecionado.valorUnitario" placeholder="Digite o valor unitário do produto">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="adicionarProduto()">Adicionar Produto</button>
+          </div>
+        </div>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="nomeProduto">
+            <th mat-header-cell *matHeaderCellDef>Nome do Produto</th>
+            <td mat-cell *matCellDef="let element">{{ element.nomeProduto }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantidade">
+            <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+            <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="valorUnitario">
+            <th mat-header-cell *matHeaderCellDef>Valor Unitário</th>
+            <td mat-cell *matCellDef="let element">{{ element.valorUnitario }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Ações</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <button mat-raised-button color="warn" (click)="removerProduto(i)">Remover</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="action-buttons">
+          <button mat-raised-button color="primary" (click)="salvarVenda()">Salvar Venda</button>
+          <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

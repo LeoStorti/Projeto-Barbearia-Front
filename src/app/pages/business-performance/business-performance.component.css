@@ -1,0 +1,89 @@
+<style>
+  /* Configuração do container principal e layout da barra de ferramentas */
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #181818; /* Cor de fundo preta */
+  }
+
+  /* Estiliza a barra de ferramentas (toolbar) */
+  mat-toolbar {
+    background-color: #0f0f10; /* Cor de fundo preta */
+    color: #fff; /* Cor do texto branca */
+    padding: 0 16px; /* Adiciona padding horizontal */
+    display: flex;
+    justify-content: space-between; /* Alinha os botões à direita */
+    align-items: center; /* Alinha os itens verticalmente */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  /* Estiliza os botões na barra de ferramentas */
+  mat-toolbar button {
+    margin-left: 8px; /* Espaçamento entre os botões */
+    color: #fff; /* Cor do texto dos botões */
+    background-color: #0f0f10; /* Cor de fundo dos botões */
+    border: none; /* Remove a borda dos botões */
+    border-radius: 4px; /* Adiciona cantos arredondados */
+  }
+
+  mat-toolbar button:hover {
+    background-color: #212121; /* Cor de fundo dos botões ao passar o mouse */
+  }
+
+  /* Configura a área de conteúdo */
+  .content {
+    flex-grow: 1;
+    padding: 16px;
+    background-color: #212121; /* Cor de fundo do conteúdo */
+    color: #e0e0e0; /* Cor do texto */
+    overflow: auto; /* Permite rolagem do conteúdo */
+  }
+
+  /* Configura o layout de grid para os cards */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 300px); /* Três colunas de 300px */
+    gap: 16px; /* Espaçamento entre os cards */
+    justify-content: start; /* Alinha à esquerda */
+  }
+
+  /* Estiliza cada card */
+  mat-card {
+    background-color: #333; /* Cor de fundo dos cards */
+    color: #e0e0e0; /* Cor do texto */
+    padding: 16px;
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
+  }
+
+  /* Estilo para o título do card */
+  mat-card-title {
+    color: #fff; /* Cor do título */
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+
+  /* Estilo para o número destacado nos cards */
+  .number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  /* Estilo do texto adicional no card */
+  mat-card-content p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  /* Estilo dos ícones */
+  mat-icon {
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+</style>

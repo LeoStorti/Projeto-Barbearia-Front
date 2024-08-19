@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <div class="header-left">
+    <h1>Cadastro de Produtos</h1>
+  </div>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-menu-left">
+    </div>
+    <div class="navbar-user-info">
+      <span>Usuário: {{ authService.getUserName() }}</span>
+      <span>Tempo de Sessão: {{ authService.getSessionDuration() }}</span>
+    </div>
+  </div>
+
+  <div class="tabcontrol">
+    <mat-tab-group (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Consulta">
+        <!-- Conteúdo da aba de consulta -->
+      </mat-tab>
+      <mat-tab label="Cadastro" active>
+        <!-- Conteúdo da aba de cadastro -->
+        <div class="cadastro">
+          <form #produtoForm="ngForm" (ngSubmit)="salvarProduto()">
+            <!-- Campos do formulário -->
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Nome do Produto</mat-label>
+                <input matInput id="nome-produto" placeholder="Digite o nome do produto" [(ngModel)]="produto.nomeProduto" name="nomeProduto" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Fornecedor</mat-label>
+                <input matInput id="fornecedor" placeholder="Digite o fornecedor" [(ngModel)]="produto.fornecedor" name="fornecedor" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Quantidade</mat-label>
+                <input matInput id="quantidade" type="number" min="0" placeholder="Digite a quantidade" [(ngModel)]="produto.quantidade" name="quantidade" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Valor de Compra</mat-label>
+                <input matInput id="valor-de-compra" type="number" min="0" placeholder="Digite o valor de compra" [(ngModel)]="produto.valorDeCompra" name="valorDeCompra" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Valor de Venda</mat-label>
+                <input matInput id="valor-de-venda" type="number" min="0" placeholder="Digite o valor de venda" [(ngModel)]="produto.valorDeVenda" name="valorDeVenda" required>
+              </mat-form-field>
+            </div>
+
+            <!-- Botões para cancelar e salvar -->
+            <div class="action-buttons">
+              <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+              <button mat-raised-button color="primary" type="submit">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</body>
+</html>

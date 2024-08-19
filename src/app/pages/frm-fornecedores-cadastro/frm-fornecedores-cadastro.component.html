@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Fornecedores</title>
+  <link rel="stylesheet" href="frm-fornecedores-cadastro.component.css">
+</head>
+<body>
+  <!DOCTYPE html>
+  <div class="header">
+    <div class="header-left">
+      <h1>Cadastro de Fornecedores</h1>
+    </div>
+    <div class="header-right">
+      <p>Usuário: {{ userName }}</p>
+      <p>Tempo Logado: {{ loginTime }}</p>
+    </div>
+  </div>
+
+  <div class="tabcontrol">
+    <mat-tab-group [(selectedIndex)]="activeTabIndex" (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Consulta">
+        <!-- Conteúdo da aba de consulta -->
+      </mat-tab>
+      <mat-tab label="Cadastro">
+        <div class="cadastro">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput id="nome" placeholder="Digite o nome do fornecedor" [(ngModel)]="fornecedor.nome">
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>CNPJ</mat-label>
+              <input matInput id="cnpj" placeholder="Digite o CNPJ do fornecedor" [(ngModel)]="fornecedor.cnpj">
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Endereço</mat-label>
+              <input matInput id="endereco" placeholder="Digite o endereço do fornecedor" [(ngModel)]="fornecedor.endereco">
+            </mat-form-field>
+          </div>
+
+          <div class="form-group-inline">
+            <mat-checkbox id="ativo" [(ngModel)]="fornecedor.ativo">Ativo</mat-checkbox>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Nível</mat-label>
+              <input matInput id="nivel" type="number" min="0" placeholder="Digite o nível do fornecedor" [(ngModel)]="fornecedor.nivel">
+            </mat-form-field>
+          </div>
+
+          <!-- Botões para cancelar e salvar -->
+          <div class="action-buttons">
+            <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+            <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+          </div>
+
+          <!-- DataGridView para produtos relacionados -->
+          <div class="data-grid">
+            <h3>Produtos Relacionados</h3>
+            <table mat-table [dataSource]="produtos" class="mat-elevation-z8">
+              <ng-container matColumnDef="productId">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.productId}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="nomeProduto">
+                <th mat-header-cell *matHeaderCellDef> Nome do Produto </th>
+                <td mat-cell *matCellDef="let element"> {{element.nomeProduto}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fornecedor">
+                <th mat-header-cell *matHeaderCellDef> Fornecedor </th>
+                <td mat-cell *matCellDef="let element"> {{element.fornecedor}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="quantidade">
+                <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+                <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</body>
+</html>

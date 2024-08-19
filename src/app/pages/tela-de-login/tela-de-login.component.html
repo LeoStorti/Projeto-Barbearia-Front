@@ -1,0 +1,28 @@
+<!-- src/app/components/tela-de-login/tela-de-login.component.html -->
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" id="login-form">
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome de Usuário</mat-label>
+        <input matInput formControlName="login" placeholder="Digite seu nome de usuário" required>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" formControlName="senha" placeholder="Digite sua senha" required>
+        <button mat-icon-button matSuffix type="button" id="toggle-password">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="button" (click)="onLogin()">Entrar</button>
+      <button mat-raised-button color="warn" type="button" (click)="onLogout()" style="margin-left: 5cm;">Sair</button>
+    </div>
+    <div class="forgot-password">
+      <a href="/forgot-password">Esqueceu a senha?</a>
+    </div>
+  </form>
+</div>

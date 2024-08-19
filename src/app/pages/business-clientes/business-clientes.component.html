@@ -1,0 +1,104 @@
+<div class="dashboard-container">
+  <nav class="navbar">
+    <ul class="navbar-list">
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Agendamentos</a></li>
+      <li><a href="#">Clientes</a></li>
+      <li><a href="#">Produtos</a></li>
+      <li><a href="#">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+    <div class="clients-section">
+      <div class="card">
+        <h2>Clientes</h2>
+        <p>Visualize os clientes cadastrados e os serviços realizados.</p>
+        <table class="clients-table">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Serviços Realizados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>João Silva</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Maria Oliveira</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Pedro Almeida</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Histórico de Serviços</h2>
+        <p>Visualize os serviços realizados para cada cliente.</p>
+        <table class="services-table">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Serviço</th>
+              <th>Data</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>João Silva</td>
+              <td>Corte de Cabelo</td>
+              <td>2023-06-23</td>
+              <td>R$ 30,00</td>
+            </tr>
+            <tr>
+              <td>Maria Oliveira</td>
+              <td>Barba & Bigode</td>
+              <td>2023-06-24</td>
+              <td>R$ 20,00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card">
+        <h2>Adicionar Novo Cliente</h2>
+        <form>
+          <label for="name">Nome</label>
+          <input type="text" id="name" placeholder="Nome do cliente" />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="exemplo@email.com" />
+
+          <label for="phone">Telefone</label>
+          <input type="tel" id="phone" placeholder="(00) 00000-0000" />
+
+          <button type="submit">Adicionar Cliente</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Filtros</h2>
+        <form>
+          <label for="filter-name">Nome</label>
+          <input type="text" id="filter-name" placeholder="Pesquisar por nome" />
+
+          <label for="service">Serviço</label>
+          <select id="service">
+            <option>Selecione o serviço</option>
+          </select>
+
+          <button type="submit">Aplicar Filtros</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+/* Estilos Gerais */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #0e0e0e; /* Fundo preto */
+  color: #e0e0e0; /* Cor clara para textos */
+}
+
+/* Navbar */
+.navbar {
+  background-color: #1c1c1c;
+  padding: 10px 20px;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-list li a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-list li a:hover {
+  color: #fff;
+}
+
+/* Layout Geral */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #0e0e0e;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.clients-section, .sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cartões */
+.card {
+  background-color: #1c1c1c;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+}
+
+.card p {
+  color: #c0c0c0;
+}
+
+/* Tabelas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: left;
+}
+
+table th {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+table td {
+  background-color: #333;
+  color: #e0e0e0;
+}
+
+table tbody tr:hover {
+  background-color: #444;
+}
+
+/* Inputs e Botões */
+input[type="text"], input[type="email"], input[type="tel"], select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #1c1c1c;
+  border: 1px solid #444;
+  color: #e0e0e0;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #444;
+  border: none;
+  color: #e0e0e0;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+}

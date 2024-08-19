@@ -1,0 +1,53 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
+src/app/app.routes.ts
+src/app/pages/frm-compras-consulta/frm-compras-consulta.component.css
+src/app/pages/frm-compras-consulta/frm-compras-consulta.component.html
+src/app/pages/frm-compras-consulta/frm-compras-consulta.component.spec.ts
+src/app/pages/frm-compras-consulta/frm-compras-consulta.component.ts
+src/app/pages/frm-compras-nova/frm-compras-nova.component.css
+src/app/pages/frm-compras-nova/frm-compras-nova.component.html
+src/app/pages/frm-compras-nova/frm-compras-nova.component.spec.ts
+src/app/pages/frm-compras-nova/frm-compras-nova.component.ts
+src/app/app.routes.ts
+*.ts

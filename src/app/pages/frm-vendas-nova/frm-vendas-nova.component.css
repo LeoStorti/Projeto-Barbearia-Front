@@ -1,0 +1,57 @@
+.header {
+  background-color: #3f51b5; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  font-size: 14px;
+  color: #000;
+}
+
+.tabcontrol {
+  margin: 2rem;
+}
+
+.cadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group,
+.form-group-inline {
+  margin-bottom: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.data-grid {
+  margin-top: 2rem;
+}
+
+.mat-option-text {
+  color: black; /* ou a cor desejada para o texto das opções */
+}
+
+.mat-select-value-text {
+  color: black; /* ou a cor desejada para o texto selecionado */
+}
+
+.cliente-info,
+.produto-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
