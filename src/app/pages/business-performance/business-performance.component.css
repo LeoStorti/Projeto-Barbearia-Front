@@ -1,4 +1,10 @@
 <style>
+html, body {
+  height: 100%;
+  margin:0;
+  padding: 0;
+  overflow: hidden;
+}
   /* Configuração do container principal e layout da barra de ferramentas */
   .container {
     display: flex;
@@ -13,14 +19,33 @@
     color: #fff; /* Cor do texto branca */
     padding: 0 16px; /* Adiciona padding horizontal */
     display: flex;
-    justify-content: space-between; /* Alinha os botões à direita */
+    justify-content: flex-start; /* Alinha os itens à esquerda */
     align-items: center; /* Alinha os itens verticalmente */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
+    width: 100%; /* Ocupa a largura completa */
+    min-height: 64px; /* Ajuste conforme necessário */
+
+  }
+
+  .toolbar-left {
+    display: flex; /* Permite alinhamento interno se houver vários itens */
+    align-items: center; /* Alinha itens verticalmente no container */
   }
 
   .spacer {
     flex: 1;
   }
+
+  /* Adiciona um efeito de elevação */
+  mat-toolbar.mat-elevation-z4 {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  /* Estiliza os botões */
+  button.mat-button {
+    margin: 0 8px; /* Espaçamento entre botões */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+  }
+  /* Opcional: espaçador */
 
   /* Estiliza os botões na barra de ferramentas */
   mat-toolbar button {
@@ -42,6 +67,7 @@
     background-color: #212121; /* Cor de fundo do conteúdo */
     color: #e0e0e0; /* Cor do texto */
     overflow: auto; /* Permite rolagem do conteúdo */
+
   }
 
   /* Configura o layout de grid para os cards */
@@ -50,6 +76,7 @@
     grid-template-columns: repeat(3, 300px); /* Três colunas de 300px */
     gap: 16px; /* Espaçamento entre os cards */
     justify-content: start; /* Alinha à esquerda */
+
   }
 
   /* Estiliza cada card */

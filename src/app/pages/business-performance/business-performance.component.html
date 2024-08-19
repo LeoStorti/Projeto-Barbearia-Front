@@ -1,18 +1,24 @@
 <div class="container">
   <mat-toolbar color="primary" class="toolbar">
-    <span>Dashboard</span>
+    <div class="toolbar-left">
     <span class="spacer"></span>
+    <button mat-button color="primary">Dashboards</button>
     <button mat-button color="primary">Agendamentos</button>
     <button mat-button color="primary">Clientes</button>
-    <button mat-button color="primary">Produtos</button>
+    <button mat-button color="primary">Serviços</button>
     <button mat-button color="primary">Relatórios</button>
+    <button mat-button color="primary">Pagamentos</button>
+    <button mat-button color="primary">Produtos</button>
+    <button mat-button color="primary">Profissionais</button>
+  </div>
+
   </mat-toolbar>
 
   <div class="content">
     <div class="grid-container">
       <!-- Primeira linha de três cards -->
       <div class="grid-item">
-        <mat-card class="dark-card">
+        <mat-card>
           <mat-card-header>
             <mat-icon>person</mat-icon>
             <mat-card-title>Clientes Ativos</mat-card-title>
@@ -25,7 +31,7 @@
       </div>
 
       <div class="grid-item">
-        <mat-card class="dark-card">
+        <mat-card>
           <mat-card-header>
             <mat-icon>settings</mat-icon>
             <mat-card-title>Serviços Realizados</mat-card-title>
@@ -38,7 +44,7 @@
       </div>
 
       <div class="grid-item">
-        <mat-card class="dark-card">
+        <mat-card>
           <mat-card-header>
             <mat-icon>attach_money</mat-icon>
             <mat-card-title>Faturamento</mat-card-title>
@@ -52,7 +58,7 @@
 
       <!-- Segunda linha de três cards -->
       <div class="grid-item">
-        <mat-card class="dark-card">
+        <mat-card>
           <mat-card-header>
             <mat-icon>shopping_cart</mat-icon>
             <mat-card-title>Produtos Vendidos</mat-card-title>
@@ -65,7 +71,7 @@
       </div>
 
       <div class="grid-item">
-        <mat-card class="dark-card">
+        <mat-card>
           <mat-card-header>
             <mat-icon>feedback</mat-icon>
             <mat-card-title>Feedback Recebidos</mat-card-title>
@@ -78,7 +84,7 @@
       </div>
 
       <div class="grid-item">
-        <mat-card class="dark-card">
+        <mat-card>
           <mat-card-header>
             <mat-icon>help_outline</mat-icon>
             <mat-card-title>Nome a Definir</mat-card-title>
