@@ -1,118 +1,116 @@
-<style>
-html, body {
-  height: 100%;
+/* Fontes e cores do tema */
+/* @import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap'); */
+
+:root {
+  --primary-color: #3f51b5;
+  --background-color: #f5f5f5;
+  --card-background: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+  --text-primary: #333333;
+  --text-muted: #777777;
+  --border-color: #e0e0e0;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
-/* Configuração do container principal e layout da barra de ferramentas */
+header {
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 64px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header nav a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+
+header nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
 .container {
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background-color: #181818; /* Cor de fundo preta */
+  gap: 16px;
 }
 
-/* Estiliza a barra de ferramentas (toolbar) */
-mat-toolbar {
-  background-color: #0f0f10; /* Cor de fundo preta */
-  color: #fff; /* Cor do texto branca */
-  padding: 0 16px; /* Adiciona padding horizontal */
-  display: flex;
-  justify-content: flex-start; /* Alinha os itens à esquerda */
-  align-items: center; /* Alinha os itens verticalmente */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
-  width: 100%; /* Ocupa a largura completa */
-  min-height: 64px; /* Ajuste conforme necessário */
-}
-
-/* Estiliza os botões */
-button.mat-button {
-  margin: 0 8px; /* Espaçamento entre botões */
-  font-size: 14px; /* Ajusta o tamanho da fonte */
-}
-
-/* Opcional: espaçador */
-.spacer {
-  flex: 1;
-}
-
-/* Adiciona um efeito de elevação */
-mat-toolbar.mat-elevation-z4 {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Configura a área de conteúdo */
-.content {
-  flex-grow: 1;
-  padding: 16px;
-  background-color: #212121; /* Cor de fundo do conteúdo */
-  color: #e0e0e0; /* Cor do texto */
-  display: flex; /* Adiciona flexbox para alinhar os cards e o mat-card grande */
-  flex-wrap: wrap; /* Permite que os itens se movam para a linha seguinte se necessário */
-  gap: 16px; /* Espaçamento entre os itens */
-}
-
-/* Configura o layout de grid para os cards */
-.grid-container {
+.grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Ajusta a largura das colunas */
-  gap: 8px; /* Ajusta o espaço entre os cards (pode incluir altura e largura) */
-  flex: 1; /* Faz a grid-container ocupar o espaço disponível */
+  gap: 16px;
 }
 
-.grid-item {
-  margin: 0; /* Remove margem extra, se houver */
-  padding: 0; /* Remove padding extra, se houver */
+.grid.md\:grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
-/* Estiliza cada card */
-mat-card {
-  background-color: #333; /* Cor de fundo dos cards */
-  color: #e0e0e0; /* Cor do texto */
+
+.grid.lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
   padding: 16px;
-  border-radius: 8px; /* Cantos arredondados */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
-  margin: 0; /* Remove margem extra, se houver */
-  padding: 8px; /* Ajusta o padding interno do card */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* Estilo para o título do card */
-mat-card-title {
-  color: #fff; /* Cor do título */
-  font-size: 1.2rem;
-  margin-bottom: 16px;
+.card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
 }
 
-/* Estilo para o número destacado nos cards */
-.number {
+.card .value {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 8px;
 }
 
-/* Estilo do texto adicional no card */
-mat-card-content p {
-  max-height: 80px; /* Define a altura máxima do conteúdo do card */
-  overflow: auto; /* Adiciona rolagem se o conteúdo exceder a altura máxima */
+.card .description {
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
-/* Estilo dos ícones */
-mat-icon {
-  vertical-align: middle;
-  margin-right: 8px;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Estiliza o card grande à direita */
-.large-card {
-  width: 400px; /* Ajuste a largura conforme necessário */
-  flex-shrink: 0; /* Evita que o card encolha */
+table th,
+table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
 }
-/* Adiciona uma classe para cards específicos que devem ser ajustados */
-.grid-item.products-sold,
-.grid-item.feedback-received,
-.grid-item.unnamed-card {
-  /* Ajusta o posicionamento dos cards */
-  margin-top: -16px; /* Ajuste o valor conforme necessário para subir os cards */
+
+table thead th {
+  background-color: var(--primary-color);
+  color: white;
 }
-</style>
+
+table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
