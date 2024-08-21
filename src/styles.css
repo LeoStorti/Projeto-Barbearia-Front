@@ -1,149 +1,115 @@
+/* Fontes e cores do tema */
+/* @import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap'); */
 
-/* Tema escuro completo com fundo preto */
-html, body {
-  height: 100%;
+:root {
+  --primary-color: #1c1c1e; /* Cor mais escura para o header */
+  --background-color: #121212; /* Cor de fundo mais escura */
+  --card-background: #1f1f1f; /* Fundo dos cards mais escuro */
+  --text-primary: #e0e0e0; /* Texto primário mais claro para contraste */
+  --text-muted: #9e9e9e; /* Texto muted também mais claro */
+  --border-color: #2c2c2e; /* Cor da borda mais escura */
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
   margin: 0;
   padding: 0;
-  background-color: #000;  /* Fundo preto para toda a página */
-  color: #e0e0e0;
-  font-family: Arial, sans-serif;
 }
 
-.dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #000; /* Fundo preto para o container */
-}
-
-.navbar {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-bottom: 1px solid #333;
-}
-
-.navbar-list {
+header {
+  background-color: var(--primary-color);
+  color: white;
   display: flex;
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 64px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-list li a {
+header nav a {
+  color: white;
+  font-weight: 500;
   text-decoration: none;
-  color: #e0e0e0;
-  font-weight: bold;
-  padding: 5px 10px;
+  padding: 8px 16px;
 }
 
-.navbar-list li a:hover {
-  background-color: #333;
-  border-radius: 5px;
+header nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
 }
 
-.dashboard {
-  margin-top: 20px;
+.container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.stats-cards {
+.grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 16px;
+}
+
+.grid.md\:grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid.lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .card {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .card h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #fff;
-}
-
-.card p {
+  font-size: 1rem;
+  font-weight: 600;
   margin: 0;
 }
 
-.value {
+.card .value {
   font-size: 2rem;
   font-weight: bold;
-  margin: 10px 0;
-  color: #fff;
 }
 
-.percentage {
-  color: #27ae60;
+.card .description {
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
-.main-content {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.agendamentos-recentes {
-  flex: 0.65;
-}
-
-.agendamentos-recentes h2 {
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.agendamentos-recentes .subtitle {
-  color: #888;
-  margin-bottom: 20px;
-}
-
-.recent-table {
+table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.recent-table th, .recent-table td {
-  padding: 15px;
+table th,
+table td {
+  padding: 8px;
   text-align: left;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.recent-table th {
-  background-color: #1e1e1e;
-  color: #e0e0e0;
+table thead th {
+  background-color: var(--primary-color);
+  color: white;
 }
 
-.recent-table td {
-  background-color: #2c2c2c;
-  color: #e0e0e0;
+table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.sidebar {
-
-  flex: 0.35;
-}
-
-.info ul {
-  padding-left: 20px;
-  margin: 0.5rem 0;
-}
-
-.service-list {
-  padding-left: 20px;
-  margin: 0.5rem 0;
-}
-
-.service-list li {
-  margin-bottom: 0.5rem;
-}
-
-.sidebar .card h3 {
-
-  color: #fff;
-}
-
-.sidebar .card p {
-  color: #e0e0e0;
+table tbody tr:last-child td {
+  border-bottom: none;
 }
