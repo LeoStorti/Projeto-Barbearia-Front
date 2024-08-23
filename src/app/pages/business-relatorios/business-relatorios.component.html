@@ -1,165 +1,151 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo</title>
-    <link rel="stylesheet" href="business-relatorios.component.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços</title>
+  <link rel="stylesheet" href="business-relatorios.component.css">
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">Painel Administrativo</div>
-            <nav>
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Agendamentos</a></li>
-                    <li><a href="#">Clientes</a></li>
-                    <li><a href="#">Produtos</a></li>
-                    <li><a href="#">Relatórios</a></li>
-                </ul>
-            </nav>
+    <main class="p-4 space-y-4">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <!-- Cards content goes here -->
+      </div>
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-4">
+        <!-- More cards content goes here -->
+      </div>
+    </main>
+
+    <div class="p-4 space-y-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
+              <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+              <path d="M12 17.5v-11"></path>
+            </svg>
+            <div>
+              <h3 class="title">1 - Faturamento Total por Data</h3>
+              <p class="text">Aqui você pesquisa o valor total faturado e o detalhe dos pagamentos recebidos em um intervalo de data.</p>
+            </div>
+          </div>
         </div>
-    </header>
 
-    <main class="container">
-        <section class="section">
-            <h2>Agendamentos</h2>
-            <p>Visualize os agendamentos realizados.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Serviço</th>
-                        <th>Data</th>
-                        <th>Horário</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> João Silva</td>
-                        <td>Corte de Cabelo</td>
-                        <td>2023-06-15</td>
-                        <td>14:00</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Maria Oliveira</td>
-                        <td>Coloração</td>
-                        <td>2023-06-20</td>
-                        <td>10:30</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Pedro Almeida</td>
-                        <td>Barba</td>
-                        <td>2023-06-22</td>
-                        <td>16:45</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+            </svg>
+            <div>
+              <h3 class="title">2 - Vendas Total por Data</h3>
+              <p class="text">Aqui você pesquisa o valor total das suas vendas agrupadas por serviços e produtos em um intervalo de data.</p>
+            </div>
+          </div>
+        </div>
 
-        <section class="section">
-            <h2>Vendas</h2>
-            <p>Visualize as vendas realizadas.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Produto</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> João Silva</td>
-                        <td>Produto 1</td>
-                        <td>R$ 29,99</td>
-                        <td>2023-06-15</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Maria Oliveira</td>
-                        <td>Produto 2</td>
-                        <td>R$ 39,99</td>
-                        <td>2023-06-20</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Pedro Almeida</td>
-                        <td>Produto 3</td>
-                        <td>R$ 49,99</td>
-                        <td>2023-06-22</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <line x1="12" x2="12" y1="2" y2="22"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            <div>
+              <h3 class="title">3 - Pesquisar Comissões dos Profissionais por Data</h3>
+              <p class="text">Aqui você pesquisa comissões de todos os serviços prestados pelos seus profissionais por intervalo de data.</p>
+            </div>
+          </div>
+        </div>
 
-    <main class="container">
-        <section class="section">
-            <h2>Fidelidade</h2>
-            <p>Visualize os clientes mais fiéis.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Visitas</th>
-                        <th>Valor Gasto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> João Silva</td>
-                        <td>15</td>
-                        <td>R$ 450,00</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Maria Oliveira</td>
-                        <td>10</td>
-                        <td>R$ 320,00</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Pedro Almeida</td>
-                        <td>8</td>
-                        <td>R$ 280,00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <!-- Card 4 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <path d="M12 11h4"></path>
+              <path d="M12 16h4"></path>
+              <path d="M8 11h.01"></path>
+              <path d="M8 16h.01"></path>
+            </svg>
+            <div>
+              <h3 class="title">4 - Pesquisar Comandas por Número ou Data</h3>
+              <p class="text">Aqui você pesquisa todas as comandas do seu estabelecimento por número da comanda ou intervalo de data.</p>
+            </div>
+          </div>
+        </div>
 
-        <section class="section">
-            <h2>Feedbacks</h2>
-            <p>Visualize os feedbacks dos clientes.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Feedback</th>
-                        <th>Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> João Silva</td>
-                        <td>Excelente atendimento, recomendo!</td>
-                        <td>2023-06-15</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Maria Oliveira</td>
-                        <td>Gostei muito do serviço, voltarei em breve.</td>
-                        <td>2023-06-20</td>
-                    </tr>
-                    <tr>
-                        <td><img src="user.svg" alt="Ícone de usuário"> Pedro Almeida</td>
-                        <td>Ótimo atendimento, profissionais qualificados.</td>
-                        <td>2023-06-22</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
+        <!-- Card 5 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <path d="M4 4h16v16H4z"></path>
+              <path d="M4 4v16h16V4"></path>
+            </svg>
+            <div>
+              <h3 class="title">5 - Pesquisa de Produtos Vendidos</h3>
+              <p class="text">Aqui você pesquisa todos os produtos vendidos em um intervalo de data, com informações detalhadas.</p>
+            </div>
+          </div>
+        </div>
 
-    <footer class="container">
-        <p>&copy; 2023 - Todos os direitos reservados</p>
+        <!-- Card 6 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <path d="M4 4h16v16H4z"></path>
+              <path d="M4 4v16h16V4"></path>
+              <path d="M4 12h16"></path>
+            </svg>
+            <div>
+              <h3 class="title">6 - Pesquisar Serviços por Tipo</h3>
+              <p class="text">Aqui você pesquisa todos os serviços oferecidos por tipo e suas respectivas vendas e comissões.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-4">
+        <!-- New Grid 1 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <path d="M4 4h16v16H4z"></path>
+              <path d="M4 4v16h16V4"></path>
+              <path d="M4 12h16"></path>
+              <path d="M8 8h8"></path>
+              <path d="M8 16h8"></path>
+            </svg>
+            <div>
+              <h3 class="title">7 - Total de Agendamentos por Profissional</h3>
+              <p class="text">Aqui você pesquisa o total de agendamentos realizados por cada profissional em um intervalo de data.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- New Grid 2 -->
+        <div class="card">
+          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <path d="M4 4h16v16H4z"></path>
+              <path d="M4 4v16h16V4"></path>
+              <path d="M4 12h16"></path>
+              <path d="M8 16h8"></path>
+            </svg>
+            <div>
+              <h3 class="title">8 - Produtos Vendidos por Categoria</h3>
+              <p class="text">Aqui você pesquisa todos os produtos vendidos, organizados por categoria e intervalo de data.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="flex items-center justify-center h-16 border-t border-muted text-sm text-muted-foreground">
+      <span>&copy; 2024 Seu Nome - Todos os direitos reservados.</span>
     </footer>
-</body>
 </html>

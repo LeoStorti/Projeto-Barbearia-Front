@@ -1,123 +1,128 @@
-/* Variáveis CSS personalizadas */
-:root {
-  --background: hsl(210 4% 95%);
-  --foreground: hsl(210 10% 5%);
-  --card: hsl(210 4% 90%);
-  --card-foreground: hsl(210 10% 15%);
-  --popover: hsl(210 4% 95%);
-  --popover-foreground: hsl(210 10% 5%);
-  --primary: hsl(204 84% 52%);
-  --primary-foreground: hsl(210 10% 98%);
-  --secondary: hsl(209 71% 49%);
-  --secondary-foreground: hsl(210 10% 5%);
-  --muted: hsl(209 71% 49%);
-  --muted-foreground: hsl(210 10% 45%);
-  --accent: hsl(204 84% 52%);
-  --accent-foreground: hsl(210 10% 5%);
-  --destructive: hsl(0 72% 51%);
-  --destructive-foreground: hsl(210 10% 98%);
-  --border: hsl(210 5.9% 90%);
-  --input: hsl(210 5.9% 90%);
-  --ring: hsl(210 5.9% 10%);
-  --radius: 0.5rem;
-}
+  /* Variáveis CSS personalizadas */
+  :root {
+    --background: hsl(210 4% 95%);
+    --foreground: hsl(210 10% 5%);
+    --card: hsl(210 4% 90%);
+    --card-foreground: hsl(210 10% 15%);
+    --popover: hsl(210 4% 95%);
+    --popover-foreground: hsl(210 10% 5%);
+    --primary: hsl(204 84% 52%);
+    --primary-foreground: hsl(210 10% 98%);
+    --secondary: hsl(209 71% 49%);
+    --secondary-foreground: hsl(210 10% 5%);
+    --muted: hsl(209 71% 49%);
+    --muted-foreground: hsl(210 10% 45%);
+    --accent: hsl(204 84% 52%);
+    --accent-foreground: hsl(210 10% 5%);
+    --destructive: hsl(0 72% 51%);
+    --destructive-foreground: hsl(210 10% 98%);
+    --border: hsl(210 5.9% 90%);
+    --input: hsl(210 5.9% 90%);
+    --ring: hsl(210 5.9% 10%);
+    --radius: 0.5rem;
+  }
 
-/* Imagens com filtro de preenchimento */
-img[src="/placeholder.svg"],
-img[src="/placeholder-user.jpg"] {
-  filter: sepia(0.3) hue-rotate(-60deg) saturate(0.5) opacity(0.8);
-}
+  /* Imagens com filtro de preenchimento */
+  img[src="/placeholder.svg"],
+  img[src="/placeholder-user.jpg"] {
+    filter: sepia(0.3) hue-rotate(-60deg) saturate(0.5) opacity(0.8);
+  }
 
-/* Fonte padrão para títulos */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Inter', sans-serif;
-  --font-sans-serif: 'Inter';
-}
+  /* Fonte padrão para títulos */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Inter', sans-serif;
+    --font-sans-serif: 'Inter';
+  }
 
-/* Fonte padrão para o corpo */
-body {
-  font-family: 'Inter', sans-serif;
-  --font-sans-serif: 'Inter';
-}
+  /* Fonte padrão para o corpo */
+  body {
+    font-family: 'Inter', sans-serif;
+    --font-sans-serif: 'Inter';
+  }
 
-/* Estilo para a página inteira */
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-  margin: 0;
-  min-height: 100vh;
-  padding: 0;
-}
+  /* Estilo para a página inteira */
+  body {
+    background-color: var(
 
-/* Estilo para o cabeçalho */
-/* Estilo para o cabeçalho */
-header {
-  background-color: var(--primary);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  height: 64px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    );
+    color: var(--foreground);
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+  }
 
-/* Estilo para a navegação */
-nav {
-  display: flex;
-  align-items: center;
-  gap: 16px; /* Ajuste o espaçamento entre os itens conforme necessário */
-}
-
-nav a {
-  color: white;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 8px 16px;
-}
-
-nav a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
+  /* Estilo para o cabeçalho */
+  /* Estilo para o cabeçalho */
+  header {
+    background-color: var(
 
 
-nav a.font-bold {
-  font-weight: bold;
-}
+    );
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 64px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-nav a.text-muted-foreground {
-  color: var(--muted-foreground);
-}
+  /* Estilo para a navegação */
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Ajuste o espaçamento entre os itens conforme necessário */
+  }
 
-/* Estilo para o botão de usuário */
-header {
-  background-color: var(--primary-color);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  height: 64px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  nav a {
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 16px;
+  }
 
-header nav a {
-  color: white;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 8px 16px;
-}
+  nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
 
-header nav a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
+
+  nav a.font-bold {
+    font-weight: bold;
+  }
+
+  nav a.text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+
+  /* Estilo para o botão de usuário */
+  header {
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 64px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  header nav a {
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 16px;
+  }
+
+  header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }

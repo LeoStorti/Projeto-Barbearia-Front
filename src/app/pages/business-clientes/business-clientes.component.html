@@ -1,13 +1,4 @@
 <div class="dashboard-container">
-  <nav class="navbar">
-    <ul class="navbar-list">
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Agendamentos</a></li>
-      <li><a href="#">Clientes</a></li>
-      <li><a href="#">Produtos</a></li>
-      <li><a href="#">Relatórios</a></li>
-    </ul>
-  </nav>
 
   <div class="main-content">
     <div class="clients-section">
@@ -18,20 +9,24 @@
           <thead>
             <tr>
               <th>Cliente</th>
+              <th>Telefone</th> <!-- Nova coluna para Telefone -->
               <th>Serviços Realizados</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>João Silva</td>
+              <td>(11) 99999-9999</td> <!-- Dados de telefone adicionados -->
               <td>3</td>
             </tr>
             <tr>
               <td>Maria Oliveira</td>
+              <td>(21) 88888-8888</td> <!-- Dados de telefone adicionados -->
               <td>2</td>
             </tr>
             <tr>
               <td>Pedro Almeida</td>
+              <td>(31) 77777-7777</td> <!-- Dados de telefone adicionados -->
               <td>1</td>
             </tr>
           </tbody>
@@ -75,11 +70,24 @@
           <label for="name">Nome</label>
           <input type="text" id="name" placeholder="Nome do cliente" />
 
+          <label for="phone">Telefone</label>
+          <input type="tel" id="phone" placeholder="(00) 00000-0000" />
+
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="exemplo@email.com" />
 
-          <label for="phone">Telefone</label>
-          <input type="tel" id="phone" placeholder="(00) 00000-0000" />
+          <label for="dob">Data de Nascimento    </label>
+          <input type="date" id="dob" />
+          <br>
+          <br>
+          <label for="address">Endereço</label>
+          <input type="text" id="address" placeholder="Endereço completo" />
+
+          <label for="notes">Observações</label>
+          <textarea id="notes" placeholder="Observações adicionais"></textarea>
+
+          <label for="allergies">Alergias</label>
+          <textarea id="allergies" placeholder="Liste as alergias"></textarea>
 
           <button type="submit">Adicionar Cliente</button>
         </form>

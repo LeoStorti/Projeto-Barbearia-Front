@@ -1,12 +1,545 @@
 <!--
 // v0 by Vercel.
-// https://v0.dev/t/AGSn7SVDkRw
+// https://v0.dev/t/qQE9xBV30N8
 -->
 
-<div class="flex flex-col min-h-screen bg-background">
-  <header class="flex items-center h-16 px-4 border-b border-muted shrink-0 md:px-6">
-    <nav class="gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-      <a class="flex items-center gap-2 text-lg font-semibold md:text-base" href="#">
+  <div class="flex items-center justify-between mb-6 flex-col md:flex-row md:items-start md:gap-4 mt-8">
+    <div class="flex-1 order-2 md:order-1">
+      <div class="flex items-center gap-4">
+        <button
+          type="button"
+          role="combobox"
+          aria-controls="radix-:r36:"
+          aria-expanded="false"
+          aria-autocomplete="none"
+          dir="ltr"
+          data-state="closed"
+          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <span style="pointer-events: none;">All Employees</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          role="combobox"
+          aria-controls="radix-:r3b:"
+          aria-expanded="false"
+          aria-autocomplete="none"
+          dir="ltr"
+          data-state="closed"
+          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <span style="pointer-events: none;">All Dates</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          role="combobox"
+          aria-controls="radix-:r3g:"
+          aria-expanded="false"
+          aria-autocomplete="none"
+          dir="ltr"
+          data-state="closed"
+          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <span style="pointer-events: none;">All Statuses</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="order-1 md:order-2 mt-4 md:mt-0">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+        Add New Schedule
+      </button>
+    </div>
+  </div>
+  <div class="overflow-auto">
+    <table class="w-full table-auto border-collapse border border-grey-300 dark:border-grey-600">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 bg-gray-700 border-b dark:bg-gray-700 dark:text-white">Horários</th>
+          <th class="px-4 py-2 bg-gray-700 border-b dark:bg-gray-700 dark:text-white">John Doe - Cashier</th>
+          <th class="px-4 py-2 bg-gray-700 border-b dark:bg-gray-700 dark:text-white">Jane Doe - Manager</th>
+          <th class="px-4 py-2 bg-gray-700 border-b dark:bg-gray-700 dark:text-white">Bob Smith - Receptionist</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">00:00 - 01:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">01:00 - 02:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">02:00 - 03:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">03:00 - 04:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">04:00 - 05:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">05:00 - 06:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">06:00 - 07:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">07:00 - 08:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">08:00 - 09:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Sarah Lee
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Michael Brown
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jessica Thompson
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">09:00 - 10:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">10:00 - 11:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">11:00 - 12:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">12:00 - 13:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">13:00 - 14:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">14:00 - 15:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">15:00 - 16:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">16:00 - 17:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Jane Smith
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Tom Wilson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Lisa Taylor
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">17:00 - 18:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Bob Johnson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Emily Davis
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              David Anderson
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">18:00 - 19:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Bob Johnson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Emily Davis
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              David Anderson
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">19:00 - 20:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Bob Johnson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Emily Davis
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              David Anderson
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">20:00 - 21:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Bob Johnson
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              Emily Davis
+            </div>
+          </td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">
+            <div
+              class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              data-v0-t="badge"
+            >
+              David Anderson
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">21:00 - 22:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">22:00 - 23:00</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">23:00 - 23:59</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-6">
+    <h2 class="text-xl font-bold mb-4">Add New Schedule</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <button
+        type="button"
+        role="combobox"
+        aria-controls="radix-:r3l:"
+        aria-expanded="false"
+        aria-autocomplete="none"
+        dir="ltr"
+        data-state="closed"
+        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <span style="pointer-events: none;"></span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -17,845 +550,92 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="w-6 h-6"
+          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+          aria-hidden="true"
         >
-          <circle cx="6" cy="6" r="3"></circle>
-          <path d="M8.12 8.12 12 12"></path>
-          <path d="M20 4 8.12 15.88"></path>
-          <circle cx="6" cy="18" r="3"></circle>
-          <path d="M14.8 14.8 20 20"></path>
+          <path d="m6 9 6 6 6-6"></path>
         </svg>
-        <span class="sr-only">Barbearia</span>
-      </a>
-      <a class="font-bold" href="#">
-        Dashboard
-      </a>
-      <a class="text-muted-foreground" href="#">
-        Agendamentos
-      </a>
-      <a class="text-muted-foreground" href="#">
-        Clientes
-      </a>
-      <a class="text-muted-foreground" href="#">
-        Serviços
-      </a>
-      <a class="text-muted-foreground" href="#">
-        Relatórios
-      </a>
-      <a class="text-muted-foreground" href="#">
-        Pagamentos
-      </a>
-      <a class="text-muted-foreground" href="#">
-        Produtos
-      </a>
-      <a class="text-muted-foreground" href="#">
-        Profissionais
-      </a>
-    </nav>
-    <div class="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4"></div>
-  </header>
-  <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm col-span-1" data-v0-t="card">
-        <div class="flex flex-col space-y-1.5 p-6">
-          <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Calendário</h3>
-          <p class="text-sm text-muted-foreground">Visualize seus próximos agendamentos</p>
-        </div>
-        <div class="p-6">
-          <div class="rdp p-3 border rounded-md">
-            <div class="flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0">
-              <div class="space-y-4 rdp-caption_start rdp-caption_end">
-                <div class="flex justify-center pt-1 relative items-center">
-                  <div class="text-sm font-medium" aria-live="polite" role="presentation" id="react-day-picker-1">
-                    August 2024
-                  </div>
-                  <div class="space-x-1 flex items-center">
-                    <button
-                      name="previous-month"
-                      aria-label="Go to previous month"
-                      class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute left-1"
-                      type="button"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-chevron-left h-4 w-4"
-                      >
-                        <path d="m15 18-6-6 6-6"></path>
-                      </svg>
-                    </button>
-                    <button
-                      name="next-month"
-                      aria-label="Go to next month"
-                      class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute right-1"
-                      type="button"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-chevron-right h-4 w-4"
-                      >
-                        <path d="m9 18 6-6-6-6"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <table class="w-full border-collapse space-y-1" role="grid" aria-labelledby="react-day-picker-1">
-                  <thead class="rdp-head">
-                    <tr class="flex">
-                      <th
-                        scope="col"
-                        class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-                        aria-label="Sunday"
-                      >
-                        Su
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-                        aria-label="Monday"
-                      >
-                        Mo
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-                        aria-label="Tuesday"
-                      >
-                        Tu
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-                        aria-label="Wednesday"
-                      >
-                        We
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-                        aria-label="Thursday"
-                      >
-                        Th
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-                        aria-label="Friday"
-                      >
-                        Fr
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
-                        aria-label="Saturday"
-                      >
-                        Sa
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="rdp-tbody">
-                    <tr class="flex w-full mt-2">
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100 text-muted-foreground opacity-50"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          28
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100 text-muted-foreground opacity-50"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          29
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100 text-muted-foreground opacity-50"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          30
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100 text-muted-foreground opacity-50"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          31
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          1
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          2
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          3
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="flex w-full mt-2">
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          4
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          5
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          6
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          7
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          8
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          9
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          10
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="flex w-full mt-2">
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          11
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          12
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          13
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          14
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          15
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          16
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          17
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="flex w-full mt-2">
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          18
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          19
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100 bg-accent text-accent-foreground"
-                          role="gridcell"
-                          tabindex="0"
-                          type="button"
-                        >
-                          20
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          21
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          22
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          23
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          24
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="flex w-full mt-2">
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          25
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          26
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          27
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          28
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          29
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          30
-                        </button>
-                      </td>
-                      <td
-                        class="text-center text-sm p-0 relative [&amp;:has([aria-selected])]:bg-accent first:[&amp;:has([aria-selected])]:rounded-l-md last:[&amp;:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20"
-                        role="presentation"
-                      >
-                        <button
-                          name="day"
-                          class="rdp-button_reset rdp-button inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-                          role="gridcell"
-                          tabindex="-1"
-                          type="button"
-                        >
-                          31
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="rounded-lg border bg-card text-card-foreground shadow-sm col-span-1 lg:col-span-2"
-        data-v0-t="card"
+      </button>
+      <button
+        type="button"
+        role="combobox"
+        aria-controls="radix-:r3m:"
+        aria-expanded="false"
+        aria-autocomplete="none"
+        dir="ltr"
+        data-state="closed"
+        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        <div class="flex flex-col space-y-1.5 p-6">
-          <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Agendar Novo Serviço</h3>
-          <p class="text-sm text-muted-foreground">Cadastre um novo agendamento.</p>
-        </div>
-        <div class="p-6 space-y-4">
-          <div class="space-y-2">
-            <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="client-name"
-            >
-              Cliente
-            </label>
-            <input
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              id="client-name"
-              placeholder="Nome do cliente"
-            />
-          </div>
-          <div class="space-y-2">
-            <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="service"
-            >
-              Serviço
-            </label>
-            <button
-              type="button"
-              role="combobox"
-              aria-controls="radix-:r0:"
-              aria-expanded="false"
-              aria-autocomplete="none"
-              dir="ltr"
-              data-state="closed"
-              data-placeholder=""
-              class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              id="service"
-              aria-label="Service"
-            >
-              <span style="pointer-events: none;">Selecione o serviço</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-                aria-hidden="true"
-              >
-                <path d="m6 9 6 6 6-6"></path>
-              </svg>
-            </button>
-          </div>
-          <div class="space-y-2">
-            <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="date"
-            >
-              Data
-            </label>
-          </div>
-          <div class="space-y-2">
-            <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="time"
-            >
-              Horário
-            </label>
-            <button
-              type="button"
-              role="combobox"
-              aria-controls="radix-:r6:"
-              aria-expanded="false"
-              aria-autocomplete="none"
-              dir="ltr"
-              data-state="closed"
-              data-placeholder=""
-              class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              id="time"
-              aria-label="Time"
-            >
-              <span style="pointer-events: none;">Selecione o horário</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-                aria-hidden="true"
-              >
-                <path d="m6 9 6 6 6-6"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div class="flex items-center p-6">
-          <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">
-            Agendar
-          </button>
-        </div>
-      </div>
+        <span style="pointer-events: none;"></span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </button>
+      <button
+        type="button"
+        role="combobox"
+        aria-controls="radix-:r3t:"
+        aria-expanded="false"
+        aria-autocomplete="none"
+        dir="ltr"
+        data-state="closed"
+        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <span style="pointer-events: none;"></span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </button>
+      <button
+        type="button"
+        role="combobox"
+        aria-controls="radix-:r41:"
+        aria-expanded="false"
+        aria-autocomplete="none"
+        dir="ltr"
+        data-state="closed"
+        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <span style="pointer-events: none;"></span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </button>
     </div>
-    <div>
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-        <div class="flex flex-col space-y-1.5 p-6">
-          <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-            Agendamentos Recentes
-          </h3>
-          <p class="text-sm text-muted-foreground">Últimos agendamentos realizados.</p>
-        </div>
-        <div class="p-6">
-          <div class="relative w-full overflow-auto">
-            <table class="w-full caption-bottom text-sm">
-              <thead class="[&amp;_tr]:border-b">
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                    Cliente
-                  </th>
-                  <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                    Serviço
-                  </th>
-                  <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                    Data
-                  </th>
-                  <th class="h-12 px-4 align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 text-right">
-                    Valor
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="[&amp;_tr:last-child]:border-0">
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                      <img class="aspect-square h-full w-full" alt="João Silva" src="/placeholder-user.jpg" />
-                    </span>
-                    João Silva
-                  </td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Corte de Cabelo</td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-23</td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 30,00</td>
-                </tr>
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                      <img class="aspect-square h-full w-full" alt="Maria Souza" src="/placeholder-user.jpg" />
-                    </span>
-                    Maria Souza
-                  </td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Manicure</td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-22</td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 40,00</td>
-                </tr>
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 font-medium">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                      <img class="aspect-square h-full w-full" alt="Carlos Lima" src="/placeholder-user.jpg" />
-                    </span>
-                    Carlos Lima
-                  </td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Pedicure</td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-21</td>
-                  <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 50,00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-</div>
+  </div>

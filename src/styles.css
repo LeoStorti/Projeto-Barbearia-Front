@@ -8,7 +8,8 @@
   --card-background: #1f1f1f; /* Fundo dos cards mais escuro */
   --text-primary: #e0e0e0; /* Texto primário mais claro para contraste */
   --text-muted: #9e9e9e; /* Texto muted também mais claro */
-  --border-color: #2c2c2e; /* Cor da borda mais escura */
+  --border-color: #bb86fc; /* Cor da borda mais escura */
+
 }
 
 body {
@@ -47,11 +48,13 @@ header nav a:hover {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
 }
 
 .grid {
   display: grid;
   gap: 16px;
+
 }
 
 .grid.md\:grid-cols-2 {
@@ -67,16 +70,18 @@ header nav a:hover {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: var(--card-shadow);
-  padding: 16px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+
 }
 
 .card h3 {
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
+
 }
 
 .card .value {
@@ -92,6 +97,7 @@ header nav a:hover {
 table {
   width: 100%;
   border-collapse: collapse;
+
 }
 
 table th,
@@ -99,11 +105,13 @@ table td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+
 }
 
 table thead th {
   background-color: var(--primary-color);
   color: white;
+
 }
 
 table tbody tr:hover {
@@ -112,4 +120,11 @@ table tbody tr:hover {
 
 table tbody tr:last-child td {
   border-bottom: none;
+
+}
+
+.titleroxo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #bb86fc;
 }
