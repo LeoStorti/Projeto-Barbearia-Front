@@ -128,3 +128,6 @@ table tbody tr:last-child td {
   font-weight: 600;
   color: #bb86fc;
 }
+.no-header .app-header {
+  display: none;
+}
