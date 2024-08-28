@@ -1,0 +1,116 @@
+<div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+  <h1 class="text-3xl font-bold mb-6">Equipe da Barbearia</h1>
+  <div class="overflow-x-auto">
+    <table class="w-full table-auto border-collapse">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="px-4 py-2 text-left">Nome</th>
+          <th class="px-4 py-2 text-left">Especialização</th>
+          <th class="px-4 py-2 text-left">Telefone</th>
+          <th class="px-4 py-2 text-left">Email</th>
+          <th class="px-4 py-2 text-left">Aniversário</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b bg-black-100">
+          <td class="px-4 py-2">João Silva</td>
+          <td class="px-4 py-2">Barbeiro</td>
+          <td class="px-4 py-2">(11) 98765-4321</td>
+          <td class="px-4 py-2">joaobarbershop.com</td>
+          <td class="px-4 py-2">1985-06-15</td>
+        </tr>
+        <tr class="border-b bg-black">
+          <td class="px-4 py-2">Maria Oliveira</td>
+          <td class="px-4 py-2">Manicure</td>
+          <td class="px-4 py-2">(11) 91234-5678</td>
+          <td class="px-4 py-2">mariabarbershop.com</td>
+          <td class="px-4 py-2">1990-09-20</td>
+        </tr>
+        <tr class="border-b bg-black-100">
+          <td class="px-4 py-2">Pedro Almeida</td>
+          <td class="px-4 py-2">Barbeiro</td>
+          <td class="px-4 py-2">(11) 98765-4321</td>
+          <td class="px-4 py-2">pedrobarbershop.com</td>
+          <td class="px-4 py-2">1982-03-10</td>
+        </tr>
+        <tr class="border-b bg-black-100">
+          <td class="px-4 py-2">Joao da Silva</td>
+          <td class="px-4 py-2">Barbeiro</td>
+          <td class="px-4 py-2">(11) 98765-4321</td>
+          <td class="px-4 py-2">jaobarber.com</td>
+          <td class="px-4 py-2">1982-03-10</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-8">
+    <h2 class="text-2xl font-bold mb-4">Adicionar Novo Profissional</h2>
+    <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="name" class="block font-medium mb-1">
+          Nome
+        </label>
+        <input
+          id="name"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+          type="text"
+          value=""
+          name="name"
+        />
+      </div>
+      <div>
+        <label for="specialty" class="block font-medium mb-1">
+          Especialização
+        </label>
+        <input
+          id="specialty"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+          type="text"
+          value=""
+          name="specialty"
+        />
+      </div>
+      <div>
+        <label for="phone" class="block font-medium mb-1">
+          Telefone
+        </label>
+        <input
+          id="phone"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+          type="tel"
+          value=""
+          name="phone"
+        />
+      </div>
+      <div>
+        <label for="email" class="block font-medium mb-1">
+          Email
+        </label>
+        <input
+          id="email"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+          type="email"
+          value=""
+          name="email"
+        />
+      </div>
+      <div>
+        <label for="birthday" class="block font-medium mb-1">
+          Aniversário
+        </label>
+        <input
+          id="birthday"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+          type="date"
+          value=""
+          name="birthday"
+        />
+      </div>
+      <div class="col-span-2">
+        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">
+          Adicionar Profissional
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

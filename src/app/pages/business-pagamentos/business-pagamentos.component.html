@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamentos</title>
+    <link rel="stylesheet" href="business-pagamentos.component.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pagamentos</h1>
+            <div class="button-container">
+                <button mat-raised-button color="primary" class="new-payment-button">Novo Pagamento</button>
+            </div>
+        </div>
+
+        <mat-card class="card">
+            <div class="table-container">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="funcionario">
+                        <mat-header-cell *matHeaderCellDef> Nome do Funcionário </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <div class="employee-info">
+                                <mat-icon>account_circle</mat-icon>
+                                <div>
+                                    <div class="employee-name">{{element.nome}}</div>
+                                    <div class="employee-role">{{element.cargo}}</div>
+                                </div>
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="salario">
+                        <mat-header-cell *matHeaderCellDef> Salário Fixo </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.salario | currency:'BRL'}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="comissao">
+                        <mat-header-cell *matHeaderCellDef> Valor da Comissão </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.comissao | currency:'BRL'}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="total">
+                        <mat-header-cell *matHeaderCellDef> Total Pago </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.total | currency:'BRL'}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dataPagamento">
+                        <mat-header-cell *matHeaderCellDef> Data do Pagamento </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.dataPagamento | date}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="pago">
+                        <mat-header-cell *matHeaderCellDef> Pago </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.pago ? 'Sim' : 'Não'}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </mat-card>
+    </div>
+</body>
+</html>

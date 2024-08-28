@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="business-produtos.component.css">
+    <title>Produtos em Estoque</title>
+</head>
+<body>
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-4">Produtos em Estoque</h1>
+        <div class="overflow-x-auto">
+            <table class="w-full table-auto">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="px-4 py-2 text-left text-blue-500">Produto</th>
+                        <th class="px-4 py-2 text-left text-blue-500">Descrição</th>
+                        <th class="px-4 py-2 text-right text-blue-500">Quantidade</th>
+                        <th class="px-4 py-2 text-right text-blue-500">Preço de Compra</th>
+                        <th class="px-4 py-2 text-right text-blue">Preço de Venda</th>
+                        <th class="px-4 py-2 text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-4 py-2 border-b">Corte de Cabelo</td>
+                        <td class="px-4 py-2 border-b">Corte de cabelo profissional com lavagem e secagem</td>
+                        <td class="px-4 py-2 border-b text-right">25</td>
+                        <td class="px-4 py-2 border-b text-right">30.00</td>
+                        <td class="px-4 py-2 border-b text-right">50.00</td>
+                        <td class="px-4 py-2 border-b text-right">1250.00</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border-b">Barba Aparada</td>
+                        <td class="px-4 py-2 border-b">Aparação de barba com navalha e acabamento</td>
+                        <td class="px-4 py-2 border-b text-right">18</td>
+                        <td class="px-4 py-2 border-b text-right">20.00</td>
+                        <td class="px-4 py-2 border-b text-right">30.00</td>
+                        <td class="px-4 py-2 border-b text-right">540.00</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border-b">Shampoo Especial</td>
+                        <td class="px-4 py-2 border-b">Shampoo de alta qualidade para cabelos danificados</td>
+                        <td class="px-4 py-2 border-b text-right">12</td>
+                        <td class="px-4 py-2 border-b text-right">15.00</td>
+                        <td class="px-4 py-2 border-b text-right">25.00</td>
+                        <td class="px-4 py-2 border-b text-right">300.00</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border-b">Tintura de Cabelo</td>
+                        <td class="px-4 py-2 border-b">Tintura de cabelo com coloração duradoura</td>
+                        <td class="px-4 py-2 border-b text-right">8</td>
+                        <td class="px-4 py-2 border-b text-right">40.00</td>
+                        <td class="px-4 py-2 border-b text-right">60.00</td>
+                        <td class="px-4 py-2 border-b text-right">480.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-8">
+            <h2 class="text-xl font-bold mb-4">Adicionar Novo Produto</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="name">Nome do Produto    </label>
+                    <input id="name" type="text" value="" name="name">
+                </div>
+                <div>
+                    <label for="description">Descrição    </label>
+                    <input id="description" type="text" value="" name="description">
+                </div>
+                <div>
+                    <label for="quantity">Quantidade    </label>
+                    <input id="quantity" type="number" value="1" name="quantity">
+                </div>
+                <div>
+                    <label for="purchasePrice">Preço de Compra    </label>
+                    <input id="purchasePrice" type="number" value="0" name="purchasePrice">
+                </div>
+                <div>
+                    <label for="salePrice">Preço de Venda    </label>
+                    <input id="salePrice" type="number" value="0" name="salePrice">
+                </div>
+                <div class="col-span-2">
+                    <button>Salvar Produto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
