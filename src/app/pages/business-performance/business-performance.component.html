@@ -7,9 +7,11 @@
   <div class="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 gap-4 p-4 md:gap-8 md:p-10">
     <div class="flex flex-col gap-4 w-full">
       <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+        <!-- Card dos Clientes Ativos -->
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
           <div class="space-y-1.5 p-6 flex flex-row items-center justify-between pb-2">
-            <h3 class="whitespace-nowrap tracking-tight text-sm font-medium   ">Clientes Ativos</h3>
+            <h3 class="whitespace-nowrap tracking-tight text-sm font-medium">Clientes Ativos</h3>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -29,10 +31,12 @@
             </svg>
           </div>
           <div class="p-6">
-            <div class="text-2xl font-bold ">1.234</div>
+            <div class="text-2xl font-bold">{{ clienteCount }}</div> <!-- Exibe a contagem de clientes -->
             <p class="text-xs text-muted-foreground">+5.2% este mês</p>
           </div>
         </div>
+        <!-- Fim do Card Clientes Ativos -->
+        <!-- Inicio do Card Serviços Realizados -->
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
           <div class="space-y-1.5 p-6 flex flex-row items-center justify-between pb-2">
             <h3 class="whitespace-nowrap tracking-tight text-sm font-medium">Serviços Realizados</h3>
@@ -56,10 +60,12 @@
             </svg>
           </div>
           <div class="p-6">
-            <div class="text-2xl font-bold">3.456</div>
+            <div class="text-2xl font-bold">{{ servicosFinalizadosCount }}</div> <!-- Exibe a contagem de serviços finalizados -->
             <p class="text-xs text-muted-foreground">+8.1% este mês</p>
           </div>
         </div>
+        <!-- Fim do Card Serviços Realizados -->
+        <!-- Inicio do Card Faturado -->
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
           <div class="space-y-1.5 p-6 flex flex-row items-center justify-between pb-2">
             <h3 class="whitespace-nowrap tracking-tight text-sm font-medium">Faturamento</h3>
@@ -80,10 +86,12 @@
             </svg>
           </div>
           <div class="p-6">
-            <div class="text-2xl font-bold">R$ 45.231,89</div>
+            <div class="text-2xl font-bold">R$ {{ faturamentoTotal | currency:'BRL' }}</div> <!-- Exibe o faturamento total -->
             <p class="text-xs text-muted-foreground">+12% este mês</p>
           </div>
         </div>
+        <!-- Fim do Card Faturado -->
+        <!-- Inicio do Card Produtos Vendidos -->
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
           <div class="space-y-1.5 p-6 flex flex-row items-center justify-between pb-2">
             <h3 class="whitespace-nowrap tracking-tight text-sm font-medium">Produtos Vendidos</h3>
@@ -110,6 +118,9 @@
             <p class="text-xs text-muted-foreground">+3.4% este mês</p>
           </div>
         </div>
+        <!-- Fim do Card Produtos Vendidos -->
+        <!-- Inicio do Card Novos Clientes -->
+
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
           <div class="space-y-1.5 p-6 flex flex-row items-center justify-between pb-2">
             <h3 class="whitespace-nowrap tracking-tight text-sm font-medium">Novos Clientes</h3>
@@ -136,6 +147,9 @@
             <p class="text-xs text-muted-foreground">+7.8% este mês</p>
           </div>
         </div>
+        <!-- Fim do Card Novos Clientes -->
+        <!-- Inicio do Card Agendamentos Pendentes -->
+
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
           <div class="space-y-1.5 p-6 flex flex-row items-center justify-between pb-2">
             <h3 class="whitespace-nowrap tracking-tight text-sm font-medium">Agendamentos Pendentes</h3>
@@ -158,11 +172,15 @@
             </svg>
           </div>
           <div class="p-6">
-            <div class="text-2xl font-bold">45</div>
+
+            <div class="text-2xl font-bold">{{servicosAgendadosCount}}</div>
             <p class="text-xs text-muted-foreground">-2.1% este mês</p>
           </div>
         </div>
       </div>
+      <!-- Fim do Card Agendamentos Pendentes -->
+      <!-- Inicio da tabela de Agendamentos Recentes -->
+
       <div class="grid md:grid-cols-2 gap-4">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
           <div class="flex flex-col space-y-1.5 p-6 px-7">
@@ -259,6 +277,7 @@
             </div>
           </div>
         </div>
+        <!-- Final da tabela de Agendamentos Recentes -->
         <div class="flex flex-col gap-4">
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
             <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">

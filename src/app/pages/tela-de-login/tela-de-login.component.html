@@ -13,12 +13,13 @@
         <input class="input-field" id="email" placeholder="m@example.com" required type="email" />
       </div>
       <div class="space-y-2">
-        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="password">
-          Password
+        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="senha">
+          Senha
         </label>
         <input class="input-field" id="password" required type="password" />
       </div>
     </div>
     <div class="flex items-center p-6"></div>
+    <button (click)="onLogin()" class="btn btn-primary">Login</button>
   </div>
 </div>

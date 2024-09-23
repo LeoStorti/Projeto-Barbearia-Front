@@ -7,20 +7,21 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false, // Mudei para garantir uma verificação mais rigorosa
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "useDefineForClassFields": false,
+    "target": "ES2020", // Altere conforme o nível de compatibilidade do seu ambiente
+    "module": "ES2020", // Também alterado para manter consistência
+    "useDefineForClassFields": true, // Pode habilitar para garantir conformidade com padrões modernos
     "lib": [
-      "ES2022",
+      "ES2020", // Compatível com as mudanças acima
       "dom"
-    ]
+    ],
+    "baseUrl": "./src" // Caminho base configurado para facilitar imports
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
