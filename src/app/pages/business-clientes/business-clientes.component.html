@@ -1,93 +1,124 @@
+<!-- Inicio da primeira tabela de clientes -->
 <div class="dashboard-container">
-
   <div class="main-content">
     <div class="clients-section">
       <div class="card">
         <h2>Clientes</h2>
         <p>Visualize os clientes cadastrados e os serviços realizados.</p>
-        <table class="clients-table">
+        <table mat-table [dataSource]="dataSourceClientes" class="clients-table">
+          <ng-container matColumnDef="clienteId">
+            <th mat-header-cell *matHeaderCellDef> Cliente ID </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.clienteId }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.nome }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.email }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="endereco">
+            <th mat-header-cell *matHeaderCellDef> Endereço </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.endereco }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefone">
+            <th mat-header-cell *matHeaderCellDef> Telefone </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.telefone }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dataNascimento">
+            <th mat-header-cell *matHeaderCellDef> Data de Nascimento </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.dataNascimento | date:'shortDate' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="observacoes">
+            <th mat-header-cell *matHeaderCellDef> Observações </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.observacoes }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="alergias">
+            <th mat-header-cell *matHeaderCellDef> Alergias </th>
+            <td mat-cell *matCellDef="let cliente"> {{ cliente.alergias }} </td>
+          </ng-container>
+
           <thead>
-            <tr>
-              <th>Cliente</th>
-              <th>Telefone</th> <!-- Nova coluna para Telefone -->
-              <th>Serviços Realizados</th>
-            </tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>João Silva</td>
-              <td>(11) 99999-9999</td> <!-- Dados de telefone adicionados -->
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Maria Oliveira</td>
-              <td>(21) 88888-8888</td> <!-- Dados de telefone adicionados -->
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Pedro Almeida</td>
-              <td>(31) 77777-7777</td> <!-- Dados de telefone adicionados -->
-              <td>1</td>
-            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes;"></tr>
+
           </tbody>
+
         </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
       </div>
+<!-- Fim da primeira tabela de Clientes -->
+ <!-- Inicio da seg tabela de Historico de Serviços -->
 
       <div class="card">
         <h2>Histórico de Serviços</h2>
         <p>Visualize os serviços realizados para cada cliente.</p>
-        <table class="services-table">
-          <thead>
-            <tr>
-              <th>Cliente</th>
-              <th>Serviço</th>
-              <th>Data</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>João Silva</td>
-              <td>Corte de Cabelo</td>
-              <td>2023-06-23</td>
-              <td>R$ 30,00</td>
-            </tr>
-            <tr>
-              <td>Maria Oliveira</td>
-              <td>Barba & Bigode</td>
-              <td>2023-06-24</td>
-              <td>R$ 20,00</td>
-            </tr>
-          </tbody>
+        <table mat-table [dataSource]="dataSourceServicos" class="services-table">
+          <ng-container matColumnDef="clienteId">
+            <th mat-header-cell *matHeaderCellDef> Cliente ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.clienteId}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="servico">
+            <th mat-header-cell *matHeaderCellDef> Serviço </th>
+            <td mat-cell *matCellDef="let element"> {{element.servico}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dataVenda">
+            <th mat-header-cell *matHeaderCellDef> Data </th>
+            <td mat-cell *matCellDef="let element"> {{element.dataVenda | date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalVenda">
+            <th mat-header-cell *matHeaderCellDef> Valor </th>
+            <td mat-cell *matCellDef="let element"> {{element.totalVenda | currency}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsServicos"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsServicos;"></tr>
         </table>
+         <!-- Adicione o paginator com um pageSize inicial de 5 -->
+  <mat-paginator #paginatorServicos [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons [pageSize]="5"></mat-paginator>
       </div>
     </div>
+ <!-- Fim da seg tabela de Historico de Serviços -->
 
     <div class="sidebar">
       <div class="card">
         <h2>Adicionar Novo Cliente</h2>
-        <form>
+        <form (ngSubmit)="adicionarCliente()">
           <label for="name">Nome</label>
-          <input type="text" id="name" placeholder="Nome do cliente" />
+          <input type="text" id="name" [(ngModel)]="nome" name="nome" placeholder="Nome do cliente" required />
 
           <label for="phone">Telefone</label>
-          <input type="tel" id="phone" placeholder="(00) 00000-0000" />
+          <input type="tel" id="phone" [(ngModel)]="telefone" name="telefone" placeholder="(00) 00000-0000" required />
 
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="exemplo@email.com" />
+          <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="exemplo@email.com" required />
 
-          <label for="dob">Data de Nascimento    </label>
-          <input type="date" id="dob" />
-          <br>
-          <br>
+          <label for="dob">Data de Nascimento</label>
+          <input type="date" id="dob" [(ngModel)]="dataNascimento" name="dataNascimento" required />
+
           <label for="address">Endereço</label>
-          <input type="text" id="address" placeholder="Endereço completo" />
+          <input type="text" id="address" [(ngModel)]="endereco" name="endereco" placeholder="Endereço completo" required />
 
           <label for="notes">Observações</label>
-          <textarea id="notes" placeholder="Observações adicionais"></textarea>
+          <textarea id="notes" [(ngModel)]="observacoes" name="observacoes" placeholder="Observações adicionais"></textarea>
 
           <label for="allergies">Alergias</label>
-          <textarea id="allergies" placeholder="Liste as alergias"></textarea>
+          <textarea id="allergies" [(ngModel)]="alergias" name="alergias" placeholder="Liste as alergias"></textarea>
 
           <button type="submit">Adicionar Cliente</button>
         </form>

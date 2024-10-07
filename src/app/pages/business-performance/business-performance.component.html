@@ -211,66 +211,14 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody class="[&amp;_tr:last-child]:border-0">
-                  <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">João Silva</div>
-                      <div class="text-sm text-muted-foreground">Corte de Cabelo</div>
-                    </td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Corte de Cabelo</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-23</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 30,00</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">Maria Oliveira</div>
-                    </td>
-                  </tr>
-                  <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">Maria Oliveira</div>
-                      <div class="text-sm text-muted-foreground">Barba e Bigode</div>
-                    </td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Barba e Bigode</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-24</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 20,00</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">Pedro Almeida</div>
-                    </td>
-                  </tr>
-                  <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">Pedro Almeida</div>
-                      <div class="text-sm text-muted-foreground">Corte de Cabelo e Barba</div>
-                    </td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Corte de Cabelo e Barba</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-25</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 45,00</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">João Silva</div>
-                    </td>
-                  </tr>
-                  <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">Ana Souza</div>
-                      <div class="text-sm text-muted-foreground">Corte de Cabelo</div>
-                    </td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Corte de Cabelo</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-26</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 30,00</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">Maria Oliveira</div>
-                    </td>
-                  </tr>
-                  <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">João Silva</div>
-                      <div class="text-sm text-muted-foreground">Corte de Cabelo</div>
-                    </td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">Corte de Cabelo</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">2023-06-23</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">R$ 30,00</td>
-                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                      <div class="font-medium">Pedro Almeida</div>
-                    </td>
+                <tbody>
+                  <tr *ngFor="let agendamento of agendamentos" class="border-b transition-colors hover:bg-muted/50">
+                    <td class="p-4 align-middle">{{ agendamento.clienteId }}</td>
+                    <td class="p-4 align-middle">{{ agendamento.servicoId }}</td>
+                    <td class="p-4 align-middle">{{ agendamento.dataHora | date: 'dd/MM/yyyy HH:mm' }}</td>
+                    <td class="p-4 align-middle">{{ agendamento.status }}</td>
+                    <td class="p-4 align-middle">{{ agendamento.profissionalId }}</td>
+                    <td class="p-4 align-middle">{{ agendamento.observacoes }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -278,6 +226,8 @@
           </div>
         </div>
         <!-- Final da tabela de Agendamentos Recentes -->
+        <!-- Inicio da tabela de Configurações da Barbearia -->
+
         <div class="flex flex-col gap-4">
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
             <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
@@ -326,6 +276,9 @@
               </div>
             </div>
           </div>
+          <!-- Fim da tabela de Configurações da Barbearia -->
+          <!-- Inicio da tabela de Serviços Realizados -->
+
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
             <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
               <div class="grid gap-0.5">
@@ -355,21 +308,9 @@
               <div class="grid gap-3">
                 <div class="font-semibold">Serviços Oferecidos</div>
                 <ul class="grid gap-3">
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Corte de Cabelo</span>
-                    <span>R$ 30,00</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Barba e Bigode</span>
-                    <span>R$ 20,00</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Corte de Cabelo e Barba</span>
-                    <span>R$ 45,00</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Tratamento Capilar</span>
-                    <span>R$ 50,00</span>
+                  <li *ngFor="let servico of servicos" class="flex items-center justify-between">
+                    <span class="text-muted-foreground">{{ servico.nomeServico }}</span>
+                    <span>R$ {{ servico.preco | number: '1.2-2' }}</span>
                   </li>
                 </ul>
               </div>
@@ -378,59 +319,45 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-4 w-full">
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-        <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
-          <div class="grid gap-0.5">
-            <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Faturamento Mensal</h3>
-            <p class="text-sm text-muted-foreground">Gráfico de faturamento mensal</p>
-          </div>
-        </div>
-        <div class="p-6">
-          <div class="aspect-[16/9]">
-            <div
-              class="flex aspect-video justify-center text-xs [&amp;_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&amp;_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&amp;_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&amp;_.recharts-dot[stroke='#fff']]:stroke-transparent [&amp;_.recharts-layer]:outline-none [&amp;_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&amp;_.recharts-radial-bar-background-sector]:fill-muted [&amp;_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&amp;_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&amp;_.recharts-sector[stroke='#fff']]:stroke-transparent [&amp;_.recharts-sector]:outline-none [&amp;_.recharts-surface]:outline-none min-h-[300px]"
-              data-chart="chart-Redaafnnkr"
-            >
-              <style>
- [data-chart=chart-Redaafnnkr] {
-  --color-desktop: hsl(var(--chart-1));
-}
-.dark [data-chart=chart-Redaafnnkr] {
-  --color-desktop: hsl(var(--chart-1));
-}
-</style>
-              <div class="recharts-responsive-container" style="width:100%;height:100%;min-width:0"></div>
-            </div>
-          </div>
-        </div>
+              <!-- Fim da tabela de Serviços Realizados -->
+              <!-- Inicio do Gráfico de Faturamento Mensal -->
+<div class="flex flex-col gap-4 w-full">
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+    <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
+      <div class="grid gap-0.5">
+        <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Faturamento Mensal</h3>
+        <p class="text-sm text-muted-foreground">Gráfico de faturamento mensal</p>
       </div>
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-        <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
-          <div class="grid gap-0.5">
-            <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-              Desempenho por Vendedor
-            </h3>
-            <p class="text-sm text-muted-foreground">Gráfico de desempenho por vendedor</p>
-          </div>
-        </div>
-        <div class="p-6">
-          <div class="aspect-[16/9]">
-            <div
-              class="flex aspect-video justify-center text-xs [&amp;_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&amp;_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&amp;_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&amp;_.recharts-dot[stroke='#fff']]:stroke-transparent [&amp;_.recharts-layer]:outline-none [&amp;_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&amp;_.recharts-radial-bar-background-sector]:fill-muted [&amp;_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&amp;_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&amp;_.recharts-sector[stroke='#fff']]:stroke-transparent [&amp;_.recharts-sector]:outline-none [&amp;_.recharts-surface]:outline-none min-h-[300px]"
-              data-chart="chart-Relaafnnkr"
-            >
-              <style>
- [data-chart=chart-Relaafnnkr] {
-  --color-desktop: hsl(var(--chart-1));
-}
-.dark [data-chart=chart-Relaafnnkr] {
-  --color-desktop: hsl(var(--chart-1));
-}
-</style>
-              <div class="recharts-responsive-container" style="width:100%;height:100%;min-width:0"></div>
-            </div>
-          </div>
+    </div>
+    <div class="p-6">
+      <div class="aspect-[16/9]">
+        <canvas baseChart [data]="chartData" [type]="chartType" [options]="chartOptions"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fim do Gráfico de Faturamento Mensal -->
+
+  <!-- Inicio do Gráfico de Desempenho por Vendedor -->
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+    <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
+      <div class="grid gap-0.5">
+        <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Desempenho por Vendedor</h3>
+        <p class="text-sm text-muted-foreground">Gráfico de desempenho por vendedor</p>
+      </div>
+    </div>
+    <div class="p-6">
+      <div class="aspect-[16/9]">
+        <div class="flex aspect-video justify-center text-xs min-h-[300px]" data-chart="chart-Relaafnnkr">
+          <style>
+            [data-chart=chart-Relaafnnkr] {
+              --color-desktop: hsl(var(--chart-1));
+            }
+            .dark [data-chart=chart-Relaafnnkr] {
+              --color-desktop: hsl(var(--chart-1));
+            }
+          </style>
+          <div class="recharts-responsive-container" style="width:100%;height:100%;min-width:0"></div>
         </div>
       </div>
     </div>

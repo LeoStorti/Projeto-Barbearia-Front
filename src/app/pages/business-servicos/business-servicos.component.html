@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="business-servicos.component.css">
 </head>
 <body>
+
+  <!-- Inicio da tabela de Serviços -->
   <div class="flex flex-col min-h-screen bg-background">
     <main class="grid grid-cols-2 flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
@@ -21,127 +23,94 @@
                 <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                   <th class="h-10 px-4 text-left align-middle font-medium text-header">Nome</th>
                   <th class="h-10 px-4 text-left align-middle font-medium text-header">Preço</th>
-                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Estoque</th>
+                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Descrição</th>
                   <th class="h-10 px-4 text-left align-middle font-medium text-header">Categoria</th>
                   <th class="h-10 px-4 text-left align-middle font-medium text-header">Duração</th>
                   <th class="h-10 px-4 text-left align-middle font-medium text-header">Ações</th>
                 </tr>
               </thead>
               <tbody class="[&>tr:last-child]:border-0">
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <td class="p-4 align-middle">Corte de Cabelo</td>
-                  <td class="p-4 align-middle">R$ 30,00</td>
-                  <td class="p-4 align-middle">15</td>
-                  <td class="p-4 align-middle">Cabelo</td>
-                  <td class="p-4 align-middle">30 min</td>
-                  <td class="p-4 align-middle">
-                    <button aria-label="Editar">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="w-6 h-6 text-muted-foreground hover:text-purple"
-                      >
-                        <path d="M12 20h9"></path>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                      </svg>
-                    </button>
-                  </td>
+                <tr
+                *ngFor="let servico of dataSourceServicos.data"
+                class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
+              >
+                <td class="p-4 align-middle">{{ servico.nomeServico }}</td>
+                <td class="p-4 align-middle">R$ {{ servico.preco | number: '1.2-2' }}</td>
+                <td class="p-4 align-middle">{{ servico.descricao }}</td>
+                <td class="p-4 align-middle">{{ servico.categoria }}</td>
+                <td class="p-4 align-middle">{{ servico.duracao }} min</td>
+                <td class="p-4 align-middle">
+
+                  <button aria-label="Editar">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-muted-foreground hover:text-purple"
+                    >
+
+                      <path d="M12 20h9"></path>
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                  </button>
+                </td>
                 </tr>
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <td class="p-4 align-middle">Barba</td>
-                  <td class="p-4 align-middle">R$ 20,00</td>
-                  <td class="p-4 align-middle">20</td>
-                  <td class="p-4 align-middle">Barba</td>
-                  <td class="p-4 align-middle">20 min</td>
-                  <td class="p-4 align-middle">
-                    <button aria-label="Editar">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="w-6 h-6 text-muted-foreground hover:text-purple"
-                      >
-                        <path d="M12 20h9"></path>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <td class="p-4 align-middle">Pintura de Cabelo</td>
-                  <td class="p-4 align-middle">R$ 80,00</td>
-                  <td class="p-4 align-middle">8</td>
-                  <td class="p-4 align-middle">Cabelo</td>
-                  <td class="p-4 align-middle">1h</td>
-                  <td class="p-4 align-middle">
-                    <button aria-label="Editar">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="w-6 h-6 text-muted-foreground hover:text-purple"
-                      >
-                        <path d="M12 20h9"></path>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
+
               </tbody>
+
             </table>
+
+      <!-- Adicione o paginador -->
+      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
           </div>
         </div>
       </div>
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
-        <div class="flex flex-col space-y-1.5 p-6">
-          <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight text-purple">Novo Serviço</h3>
-          <p class="text-sm text-muted-foreground">Adicione um novo serviço à barbearia.</p>
-        </div>
-        <div class="p-6">
-          <form class="grid gap-4">
-            <div class="flex flex-col">
-              <label for="nome" class="text-sm font-medium">Nome</label>
-              <input type="text" id="nome" class="mt-1 p-2 border rounded" placeholder="Nome do serviço">
-            </div>
-            <div class="flex flex-col">
-              <label for="preco" class="text-sm font-medium">Preço</label>
-              <input type="text" id="preco" class="mt-1 p-2 border rounded" placeholder="Preço do serviço">
-            </div>
-            <div class="flex flex-col">
-              <label for="estoque" class="text-sm font-medium">Estoque</label>
-              <input type="number" id="estoque" class="mt-1 p-2 border rounded" placeholder="Quantidade em estoque">
-            </div>
-            <div class="flex flex-col">
-              <label for="categoria" class="text-sm font-medium">Categoria</label>
-              <input type="text" id="categoria" class="mt-1 p-2 border rounded" placeholder="Categoria do serviço">
-            </div>
-            <div class="flex flex-col">
-              <label for="duracao" class="text-sm font-medium">Duração</label>
-              <input type="text" id="duracao" class="mt-1 p-2 border rounded" placeholder="Duração do serviço">
-            </div>
-            <button type="submit" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">Salvar</button>
-          </form>
-        </div>
+
+      <!-- Fim da tabela de Serviços-->
+       <!-- Inicio da tabela de Novo Serviço -->
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
+  <div class="flex flex-col space-y-1.5 p-6">
+    <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight text-purple">Novo Serviço</h3>
+    <p class="text-sm text-muted-foreground">Adicione um novo serviço à barbearia.</p>
+  </div>
+  <div class="p-6">
+    <form class="grid gap-4" (ngSubmit)="enviarNovoServico()">
+      <div class="flex flex-col">
+        <label for="nome" class="text-sm font-medium">Nome</label>
+        <input [(ngModel)]="novoServico.nomeServico" type="text" id="nome" class="mt-1 p-2 border rounded" placeholder="Nome do serviço" name="nomeServico">
       </div>
+      <div class="flex flex-col">
+        <label for="preco" class="text-sm font-medium">Preço</label>
+        <input [(ngModel)]="novoServico.preco" type="text" id="preco" class="mt-1 p-2 border rounded" placeholder="Preço do serviço" name="preco">
+      </div>
+      <div class="flex flex-col">
+        <label for="descricao" class="text-sm font-medium">Descrição</label>
+        <input [(ngModel)]="novoServico.descricao" type="text" id="descricao" class="mt-1 p-2 border rounded" placeholder="Descrição do serviço" name="descricao">
+      </div>
+      <div class="flex flex-col">
+        <label for="categoria" class="text-sm font-medium">Categoria</label>
+        <input [(ngModel)]="novoServico.categoria" type="text" id="categoria" class="mt-1 p-2 border rounded" placeholder="Categoria do serviço" name="categoria">
+      </div>
+      <div class="flex flex-col">
+        <label for="duracao" class="text-sm font-medium">Duração</label>
+        <input [(ngModel)]="novoServico.duracao" type="text" id="duracao" class="mt-1 p-2 border rounded" placeholder="Duração do serviço" name="duracao">
+      </div>
+
+      <!-- Botão de submit -->
+      <button type="submit" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">Salvar</button>
+    </form>
+
+  </div>
+</div>
+<!-- Fim da tabela de Novo Serviço -->
+
     </main>
   </div>
 </body>
