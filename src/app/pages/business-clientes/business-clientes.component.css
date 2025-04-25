@@ -47,8 +47,6 @@ header nav {
   border-radius: 5px;
 }
 
-
-
 /* Estilos para o conteúdo principal */
 .main-content {
   display: flex;
@@ -77,26 +75,81 @@ header nav {
   color: #bb86fc;
 }
 
+/* Estilos para tabelas - Clientes e Serviços */
 .clients-table,
 .services-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
 }
 
 .clients-table th,
 .services-table th,
 .clients-table td,
 .services-table td {
-  border: 1px solid #333333;
-  padding: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #333333;
+  text-align: left;
 }
 
 .clients-table th,
 .services-table th {
-  background-color: #333333;
-  color: #ffffff;
-  text-align: left;
+  background: linear-gradient(135deg, #333333, #1e1e1e); /* Gradiente no cabeçalho */
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  cursor: pointer;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.clients-table th:after,
+.services-table th:after {
+  content: '\25BC'; /* Indicador de ordenação (seta) */
+  position: absolute;
+  right: 10px;
+  font-size: 0.75rem;
+  opacity: 0.5; /* Transparência leve */
+  transition: transform 0.3s ease;
+}
+
+.clients-table th.sorted-asc:after,
+.services-table th.sorted-asc:after {
+  content: '\25B2'; /* Seta para cima (ordenado ascendente) */
+}
+
+.clients-table th.sorted-desc:after,
+.services-table th.sorted-desc:after {
+  content: '\25BC'; /* Seta para baixo (ordenado descendente) */
+}
+
+.clients-table td,
+.services-table td {
+  padding: 16px 12px;
+  white-space: nowrap; /* Evitar quebra de linha */
+  text-overflow: ellipsis; /* Truncar texto longo com "..." */
+  overflow: hidden;
+}
+
+.clients-table td:hover,
+.services-table td:hover {
+  overflow: visible;
+  white-space: normal; /* Mostrar texto completo ao passar o mouse */
+}
+
+.clients-table tr:hover,
+.services-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.08); /* Cor ao passar o mouse */
+  transition: background-color 0.3s ease;
+}
+
+.clients-table tr.selected,
+.services-table tr.selected {
+  background-color: rgba(100, 149, 237, 0.2); /* Destaque da linha selecionada */
 }
 
 .clients-table tr:nth-child(even),
@@ -104,11 +157,37 @@ header nav {
   background-color: #2c2c2c;
 }
 
-.clients-table tr:hover,
-.services-table tr:hover {
-  background-color: #3a3a3a;
+.clients-table tr:last-child td,
+.services-table tr:last-child td {
+  border-bottom: none;
 }
 
+/* Responsividade para tabelas */
+@media (max-width: 768px) {
+  .clients-table,
+  .services-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .clients-table th,
+  .services-table th,
+  .clients-table td,
+  .services-table td {
+    padding: 8px 10px;
+  }
+
+  .clients-table th.hidden,
+  .services-table th.hidden,
+  .clients-table td.hidden,
+  .services-table td.hidden {
+    display: none; /* Colunas ocultas em telas menores */
+  }
+}
+
+/* Estilo para botões */
 button {
   background-color: #bb86fc;
   color: #121212;
@@ -123,6 +202,7 @@ button:hover {
   background-color: #7f39fb;
 }
 
+/* Estilos para formulários */
 form input[type="text"],
 form input[type="email"],
 form input[type="tel"],
@@ -142,9 +222,12 @@ form textarea {
   min-height: 100px;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  header nav {
-    display: none;
-  }
+/* Tema claro */
+body.light-mode {
+  --primary-color: #ffffff;
+  --background-color: #f0f0f0;
+  --card-background: #ffffff;
+  --text-primary: #000000;
+  --text-muted: #606060;
+  --border-color: #cccccc;
 }

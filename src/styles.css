@@ -9,7 +9,6 @@
   --text-primary: #e0e0e0; /* Texto primário mais claro para contraste */
   --text-muted: #9e9e9e; /* Texto muted também mais claro */
   --border-color: #bb86fc; /* Cor da borda mais escura */
-
 }
 
 body {
@@ -48,13 +47,11 @@ header nav a:hover {
   display: flex;
   flex-direction: column;
   gap: 16px;
-
 }
 
 .grid {
   display: grid;
   gap: 16px;
-
 }
 
 .grid.md\:grid-cols-2 {
@@ -74,14 +71,12 @@ header nav a:hover {
   display: flex;
   flex-direction: column;
   gap: 8px;
-
 }
 
 .card h3 {
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
-
 }
 
 .card .value {
@@ -94,41 +89,111 @@ header nav a:hover {
   color: var(--text-muted);
 }
 
+/* Estilo atualizado para tabelas */
 table {
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
-
+  background-color: var(--card-background); /* Mantendo o fundo escuro */
+  color: var(--text-primary); /* Cor do texto */
 }
 
 table th,
 table td {
-  padding: 8px;
+  padding: 12px; /* Alterado para 12px */
   text-align: left;
-  border-bottom: 1px solid var(--border-color);
-
+  border-bottom: 1px solid var(--border-color); /* Borda entre células */
 }
 
-table thead th {
-  background-color: var(--primary-color);
-  color: white;
-
+table th {
+  background-color: var(--primary-color); /* Cor do cabeçalho */
+  color: white; /* Texto branco no cabeçalho */
+  font-weight: 600; /* Deixar o texto do cabeçalho mais forte */
+  border-bottom: 2px solid var(--border-color); /* Linha inferior do cabeçalho */
 }
 
 table tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.05); /* Cor ao passar o mouse */
 }
 
 table tbody tr:last-child td {
-  border-bottom: none;
-
+  border-bottom: none; /* Remover a borda inferior na última linha */
 }
 
+/* Estilo adicional */
 .titleroxo {
   font-size: 1.25rem;
   font-weight: 600;
   color: #bb86fc;
 }
+
 .no-header .app-header {
   display: none;
+}
+
+/* Seção de Adicionar Novo Produto */
+.mt-8 {
+  margin-top: 32px;
+}
+
+h2 {
+  color: var(--border-color); /* Alterado para a cor roxa mais clara para contraste */
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  background-color: #2c2c2c;
+  color: var(--text-primary);
+  border: 1px solid #444;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--border-color);
+  box-shadow: 0 0 5px var(--border-color);
+}
+
+button {
+  padding: 12px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #7f39fb;
+}
+
+/* Ajustes para responsividade */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,235 +1,41 @@
-<!--
-// v0 by Vercel.
-// https://v0.dev/t/qQE9xBV30N8
--->
+<div class="agenda-container">
+  <header>
+    <div class="date-selector">
+      <mat-form-field>
+        <mat-label>Data</mat-label>
+        <input matInput [matDatepicker]="datepicker" (dateChange)="onDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </header>
 
-  <div class="flex items-center justify-between mb-6 flex-col md:flex-row md:items-start md:gap-4 mt-8">
-    <div class="flex-1 order-2 md:order-1">
-      <div class="flex items-center gap-4">
-        <button
-          type="button"
-          role="combobox"
-          aria-controls="radix-:r36:"
-          aria-expanded="false"
-          aria-autocomplete="none"
-          dir="ltr"
-          data-state="closed"
-          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <span style="pointer-events: none;">All Employees</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-            aria-hidden="true"
-          >
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
-        </button>
-        <button
-          type="button"
-          role="combobox"
-          aria-controls="radix-:r3b:"
-          aria-expanded="false"
-          aria-autocomplete="none"
-          dir="ltr"
-          data-state="closed"
-          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <span style="pointer-events: none;">All Dates</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-            aria-hidden="true"
-          >
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
-        </button>
-        <button
-          type="button"
-          role="combobox"
-          aria-controls="radix-:r3g:"
-          aria-expanded="false"
-          aria-autocomplete="none"
-          dir="ltr"
-          data-state="closed"
-          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <span style="pointer-events: none;">All Statuses</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-            aria-hidden="true"
-          >
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
-        </button>
+  <div class="agenda-grid">
+    <!-- Cabeçalho: profissionais -->
+    <div class="agenda-header">
+      <div class="col-header" *ngFor="let profissional of profissionais">
+        {{ profissional.nome }}
+        <br />
+        {{ profissional.especialidade }}
       </div>
     </div>
-    <div class="order-1 md:order-2 mt-4 md:mt-0">
-      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-        Add New Schedule
-      </button>
+
+    <!-- Corpo: horários -->
+    <div class="agenda-body">
+      <div class="row" *ngFor="let horario of horarios">
+        <div class="time-label">{{ horario }}</div>
+        <div
+          class="cell"
+          *ngFor="let profissional of profissionais"
+          [ngClass]="{ 'has-agendamento': getAgendamento(horario, profissional.id) }"
+          (click)="onAgendamentoClick(horario, profissional.id)"
+        >
+          <div *ngIf="getAgendamento(horario, profissional.id)" class="agendamento">
+            <span>{{ getAgendamento(horario, profissional.id)?.cliente }}</span>
+            <span>{{ getAgendamento(horario, profissional.id)?.servico }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-<!-- Inicio Tabela de Datas e Agendamentos -->
-
-  <div class="agendamentos-container">
-  <h2>Agendamentos Recentes por Profissional</h2>
-
-  <table mat-table [dataSource]="agendamentos" class="mat-elevation-z8">
-    <ng-container matColumnDef="profissionalId">
-      <th mat-header-cell *matHeaderCellDef> Profissional ID </th>
-      <td mat-cell *matCellDef="let agendamento"> {{ agendamento.profissionalId }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="detalhes">
-      <th mat-header-cell *matHeaderCellDef> Detalhes </th>
-      <td mat-cell *matCellDef="let agendamento">
-        {{ agendamento.data | date:'short' }} - {{ agendamento.status }}
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="['profissionalId', 'detalhes']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['profissionalId', 'detalhes'];"></tr>
-  </table>
 </div>
-<!-- Fim Tabela de Datas e Agendamentos -->
-
-
-  <div class="mt-6">
-    <h2 class="text-xl font-bold mb-4">Add New Schedule</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <button
-        type="button"
-        role="combobox"
-        aria-controls="radix-:r3l:"
-        aria-expanded="false"
-        aria-autocomplete="none"
-        dir="ltr"
-        data-state="closed"
-        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        <span style="pointer-events: none;"></span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-          aria-hidden="true"
-        >
-          <path d="m6 9 6 6 6-6"></path>
-        </svg>
-      </button>
-      <button
-        type="button"
-        role="combobox"
-        aria-controls="radix-:r3m:"
-        aria-expanded="false"
-        aria-autocomplete="none"
-        dir="ltr"
-        data-state="closed"
-        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        <span style="pointer-events: none;"></span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-          aria-hidden="true"
-        >
-          <path d="m6 9 6 6 6-6"></path>
-        </svg>
-      </button>
-      <button
-        type="button"
-        role="combobox"
-        aria-controls="radix-:r3t:"
-        aria-expanded="false"
-        aria-autocomplete="none"
-        dir="ltr"
-        data-state="closed"
-        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        <span style="pointer-events: none;"></span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-          aria-hidden="true"
-        >
-          <path d="m6 9 6 6 6-6"></path>
-        </svg>
-      </button>
-      <button
-        type="button"
-        role="combobox"
-        aria-controls="radix-:r41:"
-        aria-expanded="false"
-        aria-autocomplete="none"
-        dir="ltr"
-        data-state="closed"
-        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        <span style="pointer-events: none;"></span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-          aria-hidden="true"
-        >
-          <path d="m6 9 6 6 6-6"></path>
-        </svg>
-      </button>
-    </div>
-  </div>
