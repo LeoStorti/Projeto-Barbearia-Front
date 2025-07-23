@@ -1,41 +1,123 @@
+<!-- Template: business-agendamentos.component.html -->
 <div class="agenda-container">
-  <header>
-    <div class="date-selector">
-      <mat-form-field>
-        <mat-label>Data</mat-label>
-        <input matInput [matDatepicker]="datepicker" (dateChange)="onDateChange($event)">
-        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-        <mat-datepicker #datepicker></mat-datepicker>
-      </mat-form-field>
-    </div>
-  </header>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Profissional</mat-label>
+    <input matInput [(ngModel)]="filtroProfissional" placeholder="Buscar por nome">
+  </mat-form-field>
 
-  <div class="agenda-grid">
-    <!-- Cabeçalho: profissionais -->
-    <div class="agenda-header">
-      <div class="col-header" *ngFor="let profissional of profissionais">
-        {{ profissional.nome }}
-        <br />
-        {{ profissional.especialidade }}
-      </div>
-    </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Selecione um profissional</mat-label>
+    <select matNativeControl [(ngModel)]="selectedProfissional">
+      <option value="" disabled selected>Escolha</option>
+      <option *ngFor="let profissional of profissionaisFiltrados()" [value]="profissional.id">
+        {{ profissional.nome }} - {{ profissional.especialidade }}
+      </option>
+    </select>
+  </mat-form-field>
 
-    <!-- Corpo: horários -->
-    <div class="agenda-body">
-      <div class="row" *ngFor="let horario of horarios">
-        <div class="time-label">{{ horario }}</div>
-        <div
-          class="cell"
-          *ngFor="let profissional of profissionais"
-          [ngClass]="{ 'has-agendamento': getAgendamento(horario, profissional.id) }"
-          (click)="onAgendamentoClick(horario, profissional.id)"
-        >
-          <div *ngIf="getAgendamento(horario, profissional.id)" class="agendamento">
-            <span>{{ getAgendamento(horario, profissional.id)?.cliente }}</span>
-            <span>{{ getAgendamento(horario, profissional.id)?.servico }}</span>
+  <mat-form-field appearance="fill">
+    <mat-label>Data</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="onDateChange($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="pesquisarPorData()">Pesquisar</button>
+
+  <div *ngIf="agendamentosAgrupados && agendamentosAgrupados.length" class="calendario-container">
+    <h3>Agenda do dia</h3>
+    <div *ngFor="let grupo of agendamentosAgrupados">
+      <h4>{{ grupo.profissional.nome }} ({{ grupo.profissional.especialidade }})</h4>
+      <div class="calendario">
+        <div *ngFor="let agendamento of grupo.agendamentos"
+             class="horario-box"
+             [ngClass]="agendamento.status.toLowerCase()"
+             (click)="onAgendamentoClick(agendamento.horario, agendamento.ProfissionalId)">
+          <div class="hora">{{ agendamento.horario }}</div>
+          <div class="info">
+            <div class="status-icon">
+              <mat-icon *ngIf="agendamento.status === 'Confirmado'">check_circle</mat-icon>
+              <mat-icon *ngIf="agendamento.status === 'Pendente'">schedule</mat-icon>
+              <mat-icon *ngIf="agendamento.status === 'Cancelado'">cancel</mat-icon>
+            </div>
+            <div><strong>{{ agendamento.cliente }}</strong></div>
+            <div>{{ agendamento.servico }}</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div *ngIf="!agendamentosAgrupados || !agendamentosAgrupados.length">
+    <p>Nenhum agendamento encontrado para os filtros selecionados.</p>
+  </div>
 </div>
+
+<style>
+.agenda-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.calendario-container {
+  margin-top: 1rem;
+}
+
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.horario-box {
+  border: 1px solid #ccc;
+  border-left: 5px solid #3f51b5;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fafafa;
+  transition: 0.2s;
+}
+
+.horario-box:hover {
+  background: #f0f0ff;
+}
+
+.horario-box.confirmado {
+  border-left-color: #4caf50;
+  background: #e8f5e9;
+}
+
+.horario-box.pendente {
+  border-left-color: #ff9800;
+  background: #fff3e0;
+}
+
+.horario-box.cancelado {
+  border-left-color: #f44336;
+  background: #ffebee;
+}
+
+.hora {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.info div {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.status-icon mat-icon {
+  vertical-align: middle;
+  margin-right: 4px;
+  font-size: 18px;
+  color: inherit;
+}
+
+.full-width {
+  width: 100%;
+}
+</style>
