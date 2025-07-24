@@ -152,3 +152,28 @@
     grid-template-columns: 80px repeat(auto-fit, minmax(120px, 1fr));
   }
 }
+.agendamento-box {
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.agendamento-box.confirmado {
+  background-color: #4caf50; /* verde */
+  color: white;
+}
+
+.agendamento-box.pendente {
+  background-color: #ff9800; /* laranja */
+  color: white;
+}
+
+.agendamento-box.cancelado {
+  background-color: #f44336; /* vermelho */
+  color: white;
+}
+
+.agendamento-box.vazio {
+  background-color: #e0e0e0;
+  color: #757575;
+}
