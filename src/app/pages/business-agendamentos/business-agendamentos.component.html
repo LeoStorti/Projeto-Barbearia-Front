@@ -36,7 +36,9 @@
                  matTooltipClass="agendamento-tooltip"
                  matTooltipPosition="right"
                  (click)="onAgendamentoClick(hora, grupo.profissional.id)">
-              <strong>Ocupado</strong>
+              <strong>Ocupado</strong><br>
+              <span>{{ agendamento.cliente }}</span><br>
+              <small>{{ agendamento.servico }}</small>
             </div>
           </ng-container>
           <ng-template #vazio>
