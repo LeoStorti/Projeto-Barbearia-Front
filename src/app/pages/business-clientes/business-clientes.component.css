@@ -1,3 +1,138 @@
+/* --- HEADER E TÍTULO --- */
+.card-clientes {
+  border: 1.5px solid #bb86fc;
+  margin-bottom: 32px;
+}
+.clientes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 16px;
+}
+.clientes-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.clientes-icon {
+  color: #bb86fc;
+  font-size: 2.2rem;
+}
+.btn-novo-cliente {
+  font-weight: 700;
+  font-size: 1.08rem;
+  padding: 10px 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0002;
+  letter-spacing: 0.5px;
+}
+
+/* --- FILTRO --- */
+.filtro-bar {
+  margin-bottom: 10px;
+}
+.filtro-nome {
+  width: 100%;
+  background: #232323;
+  border-radius: 6px;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline,
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #bb86fc;
+}
+.mat-form-field-appearance-outline .mat-form-field-label {
+  color: #bb86fc;
+}
+.mat-form-field-appearance-outline .mat-input-element {
+  color: #fff;
+}
+.mat-form-field-appearance-outline .mat-form-field-suffix .mat-icon {
+  color: #bb86fc;
+}
+
+/* --- TABELA DE CLIENTES --- */
+.tabela-clientes-wrapper {
+  position: relative;
+  min-height: 180px;
+}
+.tabela-vazia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #bb86fc;
+  font-size: 1.1rem;
+  background: #181818;
+  border-radius: 8px;
+  padding: 32px 0;
+  margin-top: 8px;
+}
+
+/* --- TABELA DE SERVIÇOS --- */
+.card-servicos {
+  border: 1.5px solid #7f39fb;
+}
+.servicos-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.servicos-icon {
+  color: #7f39fb;
+  font-size: 2rem;
+}
+.tabela-servicos-wrapper {
+  position: relative;
+  min-height: 120px;
+}
+
+/* --- MODAL CLIENTE --- */
+.modal-cliente {
+  min-width: 320px;
+  max-width: 420px;
+  padding: 0 4px;
+}
+.modal-cliente .mat-dialog-title {
+  color: #bb86fc;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.modal-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.mat-dialog-content {
+  background: #181818;
+  color: #fff;
+  border-radius: 8px;
+  padding: 18px 8px 8px 8px;
+}
+.mat-dialog-actions {
+  background: #181818;
+  border-top: 1px solid #232323;
+  padding: 12px 16px 12px 0;
+}
+.mat-dialog-actions button {
+  margin-left: 8px;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+  .main-content {
+    flex-direction: column;
+    margin: 12px 0 0 0;
+  }
+  .clients-section {
+    margin-right: 0;
+    min-width: unset;
+  }
+  .card-clientes, .card-servicos {
+    margin-bottom: 18px;
+  }
+}
 /* Estilos gerais para o corpo */
 body {
   background-color: #121212; /* Fundo escuro */
@@ -50,12 +185,71 @@ header nav {
 /* Estilos para o conteúdo principal */
 .main-content {
   display: flex;
-  margin: 20px;
+  margin: 32px 0 0 0;
+  justify-content: center;
 }
 
 .clients-section {
   flex: 3;
   margin-right: 20px;
+  min-width: 340px;
+}
+
+.clientes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 16px;
+}
+
+.clientes-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #bb86fc;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.clientes-header button {
+  background: linear-gradient(90deg, #bb86fc 60%, #7f39fb 100%);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #0002;
+  padding: 8px 20px;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.clientes-header button:hover {
+  background: linear-gradient(90deg, #7f39fb 60%, #bb86fc 100%);
+}
+
+.filtro-nome {
+  width: 100%;
+  margin-bottom: 18px;
+  background: #232323;
+  border-radius: 6px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #bb86fc;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #bb86fc;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-label {
+  color: #bb86fc;
+}
+
+.mat-form-field-appearance-outline .mat-input-element {
+  color: #fff;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-suffix .mat-icon {
+  color: #bb86fc;
 }
 
 .sidebar {
@@ -76,23 +270,41 @@ header nav {
 }
 
 /* Estilos para tabelas - Clientes e Serviços */
+/* Tabelas */
 .clients-table,
 .services-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-top: 15px;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  box-shadow: 0 4px 16px #0003;
+  background: #181818;
 }
 
+/* Cabeçalho e células */
 .clients-table th,
-.services-table th,
+.services-table th {
+  background: linear-gradient(135deg, #333333, #1e1e1e);
+  color: #bb86fc;
+  font-weight: 700;
+  font-size: 1.08rem;
+  position: relative;
+  cursor: pointer;
+  padding: 18px 10px 18px 16px;
+  border-bottom: 2px solid #7f39fb;
+  letter-spacing: 0.5px;
+}
 .clients-table td,
 .services-table td {
-  padding: 12px;
-  border-bottom: 1px solid #333333;
-  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #232323;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #e0e0e0;
+  font-size: 1rem;
 }
 
 .clients-table th,
@@ -135,10 +347,13 @@ header nav {
   overflow: hidden;
 }
 
+
 .clients-table td:hover,
 .services-table td:hover {
   overflow: visible;
-  white-space: normal; /* Mostrar texto completo ao passar o mouse */
+  white-space: normal;
+  background: #232323;
+  color: #fff;
 }
 
 .clients-table tr:hover,
@@ -147,14 +362,16 @@ header nav {
   transition: background-color 0.3s ease;
 }
 
+
 .clients-table tr.selected,
 .services-table tr.selected {
-  background-color: rgba(100, 149, 237, 0.2); /* Destaque da linha selecionada */
+  background-color: #2d1e3a;
 }
+
 
 .clients-table tr:nth-child(even),
 .services-table tr:nth-child(even) {
-  background-color: #2c2c2c;
+  background-color: #232323;
 }
 
 .clients-table tr:last-child td,
@@ -187,39 +404,46 @@ header nav {
   }
 }
 
-/* Estilo para botões */
-button {
-  background-color: #bb86fc;
-  color: #121212;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Botões de ação na tabela */
+.clients-table button[mat-icon-button],
+.services-table button[mat-icon-button] {
+  background: none;
+  color: #bb86fc;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+  margin: 0 2px;
+}
+.clients-table button[mat-icon-button]:hover,
+.services-table button[mat-icon-button]:hover {
+  background: #2d1e3a;
+  color: #fff;
 }
 
-button:hover {
-  background-color: #7f39fb;
-}
-
-/* Estilos para formulários */
-form input[type="text"],
-form input[type="email"],
-form input[type="tel"],
-form select,
-form textarea {
+/* Modal de cliente */
+.modal-field {
   width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #333333;
-  border-radius: 5px;
-  background-color: #2c2c2c;
-  color: #ffffff;
+  margin-bottom: 16px;
 }
 
-form textarea {
-  resize: vertical;
-  min-height: 100px;
+.mat-dialog-content {
+  background: #181818;
+  color: #fff;
+  border-radius: 8px;
+  padding: 18px 8px 8px 8px;
+}
+.mat-dialog-title {
+  color: #bb86fc;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.mat-dialog-actions {
+  background: #181818;
+  border-top: 1px solid #232323;
+  padding: 12px 16px 12px 0;
+}
+.mat-dialog-actions button {
+  margin-left: 8px;
 }
 
 /* Tema claro */
