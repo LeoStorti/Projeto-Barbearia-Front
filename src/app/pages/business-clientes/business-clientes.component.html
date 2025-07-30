@@ -1,183 +1,186 @@
-<!-- Modernizado: Clientes com modal e ações -->
-<div class="dashboard-container">
-  <div class="main-content">
-    <div class="clients-section">
-      <div class="card card-clientes">
-        <div class="clientes-header">
-          <div class="clientes-title">
-            <mat-icon class="clientes-icon">groups</mat-icon>
-            <h2>Clientes</h2>
-          </div>
-          <button mat-flat-button color="primary" class="btn-novo-cliente" (click)="abrirModalCliente()">
-            <mat-icon>person_add</mat-icon> Novo Cliente
-          </button>
-        </div>
-        <div class="filtro-bar">
-          <mat-form-field appearance="outline" class="filtro-nome">
-            <mat-label>Pesquisar por nome</mat-label>
-            <input matInput [(ngModel)]="filtroNome" (ngModelChange)="aplicarFiltroNome()" placeholder="Digite o nome do cliente">
-            <button mat-icon-button matSuffix *ngIf="filtroNome" (click)="limparFiltroNome()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div class="tabela-clientes-wrapper">
-          <table mat-table [dataSource]="dataSourceClientes" class="clients-table">
-            <ng-container matColumnDef="clienteId">
-              <th mat-header-cell *matHeaderCellDef> Cliente ID </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.clienteId }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="nome">
-              <th mat-header-cell *matHeaderCellDef> Nome </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.nome }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef> Email </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.email }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="endereco">
-              <th mat-header-cell *matHeaderCellDef> Endereço </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.endereco }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="telefone">
-              <th mat-header-cell *matHeaderCellDef> Telefone </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.telefone }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="dataNascimento">
-              <th mat-header-cell *matHeaderCellDef> Data de Nascimento </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.dataNascimento | date:'shortDate' }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="observacoes">
-              <th mat-header-cell *matHeaderCellDef> Observações </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.observacoes }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="alergias">
-              <th mat-header-cell *matHeaderCellDef> Alergias </th>
-              <td mat-cell *matCellDef="let cliente"> {{ cliente.alergias }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="acoes">
-              <th mat-header-cell *matHeaderCellDef> Ações </th>
-              <td mat-cell *matCellDef="let cliente">
-                <button mat-icon-button color="primary" (click)="abrirModalCliente(cliente)" matTooltip="Editar">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="excluirCliente(cliente)" matTooltip="Excluir">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </td>
-            </ng-container>
-
-            <thead>
-              <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes.concat(['acoes'])"></tr>
-            </thead>
-            <tbody>
-              <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes.concat(['acoes']);"></tr>
-            </tbody>
-          </table>
-          <div *ngIf="dataSourceClientes.data.length === 0" class="tabela-vazia">
-            <mat-icon>sentiment_dissatisfied</mat-icon>
-            Nenhum cliente encontrado.
-          </div>
-        </div>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-
-      <div class="card card-servicos">
-        <div class="servicos-header">
-          <mat-icon class="servicos-icon">history</mat-icon>
-          <div>
-            <h2>Histórico de Serviços</h2>
-            <p>Visualize os serviços realizados para cada cliente.</p>
-          </div>
-        </div>
-        <div class="tabela-servicos-wrapper">
-          <table mat-table [dataSource]="dataSourceServicos" class="services-table">
-            <ng-container matColumnDef="clienteId">
-              <th mat-header-cell *matHeaderCellDef> Cliente ID </th>
-              <td mat-cell *matCellDef="let element"> {{element.clienteId}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="servico">
-              <th mat-header-cell *matHeaderCellDef> Serviço </th>
-              <td mat-cell *matCellDef="let element"> {{element.servico}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="dataVenda">
-              <th mat-header-cell *matHeaderCellDef> Data </th>
-              <td mat-cell *matCellDef="let element"> {{element.dataVenda | date}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="totalVenda">
-              <th mat-header-cell *matHeaderCellDef> Valor </th>
-              <td mat-cell *matCellDef="let element"> {{element.totalVenda | currency}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumnsServicos"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumnsServicos;"></tr>
-          </table>
-          <div *ngIf="dataSourceServicos.data.length === 0" class="tabela-vazia">
-            <mat-icon>sentiment_dissatisfied</mat-icon>
-            Nenhum serviço encontrado.
-          </div>
-        </div>
-        <mat-paginator #paginatorServicos [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons [pageSize]="5"></mat-paginator>
-      </div>
+<div class="clients-container">
+  <!-- Header da página -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Tabela de Clientes Cadastrados</h1>
+      <p class="page-subtitle">Visão completa de todos os seus clientes cadastrados</p>
     </div>
+    <div class="header-actions">
+      <button mat-button class="export-btn">
+        <mat-icon>download</mat-icon>
+        Exportar CSV
+      </button>
+      <button mat-raised-button color="primary" class="add-client-btn" (click)="abrirModalCliente()">
+        <mat-icon>person_add</mat-icon>
+        Adicionar Cliente
+      </button>
+    </div>
+  </div>
 
-    <!-- Modal de Cliente -->
-    <ng-template #modalCliente let-modal>
-      <div class="modal-cliente">
-        <h2 mat-dialog-title>{{ clienteEditando ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
-        <mat-dialog-content>
-          <form #formCliente="ngForm">
-            <mat-form-field appearance="outline" class="modal-field">
-              <mat-label>Nome</mat-label>
-              <input matInput [(ngModel)]="clienteForm.nome" name="nome" required />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="modal-field">
-              <mat-label>Telefone</mat-label>
-              <input matInput [(ngModel)]="clienteForm.telefone" name="telefone" required />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="modal-field">
-              <mat-label>Email</mat-label>
-              <input matInput [(ngModel)]="clienteForm.email" name="email" required />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="modal-field">
-              <mat-label>Data de Nascimento</mat-label>
-              <input matInput [matDatepicker]="pickerModal" [(ngModel)]="clienteForm.dataNascimento" name="dataNascimento" required />
-              <mat-datepicker-toggle matSuffix [for]="pickerModal"></mat-datepicker-toggle>
-              <mat-datepicker #pickerModal></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="modal-field">
-              <mat-label>Endereço</mat-label>
-              <input matInput [(ngModel)]="clienteForm.endereco" name="endereco" required />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="modal-field">
-              <mat-label>Observações</mat-label>
-              <textarea matInput [(ngModel)]="clienteForm.observacoes" name="observacoes"></textarea>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="modal-field">
-              <mat-label>Alergias</mat-label>
-              <textarea matInput [(ngModel)]="clienteForm.alergias" name="alergias"></textarea>
-            </mat-form-field>
-          </form>
-        </mat-dialog-content>
-        <mat-dialog-actions align="end">
-          <button mat-button (click)="fecharModalCliente()">Cancelar</button>
-          <button mat-flat-button color="primary" (click)="salvarCliente()" [disabled]="!formCliente.form.valid">
-            {{ clienteEditando ? 'Salvar Alterações' : 'Adicionar Cliente' }}
+  <!-- Barra de pesquisa e filtros -->
+  <div class="search-filter-bar">
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput
+               [(ngModel)]="filtroNome"
+               (ngModelChange)="aplicarFiltroNome()"
+               placeholder="Pesquisar clientes por nome, email, telefone ou endereço...">
+      </mat-form-field>
+    </div>
+    <div class="filter-container">
+      <mat-form-field appearance="outline" class="filter-select">
+        <mat-icon matPrefix>filter_list</mat-icon>
+        <mat-select value="all">
+          <mat-option value="all">Todos os Clientes</mat-option>
+          <mat-option value="recent">Recentes</mat-option>
+          <mat-option value="active">Ativos</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Status da tabela -->
+  <div class="table-status">
+    <span class="showing-text">Mostrando {{ dataSourceClientes.data.length }} de {{ dataSourceClientes.data.length }} clientes cadastrados</span>
+    <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
+  </div>
+
+  <!-- Tabela de clientes -->
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSourceClientes" class="clients-table">
+
+      <!-- Coluna Nome -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let cliente" class="name-cell">
+          <span class="client-name">{{ cliente.nome }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let cliente">
+          <a href="mailto:{{ cliente.email }}" class="email-link">{{ cliente.email }}</a>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Telefone -->
+      <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef>Telefone</th>
+        <td mat-cell *matCellDef="let cliente">{{ cliente.telefone }}</td>
+      </ng-container>
+
+      <!-- Coluna Endereço -->
+      <ng-container matColumnDef="endereco">
+        <th mat-header-cell *matHeaderCellDef>Endereço</th>
+        <td mat-cell *matCellDef="let cliente">{{ cliente.endereco }}</td>
+      </ng-container>
+
+      <!-- Coluna Data de Nascimento -->
+      <ng-container matColumnDef="dataNascimento">
+        <th mat-header-cell *matHeaderCellDef>Data de Nascimento</th>
+        <td mat-cell *matCellDef="let cliente">
+          <span class="date-text">{{ cliente.dataNascimento | date:'dd/MM/yyyy' }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Observações -->
+      <ng-container matColumnDef="observacoes">
+        <th mat-header-cell *matHeaderCellDef>Observações</th>
+        <td mat-cell *matCellDef="let cliente">
+          <span class="notes-text">{{ cliente.observacoes || '-' }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Alergias -->
+      <ng-container matColumnDef="alergias">
+        <th mat-header-cell *matHeaderCellDef>Alergias</th>
+        <td mat-cell *matCellDef="let cliente">
+          <span class="allergy-badge" *ngIf="cliente.alergias; else noAllergy">{{ cliente.alergias }}</span>
+          <ng-template #noAllergy>
+            <span class="no-allergy">Nenhuma</span>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Ações -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let cliente" class="actions-cell">
+          <button mat-icon-button class="action-btn view-btn" matTooltip="Visualizar">
+            <mat-icon>visibility</mat-icon>
           </button>
-        </mat-dialog-actions>
-      </div>
-    </ng-template>
-    <!-- Fim Modal Cliente -->
+          <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalCliente(cliente)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn delete-btn" (click)="excluirCliente(cliente)" matTooltip="Excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Header e Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes;" class="table-row"></tr>
+    </table>
+
+    <!-- Estado vazio -->
+    <div *ngIf="dataSourceClientes.data.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">person_outline</mat-icon>
+      <h3>Nenhum cliente encontrado</h3>
+      <p>Comece adicionando seu primeiro cliente</p>
+      <button mat-raised-button color="primary" (click)="abrirModalCliente()">
+        Adicionar Cliente
+      </button>
+    </div>
   </div>
 </div>
+
+<!-- Modal de Cliente -->
+<ng-template #modalCliente let-modal>
+  <div class="modal-cliente">
+    <h2 mat-dialog-title>{{ clienteEditando ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+    <mat-dialog-content>
+      <form #formCliente="ngForm">
+        <mat-form-field appearance="outline" class="modal-field">
+          <mat-label>Nome</mat-label>
+          <input matInput [(ngModel)]="clienteForm.nome" name="nome" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="modal-field">
+          <mat-label>Telefone</mat-label>
+          <input matInput [(ngModel)]="clienteForm.telefone" name="telefone" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="modal-field">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="clienteForm.email" name="email" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="modal-field">
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput [matDatepicker]="pickerModal" [(ngModel)]="clienteForm.dataNascimento" name="dataNascimento" required />
+          <mat-datepicker-toggle matSuffix [for]="pickerModal"></mat-datepicker-toggle>
+          <mat-datepicker #pickerModal></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="modal-field">
+          <mat-label>Endereço</mat-label>
+          <input matInput [(ngModel)]="clienteForm.endereco" name="endereco" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="modal-field">
+          <mat-label>Observações</mat-label>
+          <textarea matInput [(ngModel)]="clienteForm.observacoes" name="observacoes"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="modal-field">
+          <mat-label>Alergias</mat-label>
+          <textarea matInput [(ngModel)]="clienteForm.alergias" name="alergias"></textarea>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="fecharModalCliente()">Cancelar</button>
+      <button mat-flat-button color="primary" (click)="salvarCliente()" [disabled]="!formCliente.form.valid">
+        {{ clienteEditando ? 'Salvar Alterações' : 'Adicionar Cliente' }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>
