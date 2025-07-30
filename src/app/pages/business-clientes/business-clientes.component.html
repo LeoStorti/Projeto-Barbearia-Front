@@ -54,7 +54,7 @@
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
         <td mat-cell *matCellDef="let cliente" class="name-cell">
-          <span class="client-name">{{ cliente.nome }}</span>
+          <span class="client-name">{{ cliente.Nome }}</span>
         </td>
       </ng-container>
 
@@ -62,27 +62,27 @@
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef>Email</th>
         <td mat-cell *matCellDef="let cliente">
-          <a href="mailto:{{ cliente.email }}" class="email-link">{{ cliente.email }}</a>
+          <a href="mailto:{{ cliente.Email }}" class="email-link">{{ cliente.Email }}</a>
         </td>
       </ng-container>
 
       <!-- Coluna Telefone -->
       <ng-container matColumnDef="telefone">
         <th mat-header-cell *matHeaderCellDef>Telefone</th>
-        <td mat-cell *matCellDef="let cliente">{{ cliente.telefone }}</td>
+        <td mat-cell *matCellDef="let cliente">{{ cliente.Telefone }}</td>
       </ng-container>
 
       <!-- Coluna Endereço -->
       <ng-container matColumnDef="endereco">
         <th mat-header-cell *matHeaderCellDef>Endereço</th>
-        <td mat-cell *matCellDef="let cliente">{{ cliente.endereco }}</td>
+        <td mat-cell *matCellDef="let cliente">{{ cliente.Endereco }}</td>
       </ng-container>
 
       <!-- Coluna Data de Nascimento -->
       <ng-container matColumnDef="dataNascimento">
         <th mat-header-cell *matHeaderCellDef>Data de Nascimento</th>
         <td mat-cell *matCellDef="let cliente">
-          <span class="date-text">{{ cliente.dataNascimento | date:'dd/MM/yyyy' }}</span>
+          <span class="date-text">{{ cliente.DataNascimento | date:'dd/MM/yyyy' }}</span>
         </td>
       </ng-container>
 
@@ -90,7 +90,7 @@
       <ng-container matColumnDef="observacoes">
         <th mat-header-cell *matHeaderCellDef>Observações</th>
         <td mat-cell *matCellDef="let cliente">
-          <span class="notes-text">{{ cliente.observacoes || '-' }}</span>
+          <span class="notes-text">{{ cliente.Observacoes || '-' }}</span>
         </td>
       </ng-container>
 
@@ -98,7 +98,7 @@
       <ng-container matColumnDef="alergias">
         <th mat-header-cell *matHeaderCellDef>Alergias</th>
         <td mat-cell *matCellDef="let cliente">
-          <span class="allergy-badge" *ngIf="cliente.alergias; else noAllergy">{{ cliente.alergias }}</span>
+          <span class="allergy-badge" *ngIf="cliente.Alergias; else noAllergy">{{ cliente.Alergias }}</span>
           <ng-template #noAllergy>
             <span class="no-allergy">Nenhuma</span>
           </ng-template>
@@ -135,6 +135,14 @@
         Adicionar Cliente
       </button>
     </div>
+
+    <!-- Paginação -->
+    <mat-paginator
+      #paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Selecionar página de clientes">
+    </mat-paginator>
   </div>
 </div>
 
@@ -146,33 +154,33 @@
       <form #formCliente="ngForm">
         <mat-form-field appearance="outline" class="modal-field">
           <mat-label>Nome</mat-label>
-          <input matInput [(ngModel)]="clienteForm.nome" name="nome" required />
+          <input matInput [(ngModel)]="clienteForm.Nome" name="nome" required />
         </mat-form-field>
         <mat-form-field appearance="outline" class="modal-field">
           <mat-label>Telefone</mat-label>
-          <input matInput [(ngModel)]="clienteForm.telefone" name="telefone" required />
+          <input matInput [(ngModel)]="clienteForm.Telefone" name="telefone" required />
         </mat-form-field>
         <mat-form-field appearance="outline" class="modal-field">
           <mat-label>Email</mat-label>
-          <input matInput [(ngModel)]="clienteForm.email" name="email" required />
+          <input matInput [(ngModel)]="clienteForm.Email" name="email" required />
         </mat-form-field>
         <mat-form-field appearance="outline" class="modal-field">
           <mat-label>Data de Nascimento</mat-label>
-          <input matInput [matDatepicker]="pickerModal" [(ngModel)]="clienteForm.dataNascimento" name="dataNascimento" required />
+          <input matInput [matDatepicker]="pickerModal" [(ngModel)]="clienteForm.DataNascimento" name="dataNascimento" required />
           <mat-datepicker-toggle matSuffix [for]="pickerModal"></mat-datepicker-toggle>
           <mat-datepicker #pickerModal></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="outline" class="modal-field">
           <mat-label>Endereço</mat-label>
-          <input matInput [(ngModel)]="clienteForm.endereco" name="endereco" required />
+          <input matInput [(ngModel)]="clienteForm.Endereco" name="endereco" required />
         </mat-form-field>
         <mat-form-field appearance="outline" class="modal-field">
           <mat-label>Observações</mat-label>
-          <textarea matInput [(ngModel)]="clienteForm.observacoes" name="observacoes"></textarea>
+          <textarea matInput [(ngModel)]="clienteForm.Observacoes" name="observacoes"></textarea>
         </mat-form-field>
         <mat-form-field appearance="outline" class="modal-field">
           <mat-label>Alergias</mat-label>
-          <textarea matInput [(ngModel)]="clienteForm.alergias" name="alergias"></textarea>
+          <textarea matInput [(ngModel)]="clienteForm.Alergias" name="alergias"></textarea>
         </mat-form-field>
       </form>
     </mat-dialog-content>
