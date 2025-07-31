@@ -1,9 +1,10 @@
 /* Container principal */
 .clients-container {
   padding: 32px;
-  background-color: #fafafa;
+  background-color: var(--background-color);
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.3s ease;
 }
 
 /* Header da página */
@@ -13,20 +14,20 @@
   align-items: flex-start;
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-content h1 {
   font-size: 32px;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
   letter-spacing: -0.025em;
 }
 
 .header-content p {
   font-size: 16px;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -37,17 +38,19 @@
 }
 
 .export-btn {
-  border: 1px solid #d1d5db !important;
-  color: #374151 !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
   font-weight: 500;
   height: 40px;
   padding: 0 16px;
   border-radius: 8px !important;
-  background: white !important;
+  background: var(--surface-color) !important;
+  transition: all 0.3s ease;
 }
 
 .export-btn:hover {
-  background-color: #f9fafb !important;
+  background-color: var(--primary-color) !important;
+  color: var(--surface-color) !important;
   border-color: #9ca3af !important;
 }
 
@@ -108,43 +111,46 @@
 }
 
 .showing-text {
-  color: #6b7280;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .last-updated {
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 
 /* Container da tabela */
 .table-container {
-  background: white;
+  background: var(--surface-color);
   border-radius: 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   overflow: hidden;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
 }
 
 /* Estilos da tabela */
 .clients-table {
   width: 100%;
-  background: white;
+  background: var(--surface-color);
 }
 
 .clients-table th {
-  background-color: #f9fafb !important;
-  color: #374151 !important;
+  background-color: var(--background-color) !important;
+  color: var(--text-primary) !important;
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 16px 20px;
-  border-bottom: 1px solid #e5e7eb !important;
+  border-bottom: 1px solid var(--border-color) !important;
 }
 
 .clients-table td {
   padding: 16px 20px;
-  border-bottom: 1px solid #f3f4f6 !important;
+  border-bottom: 1px solid var(--divider-color) !important;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease;
   font-size: 14px;
   color: #111827;
   background: white !important;
