@@ -1,0 +1,8 @@
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\Projeto.Barber.Api.csproj.AssemblyReference.cache
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\Projeto.Barber.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\Projeto.Barber.Api.AssemblyInfoInputs.cache
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\Projeto.Barber.Api.AssemblyInfo.cs
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\Projeto.Barber.Api.csproj.CoreCompileInputs.cache
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\Projeto.Barber.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend\obj\Debug\net8.0\Projeto.Barber.Api.sourcelink.json

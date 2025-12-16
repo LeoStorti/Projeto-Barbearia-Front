@@ -34,11 +34,11 @@
                 *ngFor="let servico of dataSourceServicos.data"
                 class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
               >
-                <td class="p-4 align-middle">{{ servico.nomeServico }}</td>
-                <td class="p-4 align-middle">R$ {{ servico.preco | number: '1.2-2' }}</td>
-                <td class="p-4 align-middle">{{ servico.descricao }}</td>
-                <td class="p-4 align-middle">{{ servico.categoria }}</td>
-                <td class="p-4 align-middle">{{ servico.duracao }} min</td>
+                <td class="p-4 align-middle">{{ servico.NomeServico }}</td>
+                <td class="p-4 align-middle">R$ {{ servico.Preco | number: '1.2-2' }}</td>
+                <td class="p-4 align-middle">{{ servico.Descricao }}</td>
+                <td class="p-4 align-middle">{{ servico.Categoria }}</td>
+                <td class="p-4 align-middle">{{ servico.Duracao }} min</td>
                 <td class="p-4 align-middle">
 
                   <button aria-label="Editar">
@@ -84,23 +84,23 @@
     <form class="grid gap-4" (ngSubmit)="enviarNovoServico()">
       <div class="flex flex-col">
         <label for="nome" class="text-sm font-medium">Nome</label>
-        <input [(ngModel)]="novoServico.nomeServico" type="text" id="nome" class="mt-1 p-2 border rounded" placeholder="Nome do serviço" name="nomeServico">
+        <input [(ngModel)]="novoServico.NomeServico" type="text" id="nome" class="mt-1 p-2 border rounded" placeholder="Nome do serviço" name="nomeServico">
       </div>
       <div class="flex flex-col">
         <label for="preco" class="text-sm font-medium">Preço</label>
-        <input [(ngModel)]="novoServico.preco" type="text" id="preco" class="mt-1 p-2 border rounded" placeholder="Preço do serviço" name="preco">
+        <input [(ngModel)]="novoServico.Preco" type="text" id="preco" class="mt-1 p-2 border rounded" placeholder="Preço do serviço" name="preco">
       </div>
       <div class="flex flex-col">
         <label for="descricao" class="text-sm font-medium">Descrição</label>
-        <input [(ngModel)]="novoServico.descricao" type="text" id="descricao" class="mt-1 p-2 border rounded" placeholder="Descrição do serviço" name="descricao">
+        <input [(ngModel)]="novoServico.Descricao" type="text" id="descricao" class="mt-1 p-2 border rounded" placeholder="Descrição do serviço" name="descricao">
       </div>
       <div class="flex flex-col">
         <label for="categoria" class="text-sm font-medium">Categoria</label>
-        <input [(ngModel)]="novoServico.categoria" type="text" id="categoria" class="mt-1 p-2 border rounded" placeholder="Categoria do serviço" name="categoria">
+        <input [(ngModel)]="novoServico.Categoria" type="text" id="categoria" class="mt-1 p-2 border rounded" placeholder="Categoria do serviço" name="categoria">
       </div>
       <div class="flex flex-col">
         <label for="duracao" class="text-sm font-medium">Duração</label>
-        <input [(ngModel)]="novoServico.duracao" type="text" id="duracao" class="mt-1 p-2 border rounded" placeholder="Duração do serviço" name="duracao">
+        <input [(ngModel)]="novoServico.Duracao" type="text" id="duracao" class="mt-1 p-2 border rounded" placeholder="Duração do serviço" name="duracao">
       </div>
 
       <!-- Botão de submit -->

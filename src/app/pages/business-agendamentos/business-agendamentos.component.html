@@ -1,90 +1,171 @@
 <div class="agenda-container">
+  <!-- Linha: Data + Pesquisar -->
+  <div class="header-row">
+    <div class="date-card">
+      <div>
+        <div class="date-card-title">Data</div>
+        <mat-form-field appearance="fill" class="date-field">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="selectedDate"
+            (dateChange)="onDateChange($event)"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
 
-  <!-- Apenas filtro de Data -->
-  <mat-form-field appearance="fill">
-    <mat-label>Data</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="onDateChange($event)">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="pesquisarPorData()">Pesquisar</button>
-
-  <!-- Grade por Profissional -->
-  <div *ngIf="agendamentosAgrupados?.length" class="grade-container">
-    <table class="agenda-tabela">
-      <thead>
-        <tr>
-          <th>Horário</th>
-          <th *ngFor="let grupo of agendamentosAgrupados">
-            {{ grupo.profissional.nome }}<br>
-            <small style="font-weight:normal; color:#555">{{ grupo.profissional.especialidade }}</small>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let hora of horariosPadrao">
-          <td><strong>{{ hora }}</strong></td>
-          <td *ngFor="let grupo of agendamentosAgrupados">
-            <ng-container *ngIf="getAgendamento(hora, grupo.profissional.id) as agendamento; else vazio">
-              <div class="agendamento-box ocupado"
-                   [ngClass]="agendamento.status.toLowerCase()"
-                   [matTooltip]="
-                    'Cliente: ' + agendamento.cliente + '\n' +
-                    'Serviço: ' + agendamento.servico + '\n' +
-                    'Status: ' + agendamento.status
-                   "
-                   matTooltipClass="agendamento-tooltip"
-                   matTooltipPosition="right"
-                   (click)="onAgendamentoClick(hora, grupo.profissional.id)">
-                <strong>Ocupado</strong><br>
-                <span>{{ agendamento.cliente }}</span><br>
-                <small>{{ agendamento.servico }}</small>
-              </div>
-            </ng-container>
-            <ng-template #vazio>
-              <div class="agendamento-box vazio"
-                   matTooltip="Clique para agendar"
-                   (click)="onAgendamentoClick(hora, grupo.profissional.id)">
-                <small>Disponível</small>
-              </div>
-            </ng-template>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <button
+      mat-raised-button
+      color="primary"
+      class="search-button"
+      (click)="pesquisarPorData()"
+    >
+      <mat-icon>search</mat-icon>
+      <span>Pesquisar</span>
+    </button>
   </div>
 
-  <div *ngIf="!agendamentosAgrupados?.length">
-    <p>Nenhum agendamento encontrado para a data selecionada.</p>
+  <!-- Linha: filtro + opções -->
+  <div class="toolbar-row">
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Filtrar profissionais</mat-label>
+      <input
+        matInput
+        placeholder="Digite o nome do profissional"
+        [(ngModel)]="filtroProfissional"
+      />
+      <button
+        *ngIf="filtroProfissional"
+        matSuffix
+        mat-icon-button
+        aria-label="Limpar filtro"
+        (click)="filtroProfissional = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="compactMode">
+      Modo compacto
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="showOnlyOccupied">
+      Mostrar só ocupados
+    </mat-checkbox>
   </div>
 
-<style>
-.agenda-tabela {
-  width: 100%;
-  border-collapse: collapse;
-}
-.agenda-tabela th, .agenda-tabela td {
-  border: 1px solid #888;
-  padding: 4px 8px;
-  text-align: center;
-}
-.agenda-tabela th {
-  background: #f0f0f0;
-  color: #222;
-  font-weight: bold;
-}
-.agendamento-box.ocupado {
-  background-color: #757575;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 4px;
-}
-.agendamento-box.vazio {
-  background: #f9f9f9;
-  color: #333;
-  border-radius: 4px;
-}
-</style>
+  <!-- Grade de agendamentos: sempre visível, mesmo sem agendamentos -->
+  <div class="grade-container">
+    <div class="agenda-scroll">
+      <table class="agenda-grid" [class.compact-mode]="compactMode">
+        <thead>
+          <tr>
+            <th class="time-header">Horário</th>
+            <th class="prof-header" *ngFor="let grupo of gruposFiltrados()">
+              <div class="prof-name">
+                {{ grupo.profissional.nome }}
+              </div>
+              <div
+                class="prof-subtitle"
+                *ngIf="grupo.profissional.especialidade"
+              >
+                {{ grupo.profissional.especialidade }}
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let hora of horariosPadrao">
+            <!-- Coluna dos horários -->
+            <td class="time-cell">
+              <button class="time-pill">
+                {{ hora }}
+              </button>
+            </td>
+
+            <!-- Colunas dos profissionais -->
+            <td class="slot-cell" *ngFor="let grupo of gruposFiltrados()">
+              <ng-container
+                *ngIf="isSlotVisible(hora, grupo.profissional.id)"
+              >
+                <!-- Slot ocupado -->
+                <ng-container
+                  *ngIf="
+                    getAgendamento(hora, grupo.profissional.id)
+                      as agendamento;
+                    else disponivel
+                  "
+                >
+                  <div
+                    class="agendamento-card"
+                    [ngClass]="
+                      'status-' +
+                      (agendamento.status || 'pendente').toLowerCase()
+                    "
+                    [matTooltip]="
+                      'Cliente: ' +
+                      agendamento.cliente +
+                      '\n' +
+                      'Serviço: ' +
+                      agendamento.servico +
+                      '\n' +
+                      'Status: ' +
+                      agendamento.status
+                    "
+                    matTooltipClass="agendamento-tooltip"
+                    matTooltipPosition="above"
+                    (click)="onAgendamentoClick(hora, grupo.profissional.id)"
+                  >
+                    <div class="agendamento-status-chip">
+                      {{ agendamento.status || 'Ocupado' }}
+                    </div>
+                    <div class="agendamento-cliente">
+                      {{ agendamento.cliente }}
+                    </div>
+                    <div
+                      class="agendamento-servico"
+                      *ngIf="!compactMode"
+                    >
+                      {{ agendamento.servico }}
+                    </div>
+                  </div>
+                  <!-- Botão fora do card, ao lado direito do slot -->
+                  <div class="slot-actions" *ngIf="agendamento">
+                    <button
+                      class="finalizar-btn"
+                      mat-stroked-button
+                      color="accent"
+                      [disabled]="isFinalizando(agendamento)"
+                      type="button"
+                      (click)="onFinalizarAgendamentoClick(agendamento, $event)"
+                    >
+                      {{ isFinalizando(agendamento) ? 'Finalizando...' : 'Finalizar' }}
+                    </button>
+                  </div>
+                </ng-container>
+
+                <!-- Slot disponível -->
+                <ng-template #disponivel>
+                  <button
+                    class="slot-disponivel"
+                    mat-stroked-button
+                    (click)="
+                      onAgendamentoClick(hora, grupo.profissional.id)
+                    "
+                  >
+                    Disponível
+                  </button>
+                </ng-template>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
-
