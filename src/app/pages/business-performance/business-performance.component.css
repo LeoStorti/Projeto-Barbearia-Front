@@ -2,3 +2,12 @@ table {
   table-layout: fixed;
   width: 100%;
 }
+
+.dashboard-chart {
+  position: relative;
+  height: 320px;
+}
+
+.dashboard-chart--small {
+  height: 260px;
+}

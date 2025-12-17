@@ -1,55 +1,69 @@
-<div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-  <h1 class="text-3xl font-bold mb-6">Equipe da Barbearia</h1>
-  <div class="overflow-x-auto">
-    <table class="w-full table-auto border-collapse">
+<div class="clients-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Equipe da Barbearia</h1>
+      <p class="page-subtitle">Profissionais cadastrados e informações de contato</p>
+    </div>
+    <div class="header-actions">
+      <button mat-button class="export-btn">
+        <mat-icon>download</mat-icon>
+        Exportar CSV
+      </button>
+      <button mat-raised-button color="primary" class="add-client-btn" (click)="abrirModalProfissional()">
+        <mat-icon>person_add</mat-icon>
+        Adicionar Profissional
+      </button>
+    </div>
+  </div>
+
+  <!-- Busca -->
+  <div class="search-filter-bar">
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput [(ngModel)]="filtroNome" (ngModelChange)="aplicarFiltroNome()" placeholder="Pesquisar profissionais por nome, especialização, telefone ou email..." />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="table-status">
+    <span class="showing-text">Mostrando {{ dataSourceProfissionais.data.length }} de {{ dataSourceProfissionais.data.length }} profissionais</span>
+    <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-container">
+    <table class="clients-table">
       <thead>
-        <tr class="bg-gray-200">
-          <th class="px-4 py-2 text-left">Nome</th>
-          <th class="px-4 py-2 text-left">Especialização</th>
-          <th class="px-4 py-2 text-left">Telefone</th>
-          <th class="px-4 py-2 text-left">Email</th> <!-- Coluna de Email -->
-          <th class="px-4 py-2 text-left">Salário Fixo</th>
+        <tr>
+          <th>Nome</th>
+          <th>Especialização</th>
+          <th>Telefone</th>
+          <th>Email</th>
+          <th>Salário</th>
+          <th style="text-align:right">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let profissional of dataSource.data" class="border-b bg-black-100">
-          <td class="px-4 py-2">{{ profissional.nome }}</td>
-          <td class="px-4 py-2">{{ profissional.especializacao }}</td>
-          <td class="px-4 py-2">{{ profissional.telefone }}</td>
-          <td class="px-4 py-2">{{ profissional.email }}</td> <!-- Ligação de Email -->
-          <td class="px-4 py-2">{{ profissional.salario }}</td>
+        <tr *ngFor="let profissional of dataSourceProfissionais.data" class="table-row">
+          <td>{{ profissional.nome }}</td>
+          <td>{{ profissional.especializacao }}</td>
+          <td>{{ profissional.telefone }}</td>
+          <td>{{ profissional.email }}</td>
+          <td>{{ profissional.salario | currency:'BRL' }}</td>
+          <td class="actions-cell">
+            <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalProfissional(profissional)" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="action-btn delete-btn" (click)="excluirProfissional(profissional)" matTooltip="Excluir">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
-  </div>
-  <div class="mt-8">
-    <h2 class="text-2xl font-bold mb-4">Adicionar Novo Profissional</h2>
-    <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <div>
-        <label for="name" class="block font-medium mb-1">Nome</label>
-        <input id="name" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" type="text" value="" name="name" />
-      </div>
-      <div>
-        <label for="specialty" class="block font-medium mb-1">Especialização</label>
-        <input id="specialty" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" type="text" value="" name="specialty" />
-      </div>
-      <div>
-        <label for="phone" class="block font-medium mb-1">Telefone</label>
-        <input id="phone" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" type="tel" value="" name="phone" />
-      </div>
-      <div>
-        <label for="email" class="block font-medium mb-1">Email</label>
-        <input id="email" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" type="email" value="" name="email" />
-      </div>
-      <div>
-        <label for="birthday" class="block font-medium mb-1">Aniversário</label>
-        <input id="birthday" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" type="date" value="" name="birthday" />
-      </div>
-      <div class="col-span-2">
-        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">
-          Adicionar Profissional
-        </button>
-      </div>
-    </form>
+    <mat-paginator #paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

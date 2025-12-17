@@ -1,106 +1,163 @@
-<div class="pagamentos-wrapper">
-    <div class="toolbar">
-        <h1 class="titulo">Pagamentos</h1>
-        <div class="toolbar-actions">
-            <mat-form-field appearance="outline">
+<div class="clients-container">
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1 class="page-title">Pagamentos</h1>
+            <p class="page-subtitle">Gestão mensal de pagamentos por profissional</p>
+        </div>
+        <div class="header-actions">
+            <button mat-button class="export-btn" (click)="exportCsv()">
+                <mat-icon>download</mat-icon>
+                Exportar CSV
+            </button>
+            <button mat-raised-button color="primary" class="add-client-btn" (click)="abrirModalPagamento()">
+                <mat-icon>add</mat-icon>
+                Novo Pagamento
+            </button>
+        </div>
+    </div>
+
+    <!-- Busca e filtros -->
+    <div class="search-filter-bar">
+        <div class="search-container">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput [(ngModel)]="filtroNome" (ngModelChange)="aplicarFiltroNome()" placeholder="Pesquisar por nome ou cargo..." />
+            </mat-form-field>
+        </div>
+        <div class="filter-container" style="display:flex; gap:12px; align-items:center;">
+            <mat-form-field appearance="outline" class="filter-select">
                 <mat-label>Mês</mat-label>
                 <mat-select [(ngModel)]="selectedMonth" (selectionChange)="refreshPagamentosView()">
                     <mat-option *ngFor="let m of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="m">{{ m }}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="filter-select">
                 <mat-label>Ano</mat-label>
                 <input matInput type="number" [(ngModel)]="selectedYear" (change)="refreshPagamentosView()" />
             </mat-form-field>
-            <button mat-stroked-button color="primary" (click)="exportCsv()" matTooltip="Exportar CSV">Exportar</button>
-            <button mat-flat-button color="accent" (click)="abrirModalPagamento()" matTooltip="Novo pagamento">Novo</button>
+            <mat-form-field appearance="outline" class="filter-select">
+                <mat-icon matPrefix>filter_list</mat-icon>
+                <mat-select value="all">
+                    <mat-option value="all">Todos</mat-option>
+                    <mat-option value="paid">Pagos</mat-option>
+                    <mat-option value="pending">Pendentes</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
 
-    <mat-card class="tabela-card">
-        <mat-table [dataSource]="dataSourcePagamentos" class="mat-elevation-z2">
+    <!-- Status -->
+    <div class="table-status">
+        <span class="showing-text">Mostrando {{ dataSourcePagamentos.data.length }} pagamentos</span>
+        <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
+    </div>
+
+    <!-- Tabela -->
+    <div class="table-container">
+        <table mat-table [dataSource]="dataSourcePagamentos" class="clients-table">
+
             <!-- Funcionário -->
             <ng-container matColumnDef="funcionario">
-                <mat-header-cell *matHeaderCellDef>Funcionário</mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                    <div class="funcionario-cell">
-                        <mat-icon fontIcon="account_circle"></mat-icon>
-                        <div class="dados">
-                            <div class="nome">{{ row.nome }}</div>
-                            <div class="cargo">{{ row.cargo }}</div>
+                <th mat-header-cell *matHeaderCellDef>Funcionário</th>
+                <td mat-cell *matCellDef="let row">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <mat-icon>account_circle</mat-icon>
+                        <div>
+                            <div class="client-name">{{ row.nome }}</div>
+                            <div class="text-muted-foreground" style="font-size:12px;">{{ row.cargo }}</div>
                         </div>
                     </div>
-                </mat-cell>
+                </td>
             </ng-container>
 
             <!-- Salário -->
             <ng-container matColumnDef="salario">
-                <mat-header-cell *matHeaderCellDef>Salário</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.salario | currency:'BRL' }}</mat-cell>
+                <th mat-header-cell *matHeaderCellDef>Salário</th>
+                <td mat-cell *matCellDef="let row">{{ row.salario | currency:'BRL' }}</td>
             </ng-container>
 
-            <!-- Total (igual ao salário, comissão fora da tela) -->
+            <!-- Total -->
             <ng-container matColumnDef="total">
-                <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.total | currency:'BRL' }}</mat-cell>
+                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <td mat-cell *matCellDef="let row">{{ row.total | currency:'BRL' }}</td>
             </ng-container>
 
             <!-- Status -->
             <ng-container matColumnDef="status">
-                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                    <span class="status-pill" [class.pago]="row.pago" [class.pendente]="!row.pago">{{ row.pago ? 'Pago' : 'Pendente' }}</span>
-                </mat-cell>
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let row">
+                    <span class="badge" [style.background]="row.pago ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'" [style.color]="row.pago ? '#059669' : '#dc2626'">
+                        {{ row.pago ? 'Pago' : 'Pendente' }}
+                    </span>
+                </td>
             </ng-container>
 
             <!-- Ações -->
             <ng-container matColumnDef="acoes">
-                <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                    <button mat-icon-button color="primary" (click)="abrirModalPagamento(row)" matTooltip="Editar"><mat-icon>edit</mat-icon></button>
-                    <button mat-icon-button color="warn" (click)="excluirPagamento(row)" matTooltip="Excluir"><mat-icon>delete</mat-icon></button>
-                    <button mat-icon-button color="accent" *ngIf="!row.pago" (click)="marcarComoPago(row)" matTooltip="Marcar pago"><mat-icon>check_circle</mat-icon></button>
-                </mat-cell>
+                <th mat-header-cell *matHeaderCellDef>Ações</th>
+                <td mat-cell *matCellDef="let row" class="actions-cell">
+                    <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalPagamento(row)" matTooltip="Editar">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button class="action-btn delete-btn" (click)="excluirPagamento(row)" matTooltip="Excluir">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button class="action-btn" *ngIf="!row.pago" (click)="marcarComoPago(row)" matTooltip="Marcar pago">
+                        <mat-icon>check_circle</mat-icon>
+                    </button>
+                </td>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-        </mat-table>
-        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,25]" showFirstLastButtons></mat-paginator>
-    </mat-card>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+        </table>
 
-    <!-- Modal Template -->
+        <!-- Estado vazio -->
+        <div *ngIf="dataSourcePagamentos.data.length === 0" class="empty-state">
+            <mat-icon class="empty-icon">payments</mat-icon>
+            <h3>Nenhum pagamento encontrado</h3>
+            <p>Comece adicionando um novo pagamento</p>
+            <button mat-raised-button color="primary" (click)="abrirModalPagamento()">Novo Pagamento</button>
+        </div>
+
+        <!-- Paginação -->
+        <mat-paginator #paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <!-- Modal -->
     <ng-template #modalPagamento>
         <h2 mat-dialog-title>{{ pagamentoEditando ? 'Editar Pagamento' : 'Novo Pagamento' }}</h2>
-        <div mat-dialog-content class="modal-form">
-            <mat-form-field appearance="fill">
-                <mat-label>Profissional</mat-label>
-                <mat-select [(ngModel)]="pagamentoForm.profissionalId" (selectionChange)="onProfSelected($event.value)">
-                    <mat-option [value]="null">-- Selecionar --</mat-option>
-                    <mat-option *ngFor="let p of profissionais" [value]="p.id">{{ p.nome }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Nome</mat-label>
-                <input matInput [(ngModel)]="pagamentoForm.nome" readonly />
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Cargo</mat-label>
-                <input matInput [(ngModel)]="pagamentoForm.cargo" readonly />
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Salário</mat-label>
-                <input matInput type="number" [(ngModel)]="pagamentoForm.salario" (input)="calcularTotal()" />
-            </mat-form-field>
-            <!-- Comissão removida da edição -->
-            <mat-form-field appearance="fill">
-                <mat-label>Total</mat-label>
-                <input matInput [value]="pagamentoForm.total | currency:'BRL'" readonly />
-            </mat-form-field>
-        </div>
-        <div mat-dialog-actions align="end">
+        <mat-dialog-content>
+            <div class="modal-form">
+                <mat-form-field appearance="outline" class="modal-field">
+                    <mat-label>Profissional</mat-label>
+                    <mat-select [(ngModel)]="pagamentoForm.profissionalId" (selectionChange)="onProfSelected($event.value)">
+                        <mat-option [value]="null">-- Selecionar --</mat-option>
+                        <mat-option *ngFor="let p of profissionais" [value]="p.id">{{ p.nome }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="modal-field">
+                    <mat-label>Nome</mat-label>
+                    <input matInput [(ngModel)]="pagamentoForm.nome" readonly />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="modal-field">
+                    <mat-label>Cargo</mat-label>
+                    <input matInput [(ngModel)]="pagamentoForm.cargo" readonly />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="modal-field">
+                    <mat-label>Salário</mat-label>
+                    <input matInput type="number" [(ngModel)]="pagamentoForm.salario" (input)="calcularTotal()" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="modal-field">
+                    <mat-label>Total</mat-label>
+                    <input matInput [value]="pagamentoForm.total | currency:'BRL'" readonly />
+                </mat-form-field>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
             <button mat-button (click)="fecharModalPagamento()">Cancelar</button>
             <button mat-flat-button color="primary" (click)="salvarPagamento()">Salvar</button>
-        </div>
+        </mat-dialog-actions>
     </ng-template>
 </div>

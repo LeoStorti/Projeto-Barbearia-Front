@@ -1,14 +1,14 @@
-<!--
-// v0 by Vercel.
-// https://v0.dev/t/oakOkBQpyDn
--->
+<div class="min-h-screen bg-background">
+  <div class="mx-auto w-full max-w-screen-2xl px-4 py-4 md:px-10 md:py-8">
+    <!-- Cabeçalho + filtros -->
+    <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div class="space-y-1">
+        <h2 class="text-xl font-semibold tracking-tight">Visão Geral</h2>
+        <p class="text-sm text-muted-foreground">Acompanhe vendas, serviços e agenda</p>
+      </div>
 
-<div class="flex flex-col min-h-screen bg-background">
-  <div class="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 gap-4 p-4 md:gap-8 md:p-10">
-    <div class="flex flex-col gap-4 w-full">
-      <!-- Toolbar de período e profissional -->
-      <div class="flex items-center gap-4">
-        <mat-form-field appearance="outline">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+        <mat-form-field appearance="outline" class="w-full sm:w-48">
           <mat-label>Período</mat-label>
           <mat-select [(ngModel)]="periodoSelecionado" (selectionChange)="onPeriodoChange()">
             <mat-option value="7">Últimos 7 dias</mat-option>
@@ -16,7 +16,7 @@
             <mat-option value="90">Últimos 90 dias</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="flex-1">
+        <mat-form-field appearance="outline" class="w-full sm:w-80">
           <mat-label>Profissional</mat-label>
           <mat-select [(ngModel)]="profissionalSelecionado" (selectionChange)="onProfissionalChange()">
             <mat-option value="todos">Todos</mat-option>
@@ -24,7 +24,10 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    </div>
+
+    <!-- KPIs -->
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
         <!-- Card dos Clientes Ativos -->
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
@@ -195,38 +198,44 @@
             <p class="text-xs text-muted-foreground">-2.1% este mês</p>
           </div>
         </div>
+        <!-- Fim do Card Agendamentos Pendentes -->
       </div>
-      <!-- Fim do Card Agendamentos Pendentes -->
-      <!-- Inicio da tabela de Agendamentos Recentes -->
 
-      <div class="grid md:grid-cols-2 gap-4">
+    <!-- Conteúdo principal (gráficos + listas/tabelas) -->
+    <div class="mt-6 grid gap-4 lg:grid-cols-12">
+      <!-- Coluna principal -->
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        <!-- Faturamento mensal -->
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-          <div class="flex flex-col space-y-1.5 p-6 px-7">
-            <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-              Agendamentos Recentes
-            </h3>
-            <p class="text-sm text-muted-foreground">Últimos agendamentos realizados.</p>
+          <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
+            <div class="grid gap-0.5">
+              <h3 class="whitespace-nowrap text-lg font-semibold leading-none tracking-tight">Evolução do Faturamento</h3>
+              <p class="text-sm text-muted-foreground">Faturamento ao longo do tempo</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="dashboard-chart">
+              <canvas baseChart [data]="faturamentoMensalData" [type]="'line'" [options]="chartOptions"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agendamentos recentes -->
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+          <div class="flex flex-col space-y-1.5 p-6">
+            <h3 class="whitespace-nowrap text-lg font-semibold leading-none tracking-tight">Agendamentos Recentes</h3>
+            <p class="text-sm text-muted-foreground">Últimos agendamentos realizados</p>
           </div>
           <div class="p-6">
             <div class="relative w-full overflow-auto">
               <table class="w-full caption-bottom text-sm">
                 <thead class="[&amp;_tr]:border-b">
                   <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                      Cliente
-                    </th>
-                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                      Serviço
-                    </th>
-                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                      Data
-                    </th>
-                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                      Valor
-                    </th>
-                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                      Profissional
-                    </th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Cliente</th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Serviço</th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Data</th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Status</th>
+                    <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Profissional</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -235,153 +244,116 @@
                     <td class="p-4 align-middle">{{ agendamento.servicoId }}</td>
                     <td class="p-4 align-middle">{{ agendamento.dataHora | date: 'dd/MM/yyyy HH:mm' }}</td>
                     <td class="p-4 align-middle">{{ agendamento.status }}</td>
-                    <td class="p-4 align-middle">{{ agendamento.ProfissionalId }}</td>
-                    <td class="p-4 align-middle">{{ agendamento.observacoes }}</td>
+                    <td class="p-4 align-middle">{{ agendamento.profissionalId ?? agendamento.ProfissionalId }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        <!-- Final da tabela de Agendamentos Recentes -->
-        <!-- Inicio da tabela de Configurações da Barbearia -->
+      </div>
 
-        <div class="flex flex-col gap-4">
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-            <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
-              <div class="grid gap-0.5">
-                <h3 class="whitespace-nowrap font-semibold tracking-tight text-lg">Configurações</h3>
-                <p class="text-sm text-muted-foreground">Ajuste as configurações da barbearia</p>
-              </div>
-            </div>
-            <div class="p-6 text-sm">
-              <div class="grid gap-3">
-                <div class="font-semibold">Informações da Barbearia</div>
-                <ul class="grid gap-3">
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Nome</span>
-                    <span>Barbearia do João</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Endereço</span>
-                    <span>Rua das Flores, 123</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Telefone</span>
-                    <span>(11) 1234-5678</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">E-mail</span>
-                    <span>contatobarbeariadojao.com.br</span>
-                  </li>
-                </ul>
-                <div data-orientation="horizontal" role="none" class="shrink-0 bg-border h-[1px] w-full my-2"></div>
-                <div class="font-semibold">Horário de Funcionamento</div>
-                <ul class="grid gap-3">
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Segunda a Sexta</span>
-                    <span>08:00 - 19:00</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Sábado</span>
-                    <span>08:00 - 17:00</span>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <span class="text-muted-foreground">Domingo</span>
-                    <span>Fechado</span>
-                  </li>
-                </ul>
-              </div>
+      <!-- Coluna lateral -->
+      <div class="lg:col-span-4 flex flex-col gap-4">
+        <!-- Mix de serviços -->
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+          <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
+            <div class="grid gap-0.5">
+              <h3 class="whitespace-nowrap text-lg font-semibold leading-none tracking-tight">Mix de Serviços</h3>
+              <p class="text-sm text-muted-foreground">Participação por serviço</p>
             </div>
           </div>
-          <!-- Fim da tabela de Configurações da Barbearia -->
-          <!-- Inicio da tabela de Serviços Realizados -->
-
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-            <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
-              <div class="grid gap-0.5">
-                <h3 class="whitespace-nowrap font-semibold tracking-tight text-lg">Serviços</h3>
-                <p class="text-sm text-muted-foreground">Gerenciar os serviços oferecidos</p>
-              </div>
-              <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-4 w-4"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5v14"></path>
-                </svg>
-                <span class="sr-only">Adicionar Serviço</span>
-              </button>
-            </div>
-            <div class="p-6 text-sm">
-              <div class="grid gap-3">
-                <div class="font-semibold">Serviços Oferecidos</div>
-                <ul class="grid gap-3">
-                  <li *ngFor="let servico of servicos" class="flex items-center justify-between">
-                    <span class="text-muted-foreground">{{ servico.nomeServico }}</span>
-                    <span>R$ {{ servico.preco | number: '1.2-2' }}</span>
-                  </li>
-                </ul>
-              </div>
+          <div class="p-6">
+            <div class="dashboard-chart dashboard-chart--small">
+              <canvas baseChart [data]="servicosPopularesData" [type]="'doughnut'" [options]="doughnutOptions"></canvas>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-              <!-- Fim da tabela de Serviços Realizados -->
-              <!-- Inicio do Gráfico de Faturamento Mensal -->
-<div class="flex flex-col gap-4 w-full">
-  <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-    <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
-      <div class="grid gap-0.5">
-        <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Faturamento Mensal</h3>
-        <p class="text-sm text-muted-foreground">Gráfico de faturamento mensal</p>
-      </div>
-    </div>
-    <div class="p-6">
-      <div class="aspect-[16/9]">
-        <canvas baseChart [data]="faturamentoMensalData" [type]="'line'" [options]="chartOptions"></canvas>
-      </div>
-    </div>
-  </div>
 
-  <!-- Fim do Gráfico de Faturamento Mensal -->
+        <!-- Desempenho por vendedor -->
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+          <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
+            <div class="grid gap-0.5">
+              <h3 class="whitespace-nowrap text-lg font-semibold leading-none tracking-tight">Desempenho por Vendedor</h3>
+              <p class="text-sm text-muted-foreground">Faturamento por profissional</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="dashboard-chart dashboard-chart--small">
+              <canvas baseChart [data]="profissionaisPerformanceData" [type]="'bar'" [options]="chartOptions"></canvas>
+            </div>
+          </div>
+        </div>
 
-  <!-- Inicio do Gráfico de Desempenho por Vendedor -->
-  <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-    <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
-      <div class="grid gap-0.5">
-        <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Desempenho por Vendedor</h3>
-        <p class="text-sm text-muted-foreground">Gráfico de desempenho por vendedor</p>
-      </div>
-    </div>
-    <div class="p-6">
-      <div class="aspect-[16/9]">
-        <canvas baseChart [data]="profissionaisPerformanceData" [type]="'bar'" [options]="chartOptions"></canvas>
-      </div>
-    </div>
-  </div>
+        <!-- Configurações -->
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+          <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
+            <div class="grid gap-0.5">
+              <h3 class="whitespace-nowrap font-semibold tracking-tight text-lg">Configurações</h3>
+              <p class="text-sm text-muted-foreground">Ajuste as configurações da barbearia</p>
+            </div>
+          </div>
+          <div class="p-6 text-sm">
+            <div class="grid gap-3">
+              <div class="font-semibold">Informações da Barbearia</div>
+              <ul class="grid gap-3">
+                <li class="flex items-center justify-between">
+                  <span class="text-muted-foreground">Nome</span>
+                  <span>Barbearia do João</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-muted-foreground">Endereço</span>
+                  <span>Rua das Flores, 123</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-muted-foreground">Telefone</span>
+                  <span>(11) 1234-5678</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-muted-foreground">E-mail</span>
+                  <span>contatobarbeariadojao.com.br</span>
+                </li>
+              </ul>
+              <div data-orientation="horizontal" role="none" class="shrink-0 bg-border h-[1px] w-full my-2"></div>
+              <div class="font-semibold">Horário de Funcionamento</div>
+              <ul class="grid gap-3">
+                <li class="flex items-center justify-between">
+                  <span class="text-muted-foreground">Segunda a Sexta</span>
+                  <span>08:00 - 19:00</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-muted-foreground">Sábado</span>
+                  <span>08:00 - 17:00</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-muted-foreground">Domingo</span>
+                  <span>Fechado</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-  <!-- Mix de serviços -->
-  <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-    <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
-      <div class="grid gap-0.5">
-        <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Mix de Serviços</h3>
-        <p class="text-sm text-muted-foreground">Participação por serviço</p>
-      </div>
-    </div>
-    <div class="p-6">
-      <div class="aspect-[16/9]">
-        <canvas baseChart [data]="servicosPopularesData" [type]="'doughnut'" [options]="doughnutOptions"></canvas>
+        <!-- Serviços oferecidos -->
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+          <div class="space-y-1.5 p-6 flex flex-row items-center justify-between bg-muted/50 px-6 py-4">
+            <div class="grid gap-0.5">
+              <h3 class="whitespace-nowrap font-semibold tracking-tight text-lg">Serviços</h3>
+              <p class="text-sm text-muted-foreground">Serviços oferecidos</p>
+            </div>
+          </div>
+          <div class="p-6 text-sm">
+            <div class="grid gap-3">
+              <div class="font-semibold">Lista</div>
+              <ul class="grid gap-3">
+                <li *ngFor="let servico of servicos" class="flex items-center justify-between">
+                  <span class="text-muted-foreground">{{ servico.nomeServico }}</span>
+                  <span>{{ servico.preco | currency:'BRL' }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

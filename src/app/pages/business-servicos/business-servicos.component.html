@@ -1,117 +1,112 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serviços</title>
-  <link rel="stylesheet" href="business-servicos.component.css">
-</head>
-<body>
-
-  <!-- Inicio da tabela de Serviços -->
-  <div class="flex flex-col min-h-screen bg-background">
-    <main class="grid grid-cols-2 flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
-        <div class="flex flex-col space-y-1 p-4">
-          <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight text-purple">Serviços</h3>
-          <p class="text-sm text-muted-foreground">Gerencie os serviços oferecidos pela barbearia.</p>
-        </div>
-        <div class="p-4">
-          <div class="relative w-full overflow-auto">
-            <table class="w-full caption-bottom text-sm">
-              <thead class="[&>tr]:border-b">
-                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Nome</th>
-                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Preço</th>
-                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Descrição</th>
-                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Categoria</th>
-                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Duração</th>
-                  <th class="h-10 px-4 text-left align-middle font-medium text-header">Ações</th>
-                </tr>
-              </thead>
-              <tbody class="[&>tr:last-child]:border-0">
-                <tr
-                *ngFor="let servico of dataSourceServicos.data"
-                class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
-              >
-                <td class="p-4 align-middle">{{ servico.NomeServico }}</td>
-                <td class="p-4 align-middle">R$ {{ servico.Preco | number: '1.2-2' }}</td>
-                <td class="p-4 align-middle">{{ servico.Descricao }}</td>
-                <td class="p-4 align-middle">{{ servico.Categoria }}</td>
-                <td class="p-4 align-middle">{{ servico.Duracao }} min</td>
-                <td class="p-4 align-middle">
-
-                  <button aria-label="Editar">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-muted-foreground hover:text-purple"
-                    >
-
-                      <path d="M12 20h9"></path>
-                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                    </svg>
-                  </button>
-                </td>
-                </tr>
-
-              </tbody>
-
-            </table>
-
-      <!-- Adicione o paginador -->
-      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Fim da tabela de Serviços-->
-       <!-- Inicio da tabela de Novo Serviço -->
-<div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
-  <div class="flex flex-col space-y-1.5 p-6">
-    <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight text-purple">Novo Serviço</h3>
-    <p class="text-sm text-muted-foreground">Adicione um novo serviço à barbearia.</p>
+<div class="clients-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Tabela de Serviços</h1>
+      <p class="page-subtitle">Gerencie os serviços oferecidos pela barbearia</p>
+    </div>
+    <div class="header-actions">
+      <button mat-button class="export-btn">
+        <mat-icon>download</mat-icon>
+        Exportar CSV
+      </button>
+      <button mat-raised-button color="primary" class="add-client-btn" (click)="abrirModalServico()">
+        <mat-icon>add</mat-icon>
+        Adicionar Serviço
+      </button>
+    </div>
   </div>
-  <div class="p-6">
-    <form class="grid gap-4" (ngSubmit)="enviarNovoServico()">
-      <div class="flex flex-col">
-        <label for="nome" class="text-sm font-medium">Nome</label>
-        <input [(ngModel)]="novoServico.NomeServico" type="text" id="nome" class="mt-1 p-2 border rounded" placeholder="Nome do serviço" name="nomeServico">
-      </div>
-      <div class="flex flex-col">
-        <label for="preco" class="text-sm font-medium">Preço</label>
-        <input [(ngModel)]="novoServico.Preco" type="text" id="preco" class="mt-1 p-2 border rounded" placeholder="Preço do serviço" name="preco">
-      </div>
-      <div class="flex flex-col">
-        <label for="descricao" class="text-sm font-medium">Descrição</label>
-        <input [(ngModel)]="novoServico.Descricao" type="text" id="descricao" class="mt-1 p-2 border rounded" placeholder="Descrição do serviço" name="descricao">
-      </div>
-      <div class="flex flex-col">
-        <label for="categoria" class="text-sm font-medium">Categoria</label>
-        <input [(ngModel)]="novoServico.Categoria" type="text" id="categoria" class="mt-1 p-2 border rounded" placeholder="Categoria do serviço" name="categoria">
-      </div>
-      <div class="flex flex-col">
-        <label for="duracao" class="text-sm font-medium">Duração</label>
-        <input [(ngModel)]="novoServico.Duracao" type="text" id="duracao" class="mt-1 p-2 border rounded" placeholder="Duração do serviço" name="duracao">
-      </div>
 
-      <!-- Botão de submit -->
-      <button type="submit" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">Salvar</button>
-    </form>
-
+  <!-- Busca e filtro -->
+  <div class="search-filter-bar">
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput [(ngModel)]="filtroNome" (ngModelChange)="aplicarFiltroNome()" placeholder="Pesquisar serviços por nome, categoria ou descrição..." />
+      </mat-form-field>
+    </div>
+    <div class="filter-container">
+      <mat-form-field appearance="outline" class="filter-select">
+        <mat-icon matPrefix>filter_list</mat-icon>
+        <mat-select value="all">
+          <mat-option value="all">Todos os Serviços</mat-option>
+          <mat-option value="recent">Recentes</mat-option>
+          <mat-option value="popular">Populares</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
+
+  <!-- Status -->
+  <div class="table-status">
+    <span class="showing-text">Mostrando {{ dataSourceServicos.data.length }} de {{ dataSourceServicos.data.length }} serviços</span>
+    <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-container">
+    <table class="clients-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Descrição</th>
+          <th>Categoria</th>
+          <th>Duração</th>
+          <th style="text-align:right">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servico of dataSourceServicos.data" class="table-row">
+          <td>{{ servico.NomeServico }}</td>
+          <td>R$ {{ servico.Preco | number:'1.2-2' }}</td>
+          <td>{{ servico.Descricao }}</td>
+          <td>{{ servico.Categoria }}</td>
+          <td>{{ servico.Duracao }} min</td>
+          <td class="actions-cell">
+            <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalServico(servico)" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <mat-paginator #paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <!-- Modal de Serviço -->
+  <ng-template #modalServico let-modal>
+    <div class="modal-cliente">
+      <h2 mat-dialog-title>{{ servicoEditando ? 'Editar Serviço' : 'Novo Serviço' }}</h2>
+      <mat-dialog-content>
+        <form #formServico="ngForm">
+          <mat-form-field appearance="outline" class="modal-field">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="servicoForm.NomeServico" name="nome" required />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="modal-field">
+            <mat-label>Preço</mat-label>
+            <input matInput [(ngModel)]="servicoForm.Preco" name="preco" required />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="modal-field">
+            <mat-label>Categoria</mat-label>
+            <input matInput [(ngModel)]="servicoForm.Categoria" name="categoria" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="modal-field">
+            <mat-label>Duração (min)</mat-label>
+            <input matInput [(ngModel)]="servicoForm.Duracao" name="duracao" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="modal-field">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput [(ngModel)]="servicoForm.Descricao" name="descricao"></textarea>
+          </mat-form-field>
+        </form>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button (click)="fecharModalServico()">Cancelar</button>
+        <button mat-flat-button color="primary" (click)="salvarServico()">{{ servicoEditando ? 'Salvar Alterações' : 'Adicionar Serviço' }}</button>
+      </mat-dialog-actions>
+    </div>
+  </ng-template>
 </div>
-<!-- Fim da tabela de Novo Serviço -->
-
-    </main>
-  </div>
-</body>
-</html>

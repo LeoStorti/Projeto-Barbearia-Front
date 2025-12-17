@@ -1,66 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="business-produtos.component.css">
-    <title>Produtos em Estoque</title>
-</head>
-<body>
-  <div class="container mx-auto py-8">
-    <h1 class="text-2xl font-bold mb-4">Produtos em Estoque</h1>
-    <div class="overflow-x-auto">
-        <table class="w-full table-auto">
-            <thead>
-                <tr class="bg-gray-200">
-                    <th class="px-4 py-2 text-left text-blue-500">Produto</th>
-                    <th class="px-4 py-2 text-left text-blue-500">Descrição</th>
-                    <th class="px-4 py-2 text-right text-blue-500">Quantidade</th>
-                    <th class="px-4 py-2 text-right text-blue-500">Preço de Compra</th>
-                    <th class="px-4 py-2 text-right text-blue-500">Preço de Venda</th>
-                    <th class="px-4 py-2 text-right text-blue-500">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let produto of dataSource.data">
-                    <td class="px-4 py-2 border-b">{{ produto.nomeProduto }}</td>
-                    <td class="px-4 py-2 border-b">{{ produto.descricao }}</td>
-                    <td class="px-4 py-2 border-b text-right">{{ produto.quantidadeEmEstoque }}</td>
-                    <td class="px-4 py-2 border-b text-right">{{ produto.precoCompra | currency:'BRL' }}</td>
-                    <td class="px-4 py-2 border-b text-right">{{ produto.precoVenda | currency:'BRL' }}</td>
-                    <td class="px-4 py-2 border-b text-right">{{ calcularTotal(produto) | currency:'BRL' }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-        <div class="mt-8">
-            <h2 class="text-xl font-bold mb-4">Adicionar Novo Produto</h2>
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label for="name">Nome do Produto    </label>
-                    <input id="name" type="text" value="" name="name">
-                </div>
-                <div>
-                    <label for="description">Descrição    </label>
-                    <input id="description" type="text" value="" name="description">
-                </div>
-                <div>
-                    <label for="quantity">Quantidade    </label>
-                    <input id="quantity" type="number" value="1" name="quantity">
-                </div>
-                <div>
-                    <label for="purchasePrice">Preço de Compra    </label>
-                    <input id="purchasePrice" type="number" value="0" name="purchasePrice">
-                </div>
-                <div>
-                    <label for="salePrice">Preço de Venda    </label>
-                    <input id="salePrice" type="number" value="0" name="salePrice">
-                </div>
-                <div class="col-span-2">
-                    <button>Salvar Produto</button>
-                </div>
-            </div>
+<div class="clients-container">
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1 class="page-title">Produtos em Estoque</h1>
+            <p class="page-subtitle">Gestão de produtos, preços e quantidades</p>
+        </div>
+        <div class="header-actions">
+            <button mat-button class="export-btn">
+                <mat-icon>download</mat-icon>
+                Exportar CSV
+            </button>
+            <button mat-raised-button color="primary" class="add-client-btn" (click)="abrirModalProduto()">
+                <mat-icon>add</mat-icon>
+                Adicionar Produto
+            </button>
         </div>
     </div>
-</body>
-</html>
+
+    <!-- Busca e filtro -->
+    <div class="search-filter-bar">
+        <div class="search-container">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput [(ngModel)]="filtroNome" (ngModelChange)="aplicarFiltroNome()" placeholder="Pesquisar produtos por nome, categoria ou fornecedor..." />
+            </mat-form-field>
+        </div>
+                <div class="filter-container">
+                    <mat-form-field appearance="outline" class="filter-select">
+                        <mat-icon matPrefix>filter_list</mat-icon>
+                        <mat-select value="all">
+                            <mat-option value="all">Todos os Produtos</mat-option>
+                            <mat-option value="in">Em estoque</mat-option>
+                            <mat-option value="low">Estoque baixo</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+    </div>
+
+    <!-- Status -->
+    <div class="table-status">
+        <span class="showing-text">Mostrando {{ dataSourceProdutos.data.length }} de {{ dataSourceProdutos.data.length }} produtos</span>
+        <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
+    </div>
+
+        <!-- Tabela -->
+        <div class="table-container">
+            <table mat-table [dataSource]="dataSourceProdutos" class="clients-table">
+
+                <!-- Coluna Produto -->
+                <ng-container matColumnDef="produto">
+                    <th mat-header-cell *matHeaderCellDef>Produto</th>
+                    <td mat-cell *matCellDef="let produto">{{ produto.nomeProduto }}</td>
+                </ng-container>
+
+                <!-- Coluna Descrição -->
+                <ng-container matColumnDef="descricao">
+                    <th mat-header-cell *matHeaderCellDef>Descrição</th>
+                    <td mat-cell *matCellDef="let produto">{{ produto.descricao }}</td>
+                </ng-container>
+
+                <!-- Coluna Quantidade -->
+                <ng-container matColumnDef="quantidade">
+                    <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+                    <td mat-cell *matCellDef="let produto">{{ produto.quantidadeEmEstoque }}</td>
+                </ng-container>
+
+                <!-- Coluna Preço de Compra -->
+                <ng-container matColumnDef="precoCompra">
+                    <th mat-header-cell *matHeaderCellDef>Preço de Compra</th>
+                    <td mat-cell *matCellDef="let produto">{{ produto.precoCompra | currency:'BRL' }}</td>
+                </ng-container>
+
+                <!-- Coluna Preço de Venda -->
+                <ng-container matColumnDef="precoVenda">
+                    <th mat-header-cell *matHeaderCellDef>Preço de Venda</th>
+                    <td mat-cell *matCellDef="let produto">{{ produto.precoVenda | currency:'BRL' }}</td>
+                </ng-container>
+
+                <!-- Coluna Total -->
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef>Total</th>
+                    <td mat-cell *matCellDef="let produto">{{ calcularTotal(produto) | currency:'BRL' }}</td>
+                </ng-container>
+
+                <!-- Coluna Ações -->
+                <ng-container matColumnDef="acoes">
+                    <th mat-header-cell *matHeaderCellDef>Ações</th>
+                    <td mat-cell *matCellDef="let produto" class="actions-cell">
+                        <button mat-icon-button class="action-btn view-btn" matTooltip="Visualizar">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalProduto(produto)" matTooltip="Editar">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="action-btn delete-btn" (click)="excluirProduto(produto)" matTooltip="Excluir">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <!-- Header e Rows -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+            </table>
+
+            <!-- Paginação -->
+            <mat-paginator #paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+    <!-- Modal Produto -->
+    <ng-template #modalProduto let-modal>
+        <div class="modal-cliente">
+            <h2 mat-dialog-title>{{ produtoEditando ? 'Editar Produto' : 'Novo Produto' }}</h2>
+            <mat-dialog-content>
+                <form #formProduto="ngForm">
+                    <mat-form-field appearance="outline" class="modal-field">
+                        <mat-label>Nome</mat-label>
+                        <input matInput [(ngModel)]="produtoForm.nomeProduto" name="nome" required />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="modal-field">
+                        <mat-label>Descrição</mat-label>
+                        <input matInput [(ngModel)]="produtoForm.descricao" name="descricao" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="modal-field">
+                        <mat-label>Quantidade</mat-label>
+                        <input matInput type="number" [(ngModel)]="produtoForm.quantidadeEmEstoque" name="quantidade" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="modal-field">
+                        <mat-label>Preço de Compra</mat-label>
+                        <input matInput type="number" [(ngModel)]="produtoForm.precoCompra" name="precoCompra" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="modal-field">
+                        <mat-label>Preço de Venda</mat-label>
+                        <input matInput type="number" [(ngModel)]="produtoForm.precoVenda" name="precoVenda" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="modal-field">
+                        <mat-label>Categoria</mat-label>
+                        <input matInput [(ngModel)]="produtoForm.categoria" name="categoria" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="modal-field">
+                        <mat-label>Fornecedor</mat-label>
+                        <input matInput [(ngModel)]="produtoForm.fornecedor" name="fornecedor" />
+                    </mat-form-field>
+                </form>
+            </mat-dialog-content>
+            <mat-dialog-actions align="end">
+                <button mat-button (click)="fecharModalProduto()">Cancelar</button>
+                <button mat-flat-button color="primary" (click)="salvarProduto()">{{ produtoEditando ? 'Salvar Alterações' : 'Adicionar Produto' }}</button>
+            </mat-dialog-actions>
+        </div>
+    </ng-template>
+</div>
