@@ -1,25 +1,55 @@
-
 <div class="login-container">
-  <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md mx-auto" data-v0-t="card">
-    <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="whitespace-nowrap tracking-tight text-2xl font-bold">Welcome Back</h3>
-      <p class="text-sm text-muted-foreground">Enter your email and password to access your account.</p>
-    </div>
-    <div class="p-6 space-y-4">
-      <div class="space-y-2">
-        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="email">
-          Email
-        </label>
-        <input class="input-field" id="email" placeholder="m@example.com" required type="email" />
+  <div class="login-card w-full max-w-md" data-v0-t="card">
+    <div class="login-card-header">
+      <div class="flex items-center justify-center">
+        <img
+          src="/assets/erp-mascote.png"
+          alt="Mascote do ERP"
+          class="login-logo"
+          loading="eager" />
       </div>
-      <div class="space-y-2">
-        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="senha">
-          Senha
-        </label>
-        <input class="input-field" id="password" required type="password" />
-      </div>
+
+      <h3 class="login-title">Bem-vindo de volta</h3>
+      <p class="login-subtitle">Acesse sua conta para entrar no sistema.</p>
+      <div class="login-brand">Billy Software</div>
     </div>
-    <div class="flex items-center p-6"></div>
-    <button (click)="onLogin()" class="btn btn-primary">Login</button>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+      <div class="login-field">
+        <label class="login-label" for="login">Email</label>
+        <input
+          class="input-field"
+          id="login"
+          formControlName="login"
+          placeholder="seuemail@exemplo.com"
+          required
+          type="email" />
+      </div>
+
+      <div class="login-field">
+        <label class="login-label" for="password">Senha</label>
+        <input
+          class="input-field"
+          id="password"
+          formControlName="senha"
+          placeholder="Sua senha"
+          required
+          type="password" />
+      </div>
+
+      <p *ngIf="errorMessage" class="login-error">{{ errorMessage }}</p>
+
+      <button type="submit" class="login-btn" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Entrando...' : 'Entrar' }}
+      </button>
+
+      <div class="login-contact" aria-label="Contato Billy Software">
+        <div class="login-contact-title">Contato</div>
+        <a class="login-contact-link" href="tel:+5519992486622">(19) 99248-6622</a>
+        <a class="login-contact-link" href="https://www.billysoftware.com.br" target="_blank" rel="noopener noreferrer">
+          www.billysoftware.com.br
+        </a>
+      </div>
+    </form>
   </div>
 </div>

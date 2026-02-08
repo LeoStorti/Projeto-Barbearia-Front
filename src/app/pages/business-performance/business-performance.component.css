@@ -11,3 +11,86 @@ table {
 .dashboard-chart--small {
   height: 260px;
 }
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 16px;
+  border: 1px dashed var(--border-color, rgba(255, 255, 255, 0.12));
+  border-radius: 12px;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.02);
+  text-align: center;
+}
+
+.skeleton-block {
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%);
+  background-size: 200% 100%;
+  animation: perf-loading 1.2s infinite;
+}
+
+.skeleton-table {
+  display: grid;
+  gap: 10px;
+}
+
+.skeleton-row {
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%);
+  background-size: 200% 100%;
+  animation: perf-loading 1.2s infinite;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.status-badge.status-success {
+  border-color: color-mix(in srgb, var(--success-color) 35%, var(--border-color));
+  background: color-mix(in srgb, var(--success-color) 14%, transparent);
+  color: var(--success-color);
+}
+
+.status-badge.status-warning {
+  border-color: color-mix(in srgb, var(--warning-color) 35%, var(--border-color));
+  background: color-mix(in srgb, var(--warning-color) 14%, transparent);
+  color: var(--warning-color);
+}
+
+.status-badge.status-danger {
+  border-color: color-mix(in srgb, var(--error-color) 35%, var(--border-color));
+  background: color-mix(in srgb, var(--error-color) 14%, transparent);
+  color: var(--error-color);
+}
+
+.status-badge.status-muted {
+  color: var(--text-secondary);
+}
+
+@keyframes perf-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Configurações card tables: avoid fixed layout and tighten spacing */
+.config-table {
+  table-layout: auto;
+  border-collapse: collapse;
+}
+.config-table td {
+  padding: 6px 0;
+  vertical-align: middle;
+}

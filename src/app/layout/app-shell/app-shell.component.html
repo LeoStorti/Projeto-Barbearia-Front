@@ -1,0 +1,69 @@
+<mat-sidenav-container class="app-shell">
+  <mat-sidenav class="app-sidebar" mode="side" [opened]="true" [disableClose]="true">
+    <div class="sidebar-header">
+      <a class="brand" routerLink="/businessperformance">
+        <span class="brand-icon" aria-hidden="true"></span>
+        <div class="brand-text">
+          <div class="brand-title">Barbearia</div>
+          <div class="brand-subtitle">Painel · Billy Software</div>
+        </div>
+      </a>
+    </div>
+
+    <mat-accordion class="nav-accordion" [multi]="true">
+      <mat-expansion-panel *ngFor="let section of sections" [expanded]="section.expanded" class="nav-section" hideToggle>
+        <mat-expansion-panel-header class="nav-section-header">
+          <mat-panel-title>{{ section.label }}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-nav-list class="nav-list">
+          <a
+            mat-list-item
+            *ngFor="let item of section.items"
+            [routerLink]="item.route"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+          >
+            <mat-icon matListItemIcon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+            <span matListItemTitle>{{ item.label }}</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="app-content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-brand-icon" aria-hidden="true"></span>
+        <div class="page-title">{{ pageTitle() }}</div>
+      </div>
+
+      <div class="topbar-right">
+        <app-theme-toggle></app-theme-toggle>
+
+        <button mat-stroked-button type="button" (click)="onLogout()" aria-label="Sair">
+          <mat-icon>logout</mat-icon>
+          Sair
+        </button>
+
+        <div class="user-block">
+          <div class="user-name">Usuário: {{ userName() }}</div>
+          <div class="user-meta">Logado desde: {{ loggedSince() }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-scroll">
+      <main class="content-main">
+        <div *ngIf="deniedMessage()" class="access-denied-banner">
+          <mat-icon class="access-denied-icon">block</mat-icon>
+          <div class="access-denied-text">{{ deniedMessage() }}</div>
+        </div>
+        <router-outlet></router-outlet>
+      </main>
+
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

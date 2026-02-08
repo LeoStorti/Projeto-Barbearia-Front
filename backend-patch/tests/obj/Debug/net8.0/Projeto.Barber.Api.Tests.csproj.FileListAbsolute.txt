@@ -1,6 +1,0 @@
-C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend-patch\tests\obj\Debug\net8.0\Projeto.Barber.Api.Tests.csproj.AssemblyReference.cache
-C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend-patch\tests\obj\Debug\net8.0\Projeto.Barber.Api.Tests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend-patch\tests\obj\Debug\net8.0\Projeto.Barber.Api.Tests.AssemblyInfoInputs.cache
-C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend-patch\tests\obj\Debug\net8.0\Projeto.Barber.Api.Tests.AssemblyInfo.cs
-C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend-patch\tests\obj\Debug\net8.0\Projeto.Barber.Api.Tests.csproj.CoreCompileInputs.cache
-C:\Users\ferre\OneDrive\Área de Trabalho\AngularProject\Projeto-Barbearia-Front\backend-patch\tests\obj\Debug\net8.0\Projeto.Barber.Api.Tests.sourcelink.json

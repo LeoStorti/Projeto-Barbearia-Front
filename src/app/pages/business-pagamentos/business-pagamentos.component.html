@@ -29,7 +29,7 @@
             <mat-form-field appearance="outline" class="filter-select">
                 <mat-label>Mês</mat-label>
                 <mat-select [(ngModel)]="selectedMonth" (selectionChange)="refreshPagamentosView()">
-                    <mat-option *ngFor="let m of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="m">{{ m }}</mat-option>
+                    <mat-option *ngFor="let m of monthOptions" [value]="m.value">{{ m.label }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline" class="filter-select">
@@ -38,7 +38,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="filter-select">
                 <mat-icon matPrefix>filter_list</mat-icon>
-                <mat-select value="all">
+                <mat-select [(ngModel)]="statusFilter" (selectionChange)="aplicarFiltroStatus()">
                     <mat-option value="all">Todos</mat-option>
                     <mat-option value="paid">Pagos</mat-option>
                     <mat-option value="pending">Pendentes</mat-option>
@@ -49,43 +49,129 @@
 
     <!-- Status -->
     <div class="table-status">
-        <span class="showing-text">Mostrando {{ dataSourcePagamentos.data.length }} pagamentos</span>
+        <span class="showing-text">
+            Competência: {{ getCompetenciaLabel() }} •
+            Mostrando: {{ showingCount }} de {{ totalCount }} •
+            Pagos: {{ pagosCount }} •
+            Pendentes: {{ pendentesCount }}
+        </span>
         <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
+    </div>
+
+    <!-- Painel do gerente: Pendências do mês -->
+    <div *ngIf="isGerente" class="manager-panel">
+        <div class="manager-panel__header">
+            <div class="manager-panel__title">
+                <mat-icon class="manager-panel__icon">assignment_late</mat-icon>
+                <div>
+                    <div class="manager-panel__headline">Pendências do mês</div>
+                    <div class="manager-panel__sub text-muted-foreground">{{ getCompetenciaLabel() }} • {{ pendentesDoMes.length }} pendente(s)</div>
+                </div>
+            </div>
+
+            <div class="manager-panel__actions">
+                <button mat-stroked-button class="manager-btn" (click)="filtrarSomentePendentes()" [disabled]="statusFilter === 'pending'">
+                    Ver pendentes na tabela
+                </button>
+                <button mat-button class="manager-btn" (click)="limparFiltroStatus()" [disabled]="statusFilter === 'all'">
+                    Limpar filtro
+                </button>
+            </div>
+        </div>
+
+        <div class="manager-stats">
+            <div class="manager-stat">
+                <div class="manager-stat__label text-muted-foreground">Pagos</div>
+                <div class="manager-stat__value">{{ pagosDoMes.length }}</div>
+            </div>
+            <div class="manager-stat">
+                <div class="manager-stat__label text-muted-foreground">Pendentes</div>
+                <div class="manager-stat__value manager-stat__value--danger">{{ pendentesDoMes.length }}</div>
+            </div>
+            <div class="manager-stat">
+                <div class="manager-stat__label text-muted-foreground">Total</div>
+                <div class="manager-stat__value">{{ (pagosDoMes.length + pendentesDoMes.length) }}</div>
+            </div>
+        </div>
+
+        <div class="manager-list" *ngIf="pendentesDoMes.length > 0; else allPaid">
+            <mat-list>
+                <mat-list-item *ngFor="let row of pendentesVisiveis">
+                    <mat-icon matListItemIcon>person</mat-icon>
+                    <div matListItemTitle class="manager-item__title">
+                        <span class="truncate">{{ row.nome }}</span>
+                        <span class="badge manager-badge">Pendente</span>
+                    </div>
+                    <div matListItemLine class="text-muted-foreground manager-item__sub">
+                        <span *ngIf="row.cargo" class="truncate">{{ row.cargo }}</span>
+                        <span class="manager-item__money">Total: {{ row.total | currency:'BRL' }}</span>
+                    </div>
+                    <div matListItemMeta class="manager-item__meta">
+                        <button mat-stroked-button color="primary" (click)="marcarComoPago(row)">Marcar pago</button>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+
+            <div class="manager-list__footer" *ngIf="pendentesDoMes.length > 6">
+                <button mat-button (click)="showAllPendentes = !showAllPendentes">
+                    {{ showAllPendentes ? 'Mostrar menos' : ('Mostrar todos (' + pendentesDoMes.length + ')') }}
+                </button>
+            </div>
+        </div>
+
+        <ng-template #allPaid>
+            <div class="manager-empty text-muted-foreground">
+                <mat-icon class="manager-empty__icon">check_circle</mat-icon>
+                <span>Todos os funcionários estão com pagamento em dia neste mês.</span>
+            </div>
+        </ng-template>
     </div>
 
     <!-- Tabela -->
     <div class="table-container">
-        <table mat-table [dataSource]="dataSourcePagamentos" class="clients-table">
+        <table mat-table [dataSource]="dataSourcePagamentos" class="clients-table" matSort>
 
             <!-- Funcionário -->
             <ng-container matColumnDef="funcionario">
-                <th mat-header-cell *matHeaderCellDef>Funcionário</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Funcionário</th>
                 <td mat-cell *matCellDef="let row">
                     <div style="display:flex; align-items:center; gap:10px;">
                         <mat-icon>account_circle</mat-icon>
                         <div>
                             <div class="client-name">{{ row.nome }}</div>
-                            <div class="text-muted-foreground" style="font-size:12px;">{{ row.cargo }}</div>
+                            <div class="text-muted-foreground" style="font-size:12px;">ID: {{ row.profissionalId }}</div>
+                            <div class="text-muted-foreground" style="font-size:12px;" *ngIf="row.cargo">{{ row.cargo }}</div>
                         </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Mês (competência / pagamento) -->
+            <ng-container matColumnDef="mes">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mês</th>
+                <td mat-cell *matCellDef="let row">
+                    <div [matTooltip]="getPagoEmTooltip(row)" style="display:flex; flex-direction:column; line-height:1.1;">
+                        <span class="whitespace-nowrap">{{ getMesLabel(row) }}</span>
+                        <span class="text-muted-foreground" style="font-size:12px;">{{ getPagoEmSmallText(row) }}</span>
                     </div>
                 </td>
             </ng-container>
 
             <!-- Salário -->
             <ng-container matColumnDef="salario">
-                <th mat-header-cell *matHeaderCellDef>Salário</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Salário</th>
                 <td mat-cell *matCellDef="let row">{{ row.salario | currency:'BRL' }}</td>
             </ng-container>
 
             <!-- Total -->
             <ng-container matColumnDef="total">
-                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
                 <td mat-cell *matCellDef="let row">{{ row.total | currency:'BRL' }}</td>
             </ng-container>
 
             <!-- Status -->
             <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let row">
                     <span class="badge" [style.background]="row.pago ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'" [style.color]="row.pago ? '#059669' : '#dc2626'">
                         {{ row.pago ? 'Pago' : 'Pendente' }}

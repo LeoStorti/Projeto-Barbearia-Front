@@ -1,151 +1,126 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serviços</title>
-  <link rel="stylesheet" href="business-relatorios.component.css">
-</head>
-    <main class="p-4 space-y-4">
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        <!-- Cards content goes here -->
-      </div>
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-4">
-        <!-- More cards content goes here -->
-      </div>
-    </main>
+<div class="clients-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Relatórios de Negócio</h1>
+      <p class="page-subtitle">Analise faturamento, vendas, comissões e agendamentos</p>
+    </div>
+    <div class="header-actions">
+      <button mat-button class="export-btn">
+        <mat-icon>download</mat-icon>
+        Exportar CSV
+      </button>
+      <button mat-raised-button color="primary" class="add-client-btn" (click)="setPredefinedPeriod(30)">
+        <mat-icon>calendar_today</mat-icon>
+        Últimos 30 dias
+      </button>
+    </div>
+  </div>
 
-    <div class="p-4 space-y-4">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Card 1 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
-              <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
-              <path d="M12 17.5v-11"></path>
-            </svg>
-            <div>
-              <h3 class="title">1 - Faturamento Total por Data</h3>
-              <p class="text">Aqui você pesquisa o valor total faturado e o detalhe dos pagamentos recebidos em um intervalo de data.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-            </svg>
-            <div>
-              <h3 class="title">2 - Vendas Total por Data</h3>
-              <p class="text">Aqui você pesquisa o valor total das suas vendas agrupadas por serviços e produtos em um intervalo de data.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <line x1="12" x2="12" y1="2" y2="22"></line>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>
-            <div>
-              <h3 class="title">3 - Pesquisar Comissões dos Profissionais por Data</h3>
-              <p class="text">Aqui você pesquisa comissões de todos os serviços prestados pelos seus profissionais por intervalo de data.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
-              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-              <path d="M12 11h4"></path>
-              <path d="M12 16h4"></path>
-              <path d="M8 11h.01"></path>
-              <path d="M8 16h.01"></path>
-            </svg>
-            <div>
-              <h3 class="title">4 - Pesquisar Comandas por Número ou Data</h3>
-              <p class="text">Aqui você pesquisa todas as comandas do seu estabelecimento por número da comanda ou intervalo de data.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="M4 4h16v16H4z"></path>
-              <path d="M4 4v16h16V4"></path>
-            </svg>
-            <div>
-              <h3 class="title">5 - Pesquisa de Produtos Vendidos</h3>
-              <p class="text">Aqui você pesquisa todos os produtos vendidos em um intervalo de data, com informações detalhadas.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="M4 4h16v16H4z"></path>
-              <path d="M4 4v16h16V4"></path>
-              <path d="M4 12h16"></path>
-            </svg>
-            <div>
-              <h3 class="title">6 - Pesquisar Serviços por Tipo</h3>
-              <p class="text">Aqui você pesquisa todos os serviços oferecidos por tipo e suas respectivas vendas e comissões.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-4">
-        <!-- New Grid 1 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="M4 4h16v16H4z"></path>
-              <path d="M4 4v16h16V4"></path>
-              <path d="M4 12h16"></path>
-              <path d="M8 8h8"></path>
-              <path d="M8 16h8"></path>
-            </svg>
-            <div>
-              <h3 class="title">7 - Total de Agendamentos por Profissional</h3>
-              <p class="text">Aqui você pesquisa o total de agendamentos realizados por cada profissional em um intervalo de data.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- New Grid 2 -->
-        <div class="card">
-          <div class="flex-col space-y-1.5 p-6 flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="M4 4h16v16H4z"></path>
-              <path d="M4 4v16h16V4"></path>
-              <path d="M4 12h16"></path>
-              <path d="M8 16h8"></path>
-            </svg>
-            <div>
-              <h3 class="title">8 - Produtos Vendidos por Categoria</h3>
-              <p class="text">Aqui você pesquisa todos os produtos vendidos, organizados por categoria e intervalo de data.</p>
-            </div>
-          </div>
-        </div>
+  <!-- Grade de cards de relatórios -->
+  <div class="cards-grid">
+    <div class="report-card" (click)="generateReport(1)">
+      <mat-icon class="card-icon">payments</mat-icon>
+      <div>
+        <h3 class="card-title">Faturamento Total por Data</h3>
+        <p class="card-text">Total faturado e detalhamento dos pagamentos.</p>
       </div>
     </div>
 
-    <footer class="flex items-center justify-center h-16 border-t border-muted text-sm text-muted-foreground">
-      <span>&copy; 2024 Seu Nome - Todos os direitos reservados.</span>
-    </footer>
-</html>
+    <div class="report-card" (click)="generateReport(2)">
+      <mat-icon class="card-icon">shopping_cart</mat-icon>
+      <div>
+        <h3 class="card-title">Vendas por Serviço</h3>
+        <p class="card-text">Itens vendidos agrupados por serviço/categoria.</p>
+      </div>
+    </div>
+
+    <div class="report-card" (click)="generateReport(3)">
+      <mat-icon class="card-icon">workspace_premium</mat-icon>
+      <div>
+        <h3 class="card-title">Comissões dos Profissionais</h3>
+        <p class="card-text">Comissões por serviços prestados no período.</p>
+      </div>
+    </div>
+
+    <div class="report-card" (click)="generateReport(4)">
+      <mat-icon class="card-icon">receipt_long</mat-icon>
+      <div>
+        <h3 class="card-title">Comandas por Número/Data</h3>
+        <p class="card-text">Consulta por número ou intervalo de datas.</p>
+      </div>
+    </div>
+
+    <div class="report-card" (click)="generateReport(5)">
+      <mat-icon class="card-icon">inventory_2</mat-icon>
+      <div>
+        <h3 class="card-title">Produtos Vendidos</h3>
+        <p class="card-text">Itens vendidos com informações detalhadas.</p>
+      </div>
+    </div>
+
+    <div class="report-card" (click)="generateReport(6)">
+      <mat-icon class="card-icon">design_services</mat-icon>
+      <div>
+        <h3 class="card-title">Serviços por Tipo</h3>
+        <p class="card-text">Serviços oferecidos e desempenho por tipo.</p>
+      </div>
+    </div>
+
+    <div class="report-card" (click)="generateReport(7)">
+      <mat-icon class="card-icon">event_available</mat-icon>
+      <div>
+        <h3 class="card-title">Agendamentos por Profissional</h3>
+        <p class="card-text">Total de agendamentos por profissional.</p>
+      </div>
+    </div>
+
+    <div class="report-card" (click)="generateReport(8)">
+      <mat-icon class="card-icon">category</mat-icon>
+      <div>
+        <h3 class="card-title">Produtos por Categoria</h3>
+        <p class="card-text">Vendas agrupadas por categoria.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de seleção de período -->
+  <div class="modal-backdrop" *ngIf="showDateModal" (click)="closeDateModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">{{ getReportTitle(selectedReportType) }}</h2>
+          <p class="modal-subtitle">Selecione o período para gerar o relatório</p>
+        </div>
+        <button mat-icon-button type="button" (click)="closeDateModal()" aria-label="Fechar">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="quick-periods">
+          <button mat-stroked-button type="button" (click)="setPredefinedPeriod(7)">7 dias</button>
+          <button mat-stroked-button type="button" (click)="setPredefinedPeriod(30)">30 dias</button>
+          <button mat-stroked-button type="button" (click)="setPredefinedPeriod(90)">90 dias</button>
+        </div>
+
+        <div class="date-fields">
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Data inicial</mat-label>
+            <input matInput type="date" [(ngModel)]="startDate" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Data final</mat-label>
+            <input matInput type="date" [(ngModel)]="endDate" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button mat-button type="button" (click)="closeDateModal()">Cancelar</button>
+        <button mat-raised-button color="primary" type="button" (click)="generateReportWithDates()">Gerar relatório</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<div class="clients-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Usuários e Acessos</h1>
+      <p class="page-subtitle">Defina quem é admin e quem é funcionário</p>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" class="add-client-btn" (click)="abrirModalUsuario()">
+        <mat-icon>person_add</mat-icon>
+        Adicionar Usuário
+      </button>
+    </div>
+  </div>
+
+  <!-- Busca -->
+  <div class="search-filter-bar">
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          [(ngModel)]="filtro"
+          (ngModelChange)="aplicarFiltro()"
+          placeholder="Pesquisar por nome, email ou nível de acesso..."
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="table-status">
+    <span class="showing-text">Mostrando {{ dataSourceUsuarios.filteredData.length }} de {{ dataSourceUsuarios.data.length }} usuários</span>
+    <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSourceUsuarios" class="clients-table">
+
+      <!-- Nome -->
+      <ng-container matColumnDef="nomeUsuario">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let u" class="name-cell">
+          <span class="client-name">{{ u.nomeUsuario }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let u" class="name-cell">
+          <span class="client-name">{{ u.email }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Nível de acesso -->
+      <ng-container matColumnDef="nivelAcesso">
+        <th mat-header-cell *matHeaderCellDef>Nível de acesso</th>
+        <td mat-cell *matCellDef="let u">
+          <span class="status-badge">{{ getNivelAcessoLabel(u.nivelAcesso) }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Ações -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let u" class="actions-cell">
+          <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalUsuario(u)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            *ngIf="podeExcluir"
+            mat-icon-button
+            class="action-btn delete-btn"
+            (click)="excluirUsuario(u)"
+            matTooltip="Excluir"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+    </table>
+
+    <!-- Estado vazio -->
+    <div *ngIf="dataSourceUsuarios.data.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">person_off</mat-icon>
+      <h3>Nenhum usuário cadastrado</h3>
+      <p>Adicione um usuário para começar</p>
+      <button mat-raised-button color="primary" (click)="abrirModalUsuario()">Adicionar Usuário</button>
+    </div>
+
+    <mat-paginator #paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #modalUsuario>
+  <div class="dialog-header">
+    <h2 class="dialog-title">{{ usuarioEditando ? 'Editar Usuário' : 'Adicionar Usuário' }}</h2>
+    <button mat-icon-button (click)="fecharModalUsuario()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="usuarioForm.nomeUsuario" placeholder="Nome do usuário" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="usuarioForm.email" placeholder="email@exemplo.com" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ usuarioEditando ? 'Nova senha (opcional)' : 'Senha' }}</mat-label>
+      <input matInput type="password" [(ngModel)]="usuarioForm.senha" placeholder="••••••" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nível de acesso</mat-label>
+      <mat-select [(ngModel)]="usuarioForm.nivelAcesso">
+        <mat-option value="Admin">Admin</mat-option>
+        <mat-option value="Funcionario">Funcionário</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-button (click)="fecharModalUsuario()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="salvarUsuario()">
+      {{ usuarioEditando ? 'Salvar' : 'Criar' }}
+    </button>
+  </div>
+</ng-template>

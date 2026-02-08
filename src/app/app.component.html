@@ -1,7 +1,9 @@
 <div class="min-h-screen bg-background text-card-foreground flex flex-col">
-	<app-header *ngIf="isHeaderVisible"></app-header>
-	<main class="flex-1">
-		<router-outlet></router-outlet>
-	</main>
-	<app-footer></app-footer>
+	<app-shell *ngIf="isShellVisible; else publicLayout"></app-shell>
+	<ng-template #publicLayout>
+		<main class="flex-1">
+			<router-outlet></router-outlet>
+		</main>
+		<app-footer></app-footer>
+	</ng-template>
 </div>

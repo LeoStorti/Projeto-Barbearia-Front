@@ -1,177 +1,16 @@
-/* Container principal */
-.clients-container {
-  padding: 32px;
-  background-color: var(--background-color);
-  min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: background-color 0.3s ease;
-}
-
-/* Header da página */
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.header-content h1 {
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 0 0 8px 0;
-  letter-spacing: -0.025em;
-}
-
-.header-content p {
-  font-size: 16px;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.header-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.export-btn {
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-  font-weight: 500;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 8px !important;
-  background: var(--surface-color) !important;
-  transition: all 0.3s ease;
-}
-
-.export-btn:hover {
-  background-color: var(--primary-color) !important;
-  color: var(--surface-color) !important;
-  border-color: #9ca3af !important;
-}
-
-.add-client-btn {
-  background-color: #111827 !important;
-  color: white !important;
-  font-weight: 500;
-  height: 40px;
-  padding: 0 20px;
-  border-radius: 8px !important;
-}
-
-.add-client-btn:hover {
-  background-color: #1f2937 !important;
-}
-
-/* Barra de pesquisa e filtros */
-.search-filter-bar {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
-  align-items: center;
-}
-
-.search-container {
-  flex: 1;
-  max-width: 500px;
-}
-
-.search-field {
-  width: 100%;
-}
-
-.search-field .mat-form-field-wrapper {
-  padding-bottom: 0;
-}
-
-.search-field input {
-  font-size: 14px;
-  padding: 12px 0;
-}
-
-.filter-container {
-  min-width: 200px;
-}
-
-.filter-select {
-  width: 100%;
-}
-
-/* Status da tabela */
-.table-status {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-  font-size: 14px;
-}
-
-.showing-text {
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.last-updated {
-  color: var(--text-muted);
-}
-
-/* Container da tabela */
-.table-container {
-  background: var(--surface-color);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
-}
-
-/* Estilos da tabela */
-.clients-table {
-  width: 100%;
-  background: var(--surface-color);
-}
-
-.clients-table th {
-  background-color: var(--background-color) !important;
-  color: var(--text-primary) !important;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border-color) !important;
-}
-
-.clients-table td {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--divider-color) !important;
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  font-size: 14px;
-  color: #111827;
-  background: white !important;
-}
-
-.table-row:hover {
-  background-color: #f8fafc !important;
-}
-
-.table-row:hover td {
-  background-color: #f8fafc !important;
-}
+/*
+  Esta tela compartilha layout/tabela/ações com as telas de lista.
+  Estilos comuns ficam em src/styles.css para evitar duplicação (budgets).
+*/
 
 /* Estilos específicos das células */
 .name-cell .client-name {
   font-weight: 500;
-  color: #111827;
+  color: var(--text-primary);
 }
 
 .email-link {
-  color: #2563eb;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -180,18 +19,18 @@
 }
 
 .date-text {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 13px;
 }
 
 .notes-text {
-  color: #6b7280;
+  color: var(--text-muted);
   font-style: italic;
 }
 
 .allergy-badge {
-  background-color: #fef2f2;
-  color: #dc2626;
+  background-color: color-mix(in srgb, var(--error-color) 18%, transparent);
+  color: var(--error-color);
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 12px;
@@ -199,76 +38,13 @@
 }
 
 .no-allergy {
-  color: #9ca3af;
+  color: var(--text-muted);
   font-style: italic;
 }
 
 .registered-date {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 13px;
-}
-
-/* Ações */
-.actions-cell {
-  text-align: right;
-}
-
-.action-btn {
-  width: 32px;
-  height: 32px;
-  margin-left: 4px;
-  border-radius: 6px !important;
-}
-
-.view-btn {
-  color: #6b7280 !important;
-}
-
-.view-btn:hover {
-  color: #2563eb !important;
-  background-color: #eff6ff !important;
-}
-
-.edit-btn {
-  color: #6b7280 !important;
-}
-
-.edit-btn:hover {
-  color: #059669 !important;
-  background-color: #ecfdf5 !important;
-}
-
-.delete-btn {
-  color: #6b7280 !important;
-}
-
-.delete-btn:hover {
-  color: #dc2626 !important;
-  background-color: #fef2f2 !important;
-}
-
-/* Estado vazio */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.empty-icon {
-  font-size: 48px;
-  color: #d1d5db;
-  margin-bottom: 16px;
-}
-
-.empty-state h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 8px 0;
-}
-
-.empty-state p {
-  color: #6b7280;
-  margin: 0 0 24px 0;
 }
 
 /* Modal styles */
@@ -279,79 +55,4 @@
 .modal-field {
   width: 100%;
   margin-bottom: 16px;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .clients-container {
-    padding: 16px;
-  }
-
-  .page-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-  }
-
-  .header-actions {
-    justify-content: flex-end;
-  }
-
-  .search-filter-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .search-container {
-    max-width: none;
-  }
-
-  .clients-table th,
-  .clients-table td {
-    padding: 12px 16px;
-  }
-}
-
-/* Overrides do Angular Material */
-:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: #d1d5db !important;
-}
-
-:host ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-  color: #6366f1 !important;
-}
-
-:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix .mat-icon {
-  color: #9ca3af !important;
-}
-
-:host ::ng-deep .mat-table {
-  background: white !important;
-}
-
-:host ::ng-deep .mat-table .mat-header-row {
-  background-color: #f9fafb !important;
-}
-
-:host ::ng-deep .mat-table .mat-row {
-  background: white !important;
-}
-
-:host ::ng-deep .mat-table .mat-row:hover {
-  background-color: #f8fafc !important;
-}
-
-:host ::ng-deep .mat-table .mat-cell {
-  color: #111827 !important;
-  border-bottom-color: #f3f4f6 !important;
-}
-
-:host ::ng-deep .mat-table .mat-header-cell {
-  color: #374151 !important;
-  background-color: #f9fafb !important;
-  border-bottom-color: #e5e7eb !important;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }

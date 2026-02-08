@@ -1,6 +1,16 @@
 .login-header {
-  background-color: #333; /* Cor de fundo do cabeçalho */
-  color: white; /* Cor do texto */
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
   padding: 10px;
   text-align: center;
+}
+
+.login-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 8px;
 }

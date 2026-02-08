@@ -43,36 +43,91 @@
     <span class="last-updated">Última atualização: {{ getCurrentDate() }}</span>
   </div>
 
-  <!-- Tabela -->
+  <!-- Tabela de serviços -->
   <div class="table-container">
-    <table class="clients-table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Preço</th>
-          <th>Descrição</th>
-          <th>Categoria</th>
-          <th>Duração</th>
-          <th style="text-align:right">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let servico of dataSourceServicos.data" class="table-row">
-          <td>{{ servico.NomeServico }}</td>
-          <td>R$ {{ servico.Preco | number:'1.2-2' }}</td>
-          <td>{{ servico.Descricao }}</td>
-          <td>{{ servico.Categoria }}</td>
-          <td>{{ servico.Duracao }} min</td>
-          <td class="actions-cell">
-            <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalServico(servico)" matTooltip="Editar">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="dataSourceServicos" class="clients-table">
+
+      <!-- Coluna Serviço -->
+      <ng-container matColumnDef="nomeServico">
+        <th mat-header-cell *matHeaderCellDef>Serviço</th>
+        <td mat-cell *matCellDef="let servico" class="name-cell">
+          <span class="client-name">{{ servico.NomeServico }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Preço -->
+      <ng-container matColumnDef="preco">
+        <th mat-header-cell *matHeaderCellDef>Preço</th>
+        <td mat-cell *matCellDef="let servico">
+          <span class="price-text">{{ servico.Preco | currency:'BRL':'symbol':'1.2-2' }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Descrição -->
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let servico">
+          <span class="notes-text">{{ servico.Descricao || '-' }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Categoria -->
+      <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef>Categoria</th>
+        <td mat-cell *matCellDef="let servico">
+          <span class="category-badge" *ngIf="servico.Categoria; else noCategoria">{{ servico.Categoria }}</span>
+          <ng-template #noCategoria>
+            <span class="no-allergy">Sem categoria</span>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Duração -->
+      <ng-container matColumnDef="duracao">
+        <th mat-header-cell *matHeaderCellDef>Duração</th>
+        <td mat-cell *matCellDef="let servico">
+          <span class="duration-badge">{{ servico.Duracao }} min</span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Ações -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let servico" class="actions-cell">
+          <button mat-icon-button class="action-btn view-btn" matTooltip="Visualizar">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalServico(servico)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn delete-btn" (click)="excluirServico(servico)" matTooltip="Excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Header e Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsServicos"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsServicos;" class="table-row"></tr>
     </table>
 
-    <mat-paginator #paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+    <!-- Estado vazio -->
+    <div *ngIf="dataSourceServicos.data.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">design_services</mat-icon>
+      <h3>Nenhum serviço cadastrado</h3>
+      <p>Comece adicionando seu primeiro serviço</p>
+      <button mat-raised-button color="primary" (click)="abrirModalServico()">
+        Adicionar Serviço
+      </button>
+    </div>
+
+    <!-- Paginação -->
+    <mat-paginator
+      #paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Selecionar página de serviços">
+    </mat-paginator>
   </div>
 
   <!-- Modal de Serviço -->

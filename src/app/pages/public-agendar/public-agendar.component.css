@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+.card {
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: var(--card);
+  color: var(--card-foreground);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-xs);
+}

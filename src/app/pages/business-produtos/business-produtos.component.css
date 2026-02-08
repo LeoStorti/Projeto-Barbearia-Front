@@ -1,2 +1,14 @@
-/* Herda o visual global (clients-table, header, etc.) */
-/* Mantemos este arquivo mínimo para não conflitar com styles.css */
+/*
+	Estilos comuns (container/header/tabela/ações/empty) ficam em src/styles.css.
+*/
+
+.qty-badge {
+	background-color: color-mix(in srgb, var(--warning-color) 14%, transparent);
+	color: var(--warning-color);
+	padding: 4px 8px;
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.price-text { color: var(--text-primary); font-weight: 500; }
