@@ -1,19 +1,24 @@
 /* Variáveis CSS para temas */
 :root {
-  --primary-color: #1976d2;
-  --primary-color-dark: #1565c0;
-  --accent-color: #ff4081;
-  --background-color: #f6f7f9;
-  --surface-color: #ffffff;
-  --card-background: #ffffff;
-  --text-primary: #212121;
-  --text-secondary: #555b66;
-  --text-muted: #8a8f99;
-  --border-color: #e5e7eb;
-  --divider-color: #e5e7eb;
-  --success-color: #4caf50;
-  --warning-color: #ff9800;
-  --error-color: #f44336;
+  /* Paleta Billy Software (landing): dark + lime */
+  --primary-color: #d6ff00;
+  --primary-color-dark: #b7d900;
+  --accent-color: #9aff00;
+  --background-color: #0b0f0d;
+  --surface-color: #111614;
+  --card-background: #141a17;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #26302a;
+  --divider-color: #2f3a33;
+  --success-color: #81c784;
+  --warning-color: #ffb74d;
+  --error-color: #e57373;
+
+  /* Versões mais suaves para UI (defaults: tema escuro) */
+  --primary-ui: color-mix(in srgb, var(--primary-color) 35%, var(--surface-color));
+  --accent-ui: color-mix(in srgb, var(--accent-color) 35%, var(--surface-color));
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -34,20 +39,24 @@
   e garante que o tema claro fique realmente claro.
 */
 body.light-theme {
-  --primary-color: #1976d2;
-  --primary-color-dark: #1565c0;
-  --accent-color: #ff4081;
+  --primary-color: #d6ff00;
+  --primary-color-dark: #b7d900;
+  --accent-color: #9aff00;
   --background-color: #f6f7f9;
   --surface-color: #ffffff;
   --card-background: #ffffff;
-  --text-primary: #212121;
-  --text-secondary: #555b66;
-  --text-muted: #8a8f99;
+  --text-primary: #0b0f0d;
+  --text-secondary: #2b3430;
+  --text-muted: #66736c;
   --border-color: #e5e7eb;
   --divider-color: #e5e7eb;
   --success-color: #4caf50;
   --warning-color: #ff9800;
   --error-color: #f44336;
+
+  /* Versões mais suaves para UI (evita excesso de verde neon em componentes) */
+  --primary-ui: color-mix(in srgb, var(--primary-color) 55%, white);
+  --accent-ui: color-mix(in srgb, var(--accent-color) 55%, white);
   --shadow-xs: 0 1px 2px rgba(0,0,0,0.06);
   --shadow-sm: 0 2px 6px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
@@ -63,20 +72,24 @@ body.light-theme {
 
 body.dark-theme {
   /* Sem roxo: mantém a identidade em azul também no escuro */
-  --primary-color: #1976d2;
-  --primary-color-dark: #1565c0;
-  --accent-color: #ff4081;
-  --background-color: #121212;
-  --surface-color: #1e1e1e;
-  --card-background: #2d2d2d;
-  --text-primary: #ffffff;
-  --text-secondary: #c7c7c7;
-  --text-muted: #9aa0a6;
-  --border-color: #2a2a2a;
-  --divider-color: #2f2f2f;
+  --primary-color: #d6ff00;
+  --primary-color-dark: #b7d900;
+  --accent-color: #9aff00;
+  --background-color: #0b0f0d;
+  --surface-color: #111614;
+  --card-background: #141a17;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #26302a;
+  --divider-color: #2f3a33;
   --success-color: #81c784;
   --warning-color: #ffb74d;
   --error-color: #e57373;
+
+  /* Versões mais suaves para UI (evita excesso de verde neon em componentes) */
+  --primary-ui: color-mix(in srgb, var(--primary-color) 35%, var(--surface-color));
+  --accent-ui: color-mix(in srgb, var(--accent-color) 35%, var(--surface-color));
   --shadow-xs: 0 1px 2px rgba(0,0,0,0.35);
   --shadow-sm: 0 2px 6px rgba(0,0,0,0.40);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.45);
@@ -93,20 +106,24 @@ body.dark-theme {
 /* Tema claro (explícito): garante contraste mesmo quando o atributo data-theme está presente */
 html[data-theme="light"],
 body[data-theme="light"] {
-  --primary-color: #1976d2;
-  --primary-color-dark: #1565c0;
-  --accent-color: #ff4081;
+  --primary-color: #d6ff00;
+  --primary-color-dark: #b7d900;
+  --accent-color: #9aff00;
   --background-color: #f6f7f9;
   --surface-color: #ffffff;
   --card-background: #ffffff;
-  --text-primary: #212121;
-  --text-secondary: #555b66;
-  --text-muted: #8a8f99;
+  --text-primary: #0b0f0d;
+  --text-secondary: #2b3430;
+  --text-muted: #66736c;
   --border-color: #e5e7eb;
   --divider-color: #e5e7eb;
   --success-color: #4caf50;
   --warning-color: #ff9800;
   --error-color: #f44336;
+
+  /* Versões mais suaves para UI (evita excesso de verde neon em componentes) */
+  --primary-ui: color-mix(in srgb, var(--primary-color) 55%, white);
+  --accent-ui: color-mix(in srgb, var(--accent-color) 55%, white);
   --shadow-xs: 0 1px 2px rgba(0,0,0,0.06);
   --shadow-sm: 0 2px 6px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
@@ -116,20 +133,24 @@ body[data-theme="light"] {
 /* Tema escuro */
 html[data-theme="dark"],
 body[data-theme="dark"] {
-  --primary-color: #1976d2;
-  --primary-color-dark: #1565c0;
-  --accent-color: #ff4081;
-  --background-color: #121212;
-  --surface-color: #1e1e1e;
-  --card-background: #2d2d2d;
-  --text-primary: #ffffff;
-  --text-secondary: #c7c7c7;
-  --text-muted: #9aa0a6;
-  --border-color: #2a2a2a;
-  --divider-color: #2f2f2f;
+  --primary-color: #d6ff00;
+  --primary-color-dark: #b7d900;
+  --accent-color: #9aff00;
+  --background-color: #0b0f0d;
+  --surface-color: #111614;
+  --card-background: #141a17;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #26302a;
+  --divider-color: #2f3a33;
   --success-color: #81c784;
   --warning-color: #ffb74d;
   --error-color: #e57373;
+
+  /* Versões mais suaves para UI (evita excesso de verde neon em componentes) */
+  --primary-ui: color-mix(in srgb, var(--primary-color) 35%, var(--surface-color));
+  --accent-ui: color-mix(in srgb, var(--accent-color) 35%, var(--surface-color));
   --shadow-xs: 0 1px 2px rgba(0,0,0,0.35);
   --shadow-sm: 0 2px 6px rgba(0,0,0,0.40);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.45);
@@ -155,10 +176,96 @@ body[data-theme="dark"] {
 .mat-mdc-table { background-color: var(--surface-color); color: var(--text-primary); }
 .mat-mdc-header-cell { background-color: var(--background-color); color: var(--text-primary); }
 .mat-mdc-row:hover { background-color: color-mix(in srgb, var(--text-primary) 6%, transparent); }
-.mat-mdc-button { --mdc-text-button-label-text-color: var(--primary-color); }
-.mat-mdc-raised-button { --mdc-filled-button-container-color: var(--primary-color); --mdc-filled-button-label-text-color: var(--surface-color); }
+.mat-mdc-button { --mdc-text-button-label-text-color: var(--primary-ui, var(--primary-color)); }
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  --mdc-filled-button-container-color: var(--primary-color);
+  /* Texto escuro sobre lime (consistente nos dois temas) */
+  --mdc-filled-button-label-text-color: #0b0f0d;
+}
 .mat-mdc-icon-button { --mdc-icon-button-icon-color: var(--text-primary); }
 .mat-mdc-paginator { background-color: var(--surface-color); color: var(--text-primary); }
+
+/*
+  Angular Material (prebuilt theme) ainda injeta cores (ex: indigo/pink)
+  via tokens MDC/Material. Aqui forçamos esses tokens a seguirem a paleta
+  baseada nas CSS vars do projeto.
+*/
+:root,
+body.light-theme,
+body.dark-theme {
+  --mdc-theme-primary: var(--primary-ui, var(--primary-color));
+  --mdc-theme-secondary: var(--accent-ui, var(--accent-color));
+  --mdc-theme-error: var(--error-color);
+
+  /* Angular Material (Material 3) system tokens */
+  --mat-sys-primary: var(--primary-ui, var(--primary-color));
+  --mat-sys-on-primary: #0b0f0d;
+  --mat-sys-secondary: var(--accent-ui, var(--accent-color));
+  --mat-sys-on-secondary: #0b0f0d;
+  --mat-sys-error: var(--error-color);
+  --mat-sys-on-error: #ffffff;
+}
+
+/* Text button */
+.mat-mdc-button.mat-primary { --mdc-text-button-label-text-color: var(--primary-ui, var(--primary-color)); }
+.mat-mdc-button.mat-accent { --mdc-text-button-label-text-color: var(--accent-ui, var(--accent-color)); }
+.mat-mdc-button.mat-warn { --mdc-text-button-label-text-color: var(--error-color); }
+
+/* Raised (protected) + Flat (filled) */
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  --mdc-protected-button-container-color: var(--primary-color);
+  --mdc-protected-button-label-text-color: #0b0f0d;
+}
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  --mdc-filled-button-container-color: var(--primary-color);
+  --mdc-filled-button-label-text-color: #0b0f0d;
+  --mdc-protected-button-container-color: var(--primary-color);
+  --mdc-protected-button-label-text-color: #0b0f0d;
+}
+.mat-mdc-raised-button.mat-accent,
+.mat-mdc-unelevated-button.mat-accent {
+  --mdc-filled-button-container-color: var(--accent-color);
+  --mdc-filled-button-label-text-color: #0b0f0d;
+  --mdc-protected-button-container-color: var(--accent-color);
+  --mdc-protected-button-label-text-color: #0b0f0d;
+}
+.mat-mdc-raised-button.mat-warn,
+.mat-mdc-unelevated-button.mat-warn {
+  --mdc-filled-button-container-color: var(--error-color);
+  --mdc-filled-button-label-text-color: #ffffff;
+  --mdc-protected-button-container-color: var(--error-color);
+  --mdc-protected-button-label-text-color: #ffffff;
+}
+
+/* Outlined (stroked) */
+.mat-mdc-outlined-button,
+.mat-mdc-stroked-button {
+  --mdc-outlined-button-label-text-color: var(--text-primary);
+  --mdc-outlined-button-outline-color: var(--border-color);
+}
+.mat-mdc-outlined-button.mat-primary,
+.mat-mdc-stroked-button.mat-primary {
+  --mdc-outlined-button-label-text-color: var(--primary-ui, var(--primary-color));
+  --mdc-outlined-button-outline-color: color-mix(in srgb, var(--primary-ui, var(--primary-color)) 60%, var(--border-color));
+}
+.mat-mdc-outlined-button.mat-accent,
+.mat-mdc-stroked-button.mat-accent {
+  --mdc-outlined-button-label-text-color: var(--accent-ui, var(--accent-color));
+  --mdc-outlined-button-outline-color: color-mix(in srgb, var(--accent-ui, var(--accent-color)) 60%, var(--border-color));
+}
+.mat-mdc-outlined-button.mat-warn,
+.mat-mdc-stroked-button.mat-warn {
+  --mdc-outlined-button-label-text-color: var(--error-color);
+  --mdc-outlined-button-outline-color: color-mix(in srgb, var(--error-color) 60%, var(--border-color));
+}
+
+/* Icon buttons */
+.mat-mdc-icon-button.mat-primary { --mdc-icon-button-icon-color: var(--primary-ui, var(--primary-color)); }
+.mat-mdc-icon-button.mat-accent { --mdc-icon-button-icon-color: var(--accent-ui, var(--accent-color)); }
+.mat-mdc-icon-button.mat-warn { --mdc-icon-button-icon-color: var(--error-color); }
 
 /* Base */
 html { background: var(--background-color); color: var(--text-primary); }
@@ -212,8 +319,7 @@ mat-card {
 }
 
 .container { padding: var(--spacing-4); display: flex; flex-direction: column; gap: var(--spacing-3); max-width: var(--container-max); margin: 0 auto; }
-.grid { display: grid; gap: var(--spacing-3); grid-template-columns: repeat(2, 1fr); }
-@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+.grid { display: grid; gap: var(--spacing-3); }
 
 /* Cards e tabelas */
 .card { background: var(--card-background); border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-xs); padding: var(--spacing-3); display: flex; flex-direction: column; gap: var(--spacing-2); transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease; }
@@ -236,7 +342,7 @@ table:not(.mat-table) tbody tr:last-child td { border-bottom: none; }
 .header-content p { font-size: 16px; color: var(--text-secondary); margin: 0; }
 .header-actions { display: flex; gap: 12px; align-items: center; }
 .export-btn { border: 1px solid var(--border-color) !important; color: var(--text-primary) !important; font-weight: 500; height: 40px; padding: 0 16px; border-radius: 8px !important; background: var(--surface-color) !important; transition: all 0.3s ease; }
-.export-btn:hover { background-color: var(--primary-color) !important; color: var(--surface-color) !important; }
+.export-btn:hover { background-color: var(--primary-ui, var(--primary-color)) !important; color: var(--text-primary) !important; }
 .add-client-btn { font-weight: 500; height: 40px; padding: 0 20px; border-radius: 8px !important; }
 .search-filter-bar { display: flex; gap: 16px; margin-bottom: 24px; align-items: center; }
 .search-container { flex: 1; max-width: 500px; }

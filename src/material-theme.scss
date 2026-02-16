@@ -1,0 +1,100 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Paleta baseada na landing (dark + lime)
+// Observação: mantemos os tons iguais ao valor principal para evitar introduzir novas cores.
+$bs-primary-palette: (
+  50: #d6ff00,
+  100: #d6ff00,
+  200: #d6ff00,
+  300: #d6ff00,
+  400: #d6ff00,
+  500: #d6ff00,
+  600: #d6ff00,
+  700: #d6ff00,
+  800: #d6ff00,
+  900: #d6ff00,
+  A100: #d6ff00,
+  A200: #d6ff00,
+  A400: #d6ff00,
+  A700: #d6ff00,
+  contrast: (
+    50: #0b0f0d,
+    100: #0b0f0d,
+    200: #0b0f0d,
+    300: #0b0f0d,
+    400: #0b0f0d,
+    500: #0b0f0d,
+    600: #0b0f0d,
+    700: #0b0f0d,
+    800: #0b0f0d,
+    900: #0b0f0d,
+    A100: #0b0f0d,
+    A200: #0b0f0d,
+    A400: #0b0f0d,
+    A700: #0b0f0d,
+  )
+);
+
+$bs-accent-palette: (
+  50: #9aff00,
+  100: #9aff00,
+  200: #9aff00,
+  300: #9aff00,
+  400: #9aff00,
+  500: #9aff00,
+  600: #9aff00,
+  700: #9aff00,
+  800: #9aff00,
+  900: #9aff00,
+  A100: #9aff00,
+  A200: #9aff00,
+  A400: #9aff00,
+  A700: #9aff00,
+  contrast: (
+    50: #0b0f0d,
+    100: #0b0f0d,
+    200: #0b0f0d,
+    300: #0b0f0d,
+    400: #0b0f0d,
+    500: #0b0f0d,
+    600: #0b0f0d,
+    700: #0b0f0d,
+    800: #0b0f0d,
+    900: #0b0f0d,
+    A100: #0b0f0d,
+    A200: #0b0f0d,
+    A400: #0b0f0d,
+    A700: #0b0f0d,
+  )
+);
+
+$primary: mat.define-palette($bs-primary-palette, 500);
+$accent: mat.define-palette($bs-accent-palette, 500);
+$warn: mat.define-palette(mat.$red-palette);
+
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+));
+
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+));
+
+// Default (se o body ainda não tem classe): assume light.
+body {
+  @include mat.all-component-themes($light-theme);
+}
+
+body.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+}

@@ -398,6 +398,29 @@
   padding: 6px 8px;
 }
 
+.agenda-grid2.compact-mode .agendamento-top {
+  /* Reserva espaço apenas para o botão de expandir (>) */
+  padding-right: 44px;
+}
+
+.agenda-grid2.compact-mode .agendamento-top-actions {
+  right: 6px;
+  gap: 4px;
+}
+
+.agenda-grid2.compact-mode .details-open-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+}
+
+.agenda-grid2.compact-mode .details-open-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
 .agenda-grid2.compact-mode .slot-cell {
   padding: 4px;
 }
@@ -531,6 +554,7 @@
   border: 1px solid var(--border-color);
   cursor: pointer;
   position: relative;
+  overflow: hidden;
 }
 
 .agendamento-card.is-selected {
@@ -549,6 +573,17 @@
   z-index: 1;
 }
 
+.agendamento-top-actions {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
 .agendamento-cliente-inline {
   flex: 1;
   min-width: 0;
@@ -564,6 +599,10 @@
   border-radius: 10px;
   background: color-mix(in srgb, var(--background-color) 55%, transparent);
   border: 1px solid var(--border-color);
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  position: relative;
 }
 
 .details-open-btn mat-icon {
@@ -571,6 +610,7 @@
   width: 20px;
   height: 20px;
   line-height: 20px;
+  display: inline-block;
 }
 .agendamento-status-chip {
   background: var(--background-color);
@@ -585,32 +625,7 @@
 .agendamento-cliente { font-weight: 600; }
 .agendamento-servico { font-size: 12px; opacity: 0.9; }
 
-.agendamento-actions {
-  position: absolute;
-  right: 8px;
-  bottom: 6px;
-  display: flex;
-  gap: 6px;
-  opacity: 0;
-  transform: translateY(2px);
-  pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-}
 
-.agendamento-card:hover .agendamento-actions,
-.agendamento-card.is-selected .agendamento-actions {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-@media (hover: none) {
-  .agendamento-actions {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-}
 
 /* Badges de status */
 .status-finalizado .agendamento-status-chip {

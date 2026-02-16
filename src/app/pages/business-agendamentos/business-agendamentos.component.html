@@ -349,15 +349,19 @@
                         {{ agendamento.cliente }}
                       </div>
 
-                      <button
-                        mat-icon-button
-                        class="details-open-btn"
-                        type="button"
-                        aria-label="Abrir detalhes"
-                        (click)="openAgendamentoDetails(agendamento, $event)"
-                      >
-                        <mat-icon>chevron_right</mat-icon>
-                      </button>
+                      <div class="agendamento-top-actions">
+                        <button
+                          mat-icon-button
+                          class="details-open-btn"
+                          type="button"
+                          aria-label="Abrir detalhes"
+                          (pointerdown)="$event.stopPropagation()"
+                          (mousedown)="$event.stopPropagation()"
+                          (click)="$event.stopPropagation(); openAgendamentoDetails(agendamento, $event)"
+                        >
+                          <mat-icon>chevron_right</mat-icon>
+                        </button>
+                      </div>
                     </div>
 
                     <div class="agendamento-cliente" *ngIf="!compactMode">
@@ -367,38 +371,6 @@
                       {{ agendamento.servico }}
                     </div>
 
-                    <div
-                      class="agendamento-actions"
-                      *ngIf="(agendamento.status || '').toLowerCase() !== 'cancelado' && (agendamento.status || '').toLowerCase() !== 'finalizado'"
-                    >
-                      <button
-                        mat-icon-button
-                        class="details-open-btn finalizar-btn"
-                        type="button"
-                        data-action="finalizar"
-                        [attr.data-agendamento-id]="agendamento.id ?? agendamento.AgendamentoId ?? agendamento.agendamentoId ?? agendamento.Id"
-                        matTooltip="Finalizar"
-                        [disabled]="isFinalizando(agendamento)"
-                        (click)="onFinalizarAgendamentoClick(agendamento, $event)"
-                        style="color: var(--success-color);"
-                      >
-                        <mat-icon>check_circle</mat-icon>
-                      </button>
-
-                      <button
-                        mat-icon-button
-                        class="details-open-btn cancelar-btn"
-                        type="button"
-                        data-action="cancelar"
-                        [attr.data-agendamento-id]="agendamento.id ?? agendamento.AgendamentoId ?? agendamento.agendamentoId ?? agendamento.Id"
-                        matTooltip="Cancelar"
-                        [disabled]="isCancelando(agendamento)"
-                        (click)="onCancelarAgendamento(agendamento, $event)"
-                        style="color: var(--error-color);"
-                      >
-                        <mat-icon>cancel</mat-icon>
-                      </button>
-                    </div>
                   </div>
                 </ng-container>
 
