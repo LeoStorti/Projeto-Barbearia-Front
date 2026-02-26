@@ -1,0 +1,5 @@
+[mysqld]
+# Make table name lookups case-insensitive (Windows-like behavior).
+# This avoids errors when the schema was created/imported with lowercase table names
+# but the application queries using PascalCase (e.g., EF Core default conventions).
+lower_case_table_names=1

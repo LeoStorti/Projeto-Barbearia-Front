@@ -1,0 +1,53 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: barbearia-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_HOST_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: ["mysqld", "--lower_case_table_names=1", "--default-authentication-plugin=mysql_native_password", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    # IMPORTANTE:
+    # - Este compose está no repositório do Front.
+    # - Ajuste API_CONTEXT no seu .env para apontar para a pasta da API .NET.
+    build:
+      context: ${API_CONTEXT:-../Projeto-Barbearia-Api}
+      dockerfile: Dockerfile
+    container_name: barbearia-api
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_URLS: http://+:7219
+
+      # Connection string para dentro da rede do compose (Server=mysql)
+      ConnectionStrings__DefaultConnection: "Server=mysql;Port=3306;Database=${MYSQL_DATABASE};User=${MYSQL_USER};Password=${MYSQL_PASSWORD};SslMode=Disabled;"
+
+      # CORS (se sua API lê Cors:AllowedOrigins do appsettings)
+      Cors__AllowedOrigins__0: ${FRONT_ORIGIN_1:-http://localhost:4201}
+      Cors__AllowedOrigins__1: ${FRONT_ORIGIN_2:-http://localhost:4200}
+
+      # Se sua API usa Jwt:Issuer/Audience e você valida estritamente, defina também via env:
+      # Jwt__Issuer: http://localhost:${API_HOST_PORT:-7219}
+      # Jwt__Audience: http://localhost:4201
+      # Jwt__Key: suaChaveSuperSecretaDeNoMinimo32Caracteres... (melhor via .env, não commitar)
+    ports:
+      - "${API_HOST_PORT:-7219}:7219"
+
+volumes:
+  mysql_data:

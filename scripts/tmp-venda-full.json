@@ -1,0 +1,34 @@
+{
+  "ClienteId": 1,
+  "ServicoId": 1,
+  "ProfissionalId": 1,
+  "AgendamentoId": 1,
+  "DataVenda": "2026-02-24T10:00:00",
+  "DataPagamento": "2026-02-24T10:00:00",
+  "DataHora": "2026-02-24T10:00:00",
+  "FormaPagamento": "Dinheiro",
+  "Pago": true,
+  "Status": "Pago",
+  "TotalVenda": 10,
+  "ValorVenda": 10,
+  "ValorTotal": 10,
+  "Total": 10,
+  "Cliente": {
+    "ClienteId": 1,
+    "Nome": "Cliente Teste",
+    "Email": "cliente.teste@example.com",
+    "Alergias": "",
+    "Endereco": "",
+    "Telefone": "",
+    "Observacoes": "",
+    "DataNascimento": null
+  },
+  "Servico": {
+    "ServicoId": 1,
+    "NomeServico": "Servico Teste",
+    "Categoria": "Teste",
+    "Descricao": "",
+    "Preco": 10,
+    "DuracaoMinutos": 30
+  }
+}

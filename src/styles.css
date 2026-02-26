@@ -173,6 +173,31 @@ body[data-theme="dark"] {
   --mdc-outlined-text-field-label-text-color: var(--text-secondary);
   --mdc-outlined-text-field-input-text-color: var(--text-primary);
 }
+
+/*
+  Overlays (mat-autocomplete / mat-select) são renderizados fora do DOM do componente
+  (dentro de .cdk-overlay-container). Forçamos as cores a seguirem o tema do app,
+  evitando texto “invisível” em listas/menus.
+*/
+.cdk-overlay-container .mat-mdc-autocomplete-panel,
+.cdk-overlay-container .mat-mdc-select-panel {
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+}
+
+.cdk-overlay-container .mat-mdc-option,
+.cdk-overlay-container .mat-mdc-option .mdc-list-item__primary-text {
+  color: var(--text-primary);
+}
+
+.cdk-overlay-container .mat-mdc-option .mdc-list-item__secondary-text {
+  color: var(--text-secondary);
+}
+
+.cdk-overlay-container .mat-mdc-option:hover,
+.cdk-overlay-container .mat-mdc-option.mdc-list-item--selected {
+  background-color: color-mix(in srgb, var(--text-primary) 8%, transparent);
+}
 .mat-mdc-table { background-color: var(--surface-color); color: var(--text-primary); }
 .mat-mdc-header-cell { background-color: var(--background-color); color: var(--text-primary); }
 .mat-mdc-row:hover { background-color: color-mix(in srgb, var(--text-primary) 6%, transparent); }

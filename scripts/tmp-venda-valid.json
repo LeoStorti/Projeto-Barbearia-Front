@@ -1,0 +1,9 @@
+{
+  "ClienteId": 4,
+  "ServicoId": 5,
+  "ProfissionalId": 1,
+  "DataVenda": "2026-02-24T10:00:00Z",
+  "TotalVenda": 0,
+  "Cliente": { "ClienteId": 4, "Nome": "X", "Email": "x@x.com", "Alergias": "", "Endereco": "", "Telefone": "", "Observacoes": "" },
+  "Servico": { "ServicoId": 5, "NomeServico": "X", "Categoria": "X", "Descricao": "" }
+}

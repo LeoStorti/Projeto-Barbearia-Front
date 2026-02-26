@@ -4,7 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json --port 4201",
+    "start:docker": "ng serve --proxy-config proxy.docker.conf.json --port 4201",
+    "start:docker:4200": "ng serve --proxy-config proxy.docker.conf.json --port 4200",
     "start:4200": "ng serve --proxy-config proxy.conf.json --port 4200",
+    "smoke:docker": "powershell -ExecutionPolicy Bypass -File scripts\\docker-smoke-test.ps1",
+    "seed:docker": "powershell -ExecutionPolicy Bypass -File scripts\\docker-seed-dev.ps1",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

@@ -41,6 +41,10 @@ testem.log
 build.log
 tmp_*.json
 
+# Docker / local environment
+.env
+.env.*
+
 # System files
 .DS_Store
 Thumbs.db
