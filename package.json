@@ -31,7 +31,7 @@
     "@angular/platform-browser-dynamic": "^20.3.19",
     "@angular/platform-server": "^20.3.19",
     "@angular/router": "^20.3.19",
-    "@angular/ssr": "^19.2.24",
+    "@angular/ssr": "^19.2.25",
     "angular-calendar": "^0.31.1",
     "chart.js": "^4.4.3",
     "date-fns": "^4.1.0",
