@@ -58,4 +58,16 @@ src/app/pages/frm-compras-nova/frm-compras-nova.component.html
 src/app/pages/frm-compras-nova/frm-compras-nova.component.spec.ts
 src/app/pages/frm-compras-nova/frm-compras-nova.component.ts
 src/app/app.routes.ts
-*.ts
+
+# Sensitive / generated files
+auth-cookies.txt
+login.json
+audit-report.json
+invalid.json
+fk_*.txt
+*.log
+show_create_*.txt
+venda-error.log
+scripts/seed-empresa-3.sql
+scripts/fix-profissionais-schema.sql
+scripts/docker-seed-empresa-3.ps1
