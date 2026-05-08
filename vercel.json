@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "angular",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/projectangular/browser",
+  "installCommand": "npm ci",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://projeto-barbearia-back-c-api.onrender.com/api/$1"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "https://projeto-barbearia-back-c-api.onrender.com/uploads/$1"
+    },
+    {
+      "source": "/((?!api|uploads|assets|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
