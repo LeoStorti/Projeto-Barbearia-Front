@@ -165,8 +165,8 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="modal-field">
-            <mat-label>Foto</mat-label>
-            <input matInput disabled [value]="fotoSelecionadaNome || (profissionalForm.fotoUrl ? 'Foto atual definida' : '')" placeholder="Nenhuma foto selecionada" />
+            <mat-label>URL da Foto</mat-label>
+            <input matInput [(ngModel)]="profissionalForm.fotoUrl" name="fotoUrl" placeholder="https://..." />
           </mat-form-field>
 
           <div class="modal-file-row">

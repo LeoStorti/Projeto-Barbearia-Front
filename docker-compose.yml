@@ -33,7 +33,7 @@ services:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
-      ASPNETCORE_URLS: http://+:7219
+      ASPNETCORE_URLS: http://0.0.0.0:7219
 
       # Connection string para dentro da rede do compose (Server=mysql)
       ConnectionStrings__DefaultConnection: "Server=mysql;Port=3306;Database=${MYSQL_DATABASE};User=${MYSQL_USER};Password=${MYSQL_PASSWORD};SslMode=Disabled;"

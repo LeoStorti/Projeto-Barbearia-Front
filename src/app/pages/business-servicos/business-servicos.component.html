@@ -51,7 +51,7 @@
       <ng-container matColumnDef="nomeServico">
         <th mat-header-cell *matHeaderCellDef>Serviço</th>
         <td mat-cell *matCellDef="let servico" class="name-cell">
-          <span class="client-name">{{ servico.NomeServico }}</span>
+          <span class="client-name">{{ servico.nomeServico }}</span>
         </td>
       </ng-container>
 
@@ -59,7 +59,7 @@
       <ng-container matColumnDef="preco">
         <th mat-header-cell *matHeaderCellDef>Preço</th>
         <td mat-cell *matCellDef="let servico">
-          <span class="price-text">{{ servico.Preco | currency:'BRL':'symbol':'1.2-2' }}</span>
+          <span class="price-text">{{ servico.preco | currency:'BRL':'symbol':'1.2-2' }}</span>
         </td>
       </ng-container>
 
@@ -67,7 +67,7 @@
       <ng-container matColumnDef="descricao">
         <th mat-header-cell *matHeaderCellDef>Descrição</th>
         <td mat-cell *matCellDef="let servico">
-          <span class="notes-text">{{ servico.Descricao || '-' }}</span>
+          <span class="notes-text">{{ servico.descricao || '-' }}</span>
         </td>
       </ng-container>
 
@@ -75,7 +75,7 @@
       <ng-container matColumnDef="categoria">
         <th mat-header-cell *matHeaderCellDef>Categoria</th>
         <td mat-cell *matCellDef="let servico">
-          <span class="category-badge" *ngIf="servico.Categoria; else noCategoria">{{ servico.Categoria }}</span>
+          <span class="category-badge" *ngIf="servico.categoria; else noCategoria">{{ servico.categoria }}</span>
           <ng-template #noCategoria>
             <span class="no-allergy">Sem categoria</span>
           </ng-template>
@@ -86,7 +86,7 @@
       <ng-container matColumnDef="duracao">
         <th mat-header-cell *matHeaderCellDef>Duração</th>
         <td mat-cell *matCellDef="let servico">
-          <span class="duration-badge">{{ servico.Duracao }} min</span>
+          <span class="duration-badge">{{ servico.duracao }} min</span>
         </td>
       </ng-container>
 
@@ -138,23 +138,23 @@
         <form #formServico="ngForm">
           <mat-form-field appearance="outline" class="modal-field">
             <mat-label>Nome</mat-label>
-            <input matInput [(ngModel)]="servicoForm.NomeServico" name="nome" required />
+            <input matInput [(ngModel)]="servicoForm.nomeServico" name="nome" required />
           </mat-form-field>
           <mat-form-field appearance="outline" class="modal-field">
             <mat-label>Preço</mat-label>
-            <input matInput [(ngModel)]="servicoForm.Preco" name="preco" required />
+            <input matInput type="number" step="0.01" min="0.01" [(ngModel)]="servicoForm.preco" name="preco" required />
           </mat-form-field>
           <mat-form-field appearance="outline" class="modal-field">
             <mat-label>Categoria</mat-label>
-            <input matInput [(ngModel)]="servicoForm.Categoria" name="categoria" />
+            <input matInput [(ngModel)]="servicoForm.categoria" name="categoria" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="modal-field">
             <mat-label>Duração (min)</mat-label>
-            <input matInput [(ngModel)]="servicoForm.Duracao" name="duracao" />
+            <input matInput type="number" step="1" min="1" [(ngModel)]="servicoForm.duracao" name="duracao" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="modal-field">
             <mat-label>Descrição</mat-label>
-            <textarea matInput [(ngModel)]="servicoForm.Descricao" name="descricao"></textarea>
+            <textarea matInput [(ngModel)]="servicoForm.descricao" name="descricao"></textarea>
           </mat-form-field>
         </form>
       </mat-dialog-content>
