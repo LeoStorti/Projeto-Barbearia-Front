@@ -7,7 +7,7 @@
       </div>
 
       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
-        <mat-form-field appearance="outline" class="w-full sm:w-48">
+        <mat-form-field appearance="fill" class="w-full sm:w-48">
           <mat-label>Período</mat-label>
           <mat-select [(ngModel)]="periodoSelecionado" (selectionChange)="onPeriodoChange()">
             <mat-option value="7">Últimos 7 dias</mat-option>
@@ -18,14 +18,14 @@
         </mat-form-field>
 
         <ng-container *ngIf="periodoSelecionado === 'custom'">
-          <mat-form-field appearance="outline" class="w-full sm:w-44">
+          <mat-form-field appearance="fill" class="w-full sm:w-44">
             <mat-label>Início</mat-label>
             <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="customInicio" (dateChange)="onCustomRangeChange()" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
             <mat-datepicker #pickerInicio></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="w-full sm:w-44">
+          <mat-form-field appearance="fill" class="w-full sm:w-44">
             <mat-label>Fim</mat-label>
             <input matInput [matDatepicker]="pickerFim" [(ngModel)]="customFim" (dateChange)="onCustomRangeChange()" />
             <mat-datepicker-toggle matIconSuffix [for]="pickerFim"></mat-datepicker-toggle>
@@ -33,7 +33,7 @@
           </mat-form-field>
         </ng-container>
 
-        <mat-form-field appearance="outline" class="w-full sm:w-80">
+        <mat-form-field appearance="fill" class="w-full sm:w-80">
           <mat-label>Profissional</mat-label>
           <mat-select [(ngModel)]="profissionalSelecionado" (selectionChange)="onProfissionalChange()">
             <mat-option value="todos">Todos</mat-option>

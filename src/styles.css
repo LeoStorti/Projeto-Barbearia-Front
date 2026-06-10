@@ -395,9 +395,51 @@ table:not(.mat-table) tbody tr:last-child td { border-bottom: none; }
 .empty-state p { color: var(--text-secondary); margin: 0 0 24px 0; }
 
 /* Form e utilidades */
-label { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 4px; }
-input, textarea, select { padding: var(--spacing-2); background: var(--surface-color); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); }
-input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent); }
+label:not(.mdc-floating-label):not(.mat-mdc-floating-label) {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+input:not(.mat-mdc-input-element):not(.mat-input-element):not(.mdc-text-field__input),
+textarea:not(.mat-mdc-input-element):not(.mat-input-element):not(.mdc-text-field__input),
+select {
+  padding: var(--spacing-2);
+  background: var(--surface-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+}
+input:not(.mat-mdc-input-element):not(.mat-input-element):not(.mdc-text-field__input):focus,
+textarea:not(.mat-mdc-input-element):not(.mat-input-element):not(.mdc-text-field__input):focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent);
+}
+
+/* Reset dos inputs nativos dentro de mat-form-field (garante que o Material controle o visual) */
+.mat-mdc-form-field input,
+.mat-mdc-form-field textarea,
+.mat-form-field input,
+.mat-form-field textarea {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Campos fill nos modais: fundo e underline seguem o tema */
+.modal-field .mat-mdc-text-field-wrapper,
+.modal-field .mdc-text-field--filled {
+  background-color: color-mix(in srgb, var(--text-primary) 6%, var(--surface-color)) !important;
+  border-radius: 4px 4px 0 0 !important;
+}
+.modal-field .mdc-line-ripple::before {
+  border-bottom-color: var(--border-color) !important;
+}
+.modal-field .mdc-line-ripple::after {
+  border-bottom-color: var(--primary-color) !important;
+}
 
 button:not(.mat-mdc-button-base) {
   padding: 12px 20px;

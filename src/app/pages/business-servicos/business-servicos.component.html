@@ -20,13 +20,13 @@
   <!-- Busca e filtro -->
   <div class="search-filter-bar">
     <div class="search-container">
-      <mat-form-field appearance="outline" class="search-field">
+      <mat-form-field appearance="fill" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
         <input matInput [(ngModel)]="filtroNome" (ngModelChange)="aplicarFiltroNome()" placeholder="Pesquisar serviços por nome, categoria ou descrição..." />
       </mat-form-field>
     </div>
     <div class="filter-container">
-      <mat-form-field appearance="outline" class="filter-select">
+      <mat-form-field appearance="fill" class="filter-select">
         <mat-icon matPrefix>filter_list</mat-icon>
         <mat-select value="all">
           <mat-option value="all">Todos os Serviços</mat-option>
@@ -136,23 +136,23 @@
       <h2 mat-dialog-title>{{ servicoEditando ? 'Editar Serviço' : 'Novo Serviço' }}</h2>
       <mat-dialog-content>
         <form #formServico="ngForm">
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Nome</mat-label>
             <input matInput [(ngModel)]="servicoForm.nomeServico" name="nome" required />
           </mat-form-field>
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Preço</mat-label>
             <input matInput type="number" step="0.01" min="0.01" [(ngModel)]="servicoForm.preco" name="preco" required />
           </mat-form-field>
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Categoria</mat-label>
             <input matInput [(ngModel)]="servicoForm.categoria" name="categoria" />
           </mat-form-field>
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Duração (min)</mat-label>
             <input matInput type="number" step="1" min="1" [(ngModel)]="servicoForm.duracao" name="duracao" />
           </mat-form-field>
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Descrição</mat-label>
             <textarea matInput [(ngModel)]="servicoForm.descricao" name="descricao"></textarea>
           </mat-form-field>

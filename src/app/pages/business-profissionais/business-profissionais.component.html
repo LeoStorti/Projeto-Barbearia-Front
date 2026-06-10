@@ -20,7 +20,7 @@
   <!-- Busca -->
   <div class="search-filter-bar">
     <div class="search-container">
-      <mat-form-field appearance="outline" class="search-field">
+      <mat-form-field appearance="fill" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
         <input matInput [(ngModel)]="filtroNome" (ngModelChange)="aplicarFiltroNome()" placeholder="Pesquisar profissionais por nome, especialização, telefone ou email..." />
       </mat-form-field>
@@ -139,32 +139,32 @@
       <h2 mat-dialog-title>{{ profissionalEditando ? 'Editar Profissional' : 'Novo Profissional' }}</h2>
       <mat-dialog-content>
         <form #formProfissional="ngForm">
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Nome</mat-label>
             <input matInput [(ngModel)]="profissionalForm.nome" name="nome" required />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Especialização</mat-label>
             <input matInput [(ngModel)]="profissionalForm.especializacao" name="especializacao" />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Telefone</mat-label>
             <input matInput [(ngModel)]="profissionalForm.telefone" name="telefone" />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Email</mat-label>
             <input matInput [(ngModel)]="profissionalForm.email" name="email" required />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>Salário</mat-label>
             <input matInput type="number" [(ngModel)]="profissionalForm.salario" name="salario" required />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="modal-field">
+          <mat-form-field appearance="fill" class="modal-field">
             <mat-label>URL da Foto</mat-label>
             <input matInput [(ngModel)]="profissionalForm.fotoUrl" name="fotoUrl" placeholder="https://..." />
           </mat-form-field>

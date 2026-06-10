@@ -20,7 +20,7 @@
   <!-- Barra de pesquisa e filtros -->
   <div class="search-filter-bar">
     <div class="search-container">
-      <mat-form-field appearance="outline" class="search-field">
+      <mat-form-field appearance="fill" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
         <input matInput
                [(ngModel)]="filtroNome"
@@ -29,7 +29,7 @@
       </mat-form-field>
     </div>
     <div class="filter-container">
-      <mat-form-field appearance="outline" class="filter-select">
+      <mat-form-field appearance="fill" class="filter-select">
         <mat-icon matPrefix>filter_list</mat-icon>
         <mat-select value="all">
           <mat-option value="all">Todos os Clientes</mat-option>
@@ -152,33 +152,33 @@
     <h2 mat-dialog-title>{{ clienteEditando ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
     <mat-dialog-content>
       <form #formCliente="ngForm">
-        <mat-form-field appearance="outline" class="modal-field">
+        <mat-form-field appearance="fill" class="modal-field">
           <mat-label>Nome</mat-label>
           <input matInput [(ngModel)]="clienteForm.Nome" name="nome" required />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="modal-field">
+        <mat-form-field appearance="fill" class="modal-field">
           <mat-label>Telefone</mat-label>
           <input matInput [(ngModel)]="clienteForm.Telefone" name="telefone" required />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="modal-field">
+        <mat-form-field appearance="fill" class="modal-field">
           <mat-label>Email</mat-label>
           <input matInput [(ngModel)]="clienteForm.Email" name="email" required />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="modal-field">
+        <mat-form-field appearance="fill" class="modal-field">
           <mat-label>Data de Nascimento</mat-label>
           <input matInput [matDatepicker]="pickerModal" [(ngModel)]="clienteForm.DataNascimento" name="dataNascimento" required />
           <mat-datepicker-toggle matSuffix [for]="pickerModal"></mat-datepicker-toggle>
           <mat-datepicker #pickerModal></mat-datepicker>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="modal-field">
+        <mat-form-field appearance="fill" class="modal-field">
           <mat-label>Endereço</mat-label>
           <input matInput [(ngModel)]="clienteForm.Endereco" name="endereco" required />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="modal-field">
+        <mat-form-field appearance="fill" class="modal-field">
           <mat-label>Observações</mat-label>
           <textarea matInput [(ngModel)]="clienteForm.Observacoes" name="observacoes"></textarea>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="modal-field">
+        <mat-form-field appearance="fill" class="modal-field">
           <mat-label>Alergias</mat-label>
           <textarea matInput [(ngModel)]="clienteForm.Alergias" name="alergias"></textarea>
         </mat-form-field>

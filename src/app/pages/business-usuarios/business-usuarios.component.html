@@ -16,7 +16,7 @@
   <!-- Busca -->
   <div class="search-filter-bar">
     <div class="search-container">
-      <mat-form-field appearance="outline" class="search-field">
+      <mat-form-field appearance="fill" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
         <input
           matInput
@@ -108,22 +108,22 @@
   </div>
 
   <div class="dialog-content">
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Nome</mat-label>
       <input matInput [(ngModel)]="usuarioForm.nomeUsuario" placeholder="Nome do usuário" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Email</mat-label>
       <input matInput [(ngModel)]="usuarioForm.email" placeholder="email@exemplo.com" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>{{ usuarioEditando ? 'Nova senha (opcional)' : 'Senha' }}</mat-label>
       <input matInput type="password" [(ngModel)]="usuarioForm.senha" placeholder="••••••" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Nível de acesso</mat-label>
       <mat-select [(ngModel)]="usuarioForm.nivelAcesso">
         <mat-option value="Admin">Admin</mat-option>
