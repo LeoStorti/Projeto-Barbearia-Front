@@ -227,28 +227,55 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   private removeSelectDocCaptureListener: (() => void) | null = null;
   private lastSelectToken = '';
 
-  // --- Detecção de scroll em mobile (evita clique acidental ao rolar a grade) ---
-  private _touchScrolled = false;
-  private _touchStartY = 0;
-  private _touchStartX = 0;
+  // --- Detecção de scroll em mobile por célula (abordagem com touchend + preventDefault) ---
+  // Registra a posição do touchstart em qualquer célula interativa da grade
+  private _cellTouchStart: { x: number; y: number } | null = null;
+  private readonly TOUCH_SCROLL_THRESHOLD = 12;
 
-  onGridTouchStart(e: TouchEvent): void {
-    this._touchScrolled = false;
-    this._touchStartY = e.touches[0]?.clientY ?? 0;
-    this._touchStartX = e.touches[0]?.clientX ?? 0;
+  onCellTouchStart(e: TouchEvent): void {
+    const t = e.touches[0];
+    if (t) this._cellTouchStart = { x: t.clientX, y: t.clientY };
   }
 
-  onGridTouchMove(e: TouchEvent): void {
-    const dy = Math.abs((e.touches[0]?.clientY ?? 0) - this._touchStartY);
-    const dx = Math.abs((e.touches[0]?.clientX ?? 0) - this._touchStartX);
-    if (dy > 8 || dx > 8) {
-      this._touchScrolled = true;
+  /** Retorna true se o dedo se moveu o suficiente para ser considerado scroll */
+  private isTouchScroll(e: TouchEvent): boolean {
+    if (!this._cellTouchStart) return false;
+    const t = e.changedTouches[0];
+    if (!t) return false;
+    const dx = Math.abs(t.clientX - this._cellTouchStart.x);
+    const dy = Math.abs(t.clientY - this._cellTouchStart.y);
+    return dx > this.TOUCH_SCROLL_THRESHOLD || dy > this.TOUCH_SCROLL_THRESHOLD;
+  }
+
+  onSlotCellTouchEnd(e: TouchEvent, hora: string, profissionalId: number): void {
+    const scrolled = this.isTouchScroll(e);
+    this._cellTouchStart = null;
+    // preventDefault cancela o evento click sintético que o browser geraria em seguida
+    e.preventDefault();
+    if (!scrolled) {
+      this.onSlotCellSelect(e, hora, profissionalId);
+    }
+  }
+
+  onAgendamentoCardTouchEnd(e: TouchEvent, agendamento: any): void {
+    const scrolled = this.isTouchScroll(e);
+    this._cellTouchStart = null;
+    e.preventDefault();
+    if (!scrolled) {
+      this.openAgendamentoDetails(agendamento, e);
+    }
+  }
+
+  onSlotDisponnivelTouchEnd(e: TouchEvent, hora: string, profissionalId: number): void {
+    const scrolled = this.isTouchScroll(e);
+    this._cellTouchStart = null;
+    e.preventDefault();
+    if (!scrolled) {
+      this.onAgendamentoClick(hora, profissionalId);
     }
   }
 
   onSlotCellSelect(event: Event, horario: string, profissionalId: number): void {
-    // Ignora se o usuário estava rolando a tela
-    if (this._touchScrolled) return;
     try {
       const el = (event?.target as HTMLElement | null);
       // Não interfere em botões dentro da célula
@@ -1275,8 +1302,6 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   }
 
   onAgendamentoClick(horario: string, profissionalId: number): void {
-    // Ignora se o usuário estava rolando a tela
-    if (this._touchScrolled) return;
     try {
       // Evita disparos duplicados (pointerdown + click)
       const now = Date.now();
@@ -1586,8 +1611,6 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   }
 
   onAgendamentoCardClick(event: Event, agendamento: any): void {
-    // Ignora se o usuário estava rolando a tela
-    if (this._touchScrolled) return;
     try {
       const el = (event?.target as HTMLElement | null);
       // Se o clique veio do botão "Finalizar" (ou de um filho), não abrir detalhes/diálogo

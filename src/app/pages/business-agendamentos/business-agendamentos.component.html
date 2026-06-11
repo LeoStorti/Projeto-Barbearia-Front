@@ -275,7 +275,7 @@
 
       <!-- Grade de agendamentos: sempre visível, mesmo sem agendamentos -->
       <div class="grade-container">
-        <div class="agenda-scroll" (touchstart)="onGridTouchStart($event)" (touchmove)="onGridTouchMove($event)">
+        <div class="agenda-scroll">
           <div
             class="agenda-grid2"
             [class.compact-mode]="compactMode"
@@ -323,6 +323,8 @@
               [class.alt-row]="rowIndex % 2 === 1"
               [attr.data-hora]="hora"
               [attr.data-profissional-id]="grupo.profissional.id"
+              (touchstart)="onCellTouchStart($event)"
+              (touchend)="onSlotCellTouchEnd($event, hora, grupo.profissional.id)"
               (click)="onSlotCellSelect($event, hora, grupo.profissional.id)"
             >
               <ng-container *ngIf="isSlotVisible(hora, grupo.profissional.id)">
@@ -336,6 +338,8 @@
                     data-action="select-agendamento"
                     [attr.data-agendamento-id]="agendamento.id ?? agendamento.AgendamentoId ?? agendamento.agendamentoId ?? agendamento.Id"
                     [ngClass]="'status-' + (agendamento.status || 'pendente').toLowerCase()"
+                    (touchstart)="onCellTouchStart($event)"
+                    (touchend)="onAgendamentoCardTouchEnd($event, agendamento)"
                     (click)="onAgendamentoCardClick($event, agendamento)"
                   >
                     <div class="agendamento-top">
@@ -381,6 +385,8 @@
                     data-action="agendar"
                     [attr.data-hora]="hora"
                     [attr.data-profissional-id]="grupo.profissional.id"
+                    (touchstart)="onCellTouchStart($event)"
+                    (touchend)="onSlotDisponnivelTouchEnd($event, hora, grupo.profissional.id)"
                     (click)="onAgendamentoClick(hora, grupo.profissional.id)"
                   >
                     Disponível
