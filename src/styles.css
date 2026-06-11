@@ -486,3 +486,92 @@ p { margin: 0 0 var(--spacing-2); color: var(--text-secondary); }
 
 .text-card-foreground { color: var(--text-primary); }
 .text-muted-foreground { color: var(--text-muted); }
+
+/* ============================================================
+   RESPONSIVIDADE MOBILE (≤ 959px)
+   ============================================================ */
+
+/* Tabelas: scroll horizontal em vez de overflow oculto */
+.table-container {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 959px) {
+  /* Page header: empilha título e ações */
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+  }
+
+  .header-content h1 {
+    font-size: 22px;
+  }
+
+  .header-content p {
+    font-size: 14px;
+  }
+
+  /* Ações do header: wrap para nova linha */
+  .header-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  /* Search bar: empilha campo + filtro */
+  .search-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .search-container {
+    max-width: 100%;
+  }
+
+  /* Status da tabela */
+  .table-status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  /* Células de tabela: menos padding */
+  .clients-table th {
+    padding: 10px 12px !important;
+    font-size: 11px !important;
+  }
+
+  .clients-table td {
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 599px) {
+  /* Telas muito pequenas: esconde colunas secundárias de tabelas via classe utilitária */
+  .col-hide-mobile {
+    display: none !important;
+  }
+
+  /* Reduz ainda mais o padding das células */
+  .clients-table th,
+  .clients-table td {
+    padding: 8px 10px !important;
+  }
+
+  /* Cards de dashboard: força 1 coluna */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Modal: largura total em mobile */
+  .modal-cliente {
+    min-width: unset !important;
+    width: 100%;
+  }
+}

@@ -224,3 +224,49 @@
     padding: 16px;
   }
 }
+
+/* Botão hamburguer — escondido em desktop, visível em mobile */
+.menu-toggle {
+  display: none;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+@media (max-width: 959px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .app-sidebar {
+    width: 260px;
+  }
+
+  .topbar {
+    padding: 0 8px;
+    height: 56px;
+  }
+
+  .topbar-brand-icon {
+    display: none;
+  }
+
+  .page-title {
+    font-size: 14px;
+  }
+
+  .user-block {
+    display: none;
+  }
+
+  .logout-label {
+    display: none;
+  }
+
+  .content-scroll {
+    height: calc(100vh - 56px);
+  }
+
+  .content-main {
+    padding: 12px;
+  }
+}

@@ -1,7 +1,9 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -43,12 +45,15 @@ type NavSection = {
   templateUrl: './app-shell.component.html',
   styleUrl: './app-shell.component.css',
 })
-export class AppShellComponent {
+export class AppShellComponent implements OnDestroy {
   private readonly currentUrl = signal<string>('');
   private readonly accessDeniedMessage = signal<string>('');
+  private readonly _subs = new Subscription();
 
   readonly userName = signal<string>('');
   readonly loggedSince = signal<string>('');
+  readonly isMobile = signal<boolean>(false);
+  readonly sidenavOpened = signal<boolean>(true);
 
   readonly sections: NavSection[] = [
     {
@@ -89,21 +94,43 @@ export class AppShellComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly breakpointObserver: BreakpointObserver
   ) {
     this.currentUrl.set(this.router.url);
     this.updateDeniedFromUrl(this.router.url);
     this.refreshUserBlock();
 
-    this.router.events
-      .pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-      )
-      .subscribe((event) => {
-        this.currentUrl.set(event.urlAfterRedirects);
-        this.updateDeniedFromUrl(event.urlAfterRedirects);
-        this.refreshUserBlock();
-      });
+    this._subs.add(
+      this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.TabletPortrait]).subscribe(result => {
+        const mobile = result.matches;
+        this.isMobile.set(mobile);
+        this.sidenavOpened.set(!mobile);
+      })
+    );
+
+    this._subs.add(
+      this.router.events
+        .pipe(
+          filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+        )
+        .subscribe((event) => {
+          this.currentUrl.set(event.urlAfterRedirects);
+          this.updateDeniedFromUrl(event.urlAfterRedirects);
+          this.refreshUserBlock();
+          if (this.isMobile()) {
+            this.sidenavOpened.set(false);
+          }
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this._subs.unsubscribe();
+  }
+
+  toggleSidenav(): void {
+    this.sidenavOpened.update(v => !v);
   }
 
   private refreshUserBlock(): void {

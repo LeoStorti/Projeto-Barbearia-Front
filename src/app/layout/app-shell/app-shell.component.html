@@ -1,5 +1,10 @@
 <mat-sidenav-container class="app-shell">
-  <mat-sidenav class="app-sidebar" mode="side" [opened]="true" [disableClose]="true">
+  <mat-sidenav
+    class="app-sidebar"
+    [mode]="isMobile() ? 'over' : 'side'"
+    [opened]="sidenavOpened()"
+    (closedStart)="sidenavOpened.set(false)"
+    [disableClose]="!isMobile()">
     <div class="sidebar-header">
       <a class="brand" routerLink="/businessperformance">
         <span class="brand-icon" aria-hidden="true"></span>
@@ -35,6 +40,9 @@
   <mat-sidenav-content class="app-content">
     <div class="topbar">
       <div class="topbar-left">
+        <button mat-icon-button class="menu-toggle" (click)="toggleSidenav()" aria-label="Abrir menu">
+          <mat-icon>menu</mat-icon>
+        </button>
         <span class="topbar-brand-icon" aria-hidden="true"></span>
         <div class="page-title">{{ pageTitle() }}</div>
       </div>
@@ -42,14 +50,14 @@
       <div class="topbar-right">
         <app-theme-toggle></app-theme-toggle>
 
-        <button mat-stroked-button type="button" (click)="onLogout()" aria-label="Sair">
+        <button mat-stroked-button type="button" (click)="onLogout()" aria-label="Sair" class="logout-btn">
           <mat-icon>logout</mat-icon>
-          Sair
+          <span class="logout-label">Sair</span>
         </button>
 
         <div class="user-block">
-          <div class="user-name">Usuário: {{ userName() }}</div>
-          <div class="user-meta">Logado desde: {{ loggedSince() }}</div>
+          <div class="user-name">{{ userName() }}</div>
+          <div class="user-meta">{{ loggedSince() }}</div>
         </div>
       </div>
     </div>
