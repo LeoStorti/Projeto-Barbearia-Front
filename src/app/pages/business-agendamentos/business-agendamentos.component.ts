@@ -227,7 +227,28 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   private removeSelectDocCaptureListener: (() => void) | null = null;
   private lastSelectToken = '';
 
+  // --- Detecção de scroll em mobile (evita clique acidental ao rolar a grade) ---
+  private _touchScrolled = false;
+  private _touchStartY = 0;
+  private _touchStartX = 0;
+
+  onGridTouchStart(e: TouchEvent): void {
+    this._touchScrolled = false;
+    this._touchStartY = e.touches[0]?.clientY ?? 0;
+    this._touchStartX = e.touches[0]?.clientX ?? 0;
+  }
+
+  onGridTouchMove(e: TouchEvent): void {
+    const dy = Math.abs((e.touches[0]?.clientY ?? 0) - this._touchStartY);
+    const dx = Math.abs((e.touches[0]?.clientX ?? 0) - this._touchStartX);
+    if (dy > 8 || dx > 8) {
+      this._touchScrolled = true;
+    }
+  }
+
   onSlotCellSelect(event: Event, horario: string, profissionalId: number): void {
+    // Ignora se o usuário estava rolando a tela
+    if (this._touchScrolled) return;
     try {
       const el = (event?.target as HTMLElement | null);
       // Não interfere em botões dentro da célula
@@ -1254,6 +1275,8 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   }
 
   onAgendamentoClick(horario: string, profissionalId: number): void {
+    // Ignora se o usuário estava rolando a tela
+    if (this._touchScrolled) return;
     try {
       // Evita disparos duplicados (pointerdown + click)
       const now = Date.now();
@@ -1563,6 +1586,8 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   }
 
   onAgendamentoCardClick(event: Event, agendamento: any): void {
+    // Ignora se o usuário estava rolando a tela
+    if (this._touchScrolled) return;
     try {
       const el = (event?.target as HTMLElement | null);
       // Se o clique veio do botão "Finalizar" (ou de um filho), não abrir detalhes/diálogo
