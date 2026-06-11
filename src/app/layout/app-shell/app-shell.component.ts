@@ -1,5 +1,5 @@
-import { Component, computed, signal, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, computed, signal, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -45,7 +45,8 @@ type NavSection = {
   templateUrl: './app-shell.component.html',
   styleUrl: './app-shell.component.css',
 })
-export class AppShellComponent implements OnDestroy {
+export class AppShellComponent implements OnInit, OnDestroy {
+  private readonly platformId = inject(PLATFORM_ID);
   private readonly currentUrl = signal<string>('');
   private readonly accessDeniedMessage = signal<string>('');
   private readonly _subs = new Subscription();
@@ -123,6 +124,16 @@ export class AppShellComponent implements OnDestroy {
           }
         })
     );
+  }
+
+  ngOnInit(): void {
+    // Verificação síncrona da largura real da janela — corrige o estado inicial
+    // antes do BreakpointObserver emitir (evita flash do sidenav aberto no mobile)
+    if (isPlatformBrowser(this.platformId)) {
+      const mobile = window.innerWidth < 960;
+      this.isMobile.set(mobile);
+      this.sidenavOpened.set(!mobile);
+    }
   }
 
   ngOnDestroy(): void {
