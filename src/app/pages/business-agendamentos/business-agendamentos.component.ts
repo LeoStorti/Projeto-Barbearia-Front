@@ -68,6 +68,8 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   debugHeartbeat = 0;
 
   private removeAnyCaptureListener: (() => void) | null = null;
+  private removeScrollClickGuardListener: (() => void) | null = null;
+  private removeScrollMoveGuardListener: (() => void) | null = null;
   private overlayIntervalId: any = null;
   private heartbeatIntervalId: any = null;
 
@@ -230,15 +232,33 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   // --- Detecção de scroll em mobile por célula (abordagem com touchend + preventDefault) ---
   // Registra a posição do touchstart em qualquer célula interativa da grade
   private _cellTouchStart: { x: number; y: number } | null = null;
-  private readonly TOUCH_SCROLL_THRESHOLD = 12;
+  private readonly TOUCH_SCROLL_THRESHOLD = 25;
+  private _isTouchMoving = false;
+  // Timestamp do último touchend — usado para bloquear o click sintético gerado pelo browser
+  private _lastTouchEndAt = 0;
 
   onCellTouchStart(e: TouchEvent): void {
     const t = e.touches[0];
     if (t) this._cellTouchStart = { x: t.clientX, y: t.clientY };
+    this._isTouchMoving = false;
+  }
+
+  onCellTouchMove(e: TouchEvent): void {
+    if (this._isTouchMoving) return;
+    const t = e.touches[0];
+    if (!t || !this._cellTouchStart) return;
+    const dy = Math.abs(t.clientY - this._cellTouchStart.y);
+    if (dy > 8) {
+      this._isTouchMoving = true;
+      // Marca imediatamente para que o guard capture-phase já funcione
+      // caso o browser dispare o click antes do touchend
+      this._lastTouchEndAt = Date.now();
+    }
   }
 
   /** Retorna true se o dedo se moveu o suficiente para ser considerado scroll */
   private isTouchScroll(e: TouchEvent): boolean {
+    if (this._isTouchMoving) return true;
     if (!this._cellTouchStart) return false;
     const t = e.changedTouches[0];
     if (!t) return false;
@@ -250,7 +270,7 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   onSlotCellTouchEnd(e: TouchEvent, hora: string, profissionalId: number): void {
     const scrolled = this.isTouchScroll(e);
     this._cellTouchStart = null;
-    // preventDefault cancela o evento click sintético que o browser geraria em seguida
+    this._lastTouchEndAt = Date.now();
     e.preventDefault();
     if (!scrolled) {
       this.onSlotCellSelect(e, hora, profissionalId);
@@ -260,6 +280,7 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   onAgendamentoCardTouchEnd(e: TouchEvent, agendamento: any): void {
     const scrolled = this.isTouchScroll(e);
     this._cellTouchStart = null;
+    this._lastTouchEndAt = Date.now();
     e.preventDefault();
     if (!scrolled) {
       this.openAgendamentoDetails(agendamento, e);
@@ -269,6 +290,7 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   onSlotDisponnivelTouchEnd(e: TouchEvent, hora: string, profissionalId: number): void {
     const scrolled = this.isTouchScroll(e);
     this._cellTouchStart = null;
+    this._lastTouchEndAt = Date.now();
     e.preventDefault();
     if (!scrolled) {
       this.onAgendamentoClick(hora, profissionalId);
@@ -276,6 +298,10 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   }
 
   onSlotCellSelect(event: Event, horario: string, profissionalId: number): void {
+    // Bloqueia o click sintético gerado pelo browser após um touchend
+    if (event instanceof MouseEvent && Date.now() - this._lastTouchEndAt < 600) {
+      return;
+    }
     try {
       const el = (event?.target as HTMLElement | null);
       // Não interfere em botões dentro da célula
@@ -440,6 +466,57 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
       };
     }
 
+    // Guard nativo (capture phase) que bloqueia o click sintético gerado pelo browser
+    // após um touchend — evita que scroll seja interpretado como tap na grade.
+    if (!this.removeScrollClickGuardListener) {
+      const scrollClickGuard = (ev: Event) => {
+        if (!(ev instanceof MouseEvent)) return;
+        if (Date.now() - this._lastTouchEndAt < 600) {
+          ev.stopImmediatePropagation();
+          ev.preventDefault();
+        }
+      };
+      document.addEventListener('click', scrollClickGuard, true);
+      this.removeScrollClickGuardListener = () => {
+        document.removeEventListener('click', scrollClickGuard, true);
+      };
+    }
+
+    // Listener global de touchmove no document (capture, passivo).
+    // Detecta scroll vertical independente de qual elemento recebeu o touch —
+    // necessário porque o container .agenda-scroll absorve touchmove nativamente
+    // e o listener do elemento filho pode nunca disparar.
+    if (!this.removeScrollMoveGuardListener) {
+      let _globalTouchStartY = 0;
+
+      const globalTouchStartHandler = (ev: TouchEvent) => {
+        const t = ev.touches[0];
+        if (t) _globalTouchStartY = t.clientY;
+        // Reseta o flag de scroll junto com o touchstart
+        this._isTouchMoving = false;
+      };
+
+      const globalTouchMoveHandler = (ev: TouchEvent) => {
+        if (this._isTouchMoving) return;
+        const t = ev.touches[0];
+        if (!t) return;
+        const dy = Math.abs(t.clientY - _globalTouchStartY);
+        if (dy > 10) {
+          this._isTouchMoving = true;
+          // Atualiza imediatamente para que o click guard já funcione
+          this._lastTouchEndAt = Date.now();
+        }
+      };
+
+      document.addEventListener('touchstart', globalTouchStartHandler, { passive: true, capture: true });
+      document.addEventListener('touchmove', globalTouchMoveHandler, { passive: true, capture: true });
+
+      this.removeScrollMoveGuardListener = () => {
+        document.removeEventListener('touchstart', globalTouchStartHandler, true);
+        document.removeEventListener('touchmove', globalTouchMoveHandler, true);
+      };
+    }
+
     // Já inicia com a data atual para facilitar a pesquisa
     this.selectedDate = new Date();
     this.loadProfissionais();
@@ -596,6 +673,16 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     this.removeAnyCaptureListener = null;
 
     try {
+      this.removeScrollClickGuardListener?.();
+    } catch {}
+    this.removeScrollClickGuardListener = null;
+
+    try {
+      this.removeScrollMoveGuardListener?.();
+    } catch {}
+    this.removeScrollMoveGuardListener = null;
+
+    try {
       this.removeSelectDocCaptureListener?.();
     } catch {}
     this.removeSelectDocCaptureListener = null;
@@ -630,6 +717,10 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     try {
       const handler = (ev: Event) => {
         try {
+          // Ignora se o usuário estava scrollando
+          if (this._isTouchMoving) return;
+          if (Date.now() - this._lastTouchEndAt < 600) return;
+
           const now = Date.now();
 
           // Se o clique foi em ações (finalizar/cancelar/agendar), não abrir detalhes aqui.
@@ -681,23 +772,11 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
         } catch {}
       };
 
-      window.addEventListener('pointerdown', handler, true);
-      window.addEventListener('mousedown', handler, true);
       window.addEventListener('click', handler, true);
-      window.addEventListener('touchstart', handler, true);
-      document.addEventListener('pointerdown', handler, true);
-      document.addEventListener('mousedown', handler, true);
       document.addEventListener('click', handler, true);
-      document.addEventListener('touchstart', handler, true);
       this.removeSelectDocCaptureListener = () => {
-        window.removeEventListener('pointerdown', handler, true);
-        window.removeEventListener('mousedown', handler, true);
         window.removeEventListener('click', handler, true);
-        window.removeEventListener('touchstart', handler, true);
-        document.removeEventListener('pointerdown', handler, true);
-        document.removeEventListener('mousedown', handler, true);
         document.removeEventListener('click', handler, true);
-        document.removeEventListener('touchstart', handler, true);
       };
     } catch {
       // ignore
@@ -709,6 +788,10 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     try {
       const handler = (ev: Event) => {
         try {
+          // Ignora se o usuário estava scrollando
+          if (this._isTouchMoving) return;
+          if (Date.now() - this._lastTouchEndAt < 600) return;
+
           const btn = this.findActionElementFromEvent(ev, '[data-action="agendar"]');
           if (!btn) return;
 
@@ -1611,6 +1694,10 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   }
 
   onAgendamentoCardClick(event: Event, agendamento: any): void {
+    // Bloqueia o click sintético gerado pelo browser após um touchend
+    if (event instanceof MouseEvent && Date.now() - this._lastTouchEndAt < 600) {
+      return;
+    }
     try {
       const el = (event?.target as HTMLElement | null);
       // Se o clique veio do botão "Finalizar" (ou de um filho), não abrir detalhes/diálogo

@@ -324,6 +324,7 @@
               [attr.data-hora]="hora"
               [attr.data-profissional-id]="grupo.profissional.id"
               (touchstart)="onCellTouchStart($event)"
+              (touchmove)="onCellTouchMove($event)"
               (touchend)="onSlotCellTouchEnd($event, hora, grupo.profissional.id)"
               (click)="onSlotCellSelect($event, hora, grupo.profissional.id)"
             >
@@ -339,6 +340,7 @@
                     [attr.data-agendamento-id]="agendamento.id ?? agendamento.AgendamentoId ?? agendamento.agendamentoId ?? agendamento.Id"
                     [ngClass]="'status-' + (agendamento.status || 'pendente').toLowerCase()"
                     (touchstart)="onCellTouchStart($event)"
+                    (touchmove)="onCellTouchMove($event)"
                     (touchend)="onAgendamentoCardTouchEnd($event, agendamento)"
                     (click)="onAgendamentoCardClick($event, agendamento)"
                   >
@@ -386,6 +388,7 @@
                     [attr.data-hora]="hora"
                     [attr.data-profissional-id]="grupo.profissional.id"
                     (touchstart)="onCellTouchStart($event)"
+                    (touchmove)="onCellTouchMove($event)"
                     (touchend)="onSlotDisponnivelTouchEnd($event, hora, grupo.profissional.id)"
                     (click)="onAgendamentoClick(hora, grupo.profissional.id)"
                   >
