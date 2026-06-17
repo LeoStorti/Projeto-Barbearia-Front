@@ -354,18 +354,23 @@
 
 .grade-container {
   background: transparent;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .agenda-scroll {
   border-radius: 12px;
   overflow: auto;
+  overflow-x: auto;
   max-height: 72vh;
   scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Nova grade (CSS Grid) */
 .agenda-grid2 {
-  width: 100%;
+  /* Não usar width: 100% — deixar a grade expandir além do container para o scroll funcionar */
+  min-width: 100%;
   display: grid;
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -385,6 +390,12 @@
 
 .slot-cell.alt-row {
   background: color-mix(in srgb, var(--background-color) 55%, transparent);
+}
+
+.slot-cell,
+.agendamento-card,
+.slot-disponivel {
+  touch-action: pan-x pan-y;
 }
 
 .time-cell.alt-row {

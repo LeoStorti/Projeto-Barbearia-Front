@@ -135,6 +135,12 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     return `100px ${profCols || 'minmax(220px, 1fr)'}`;
   }
 
+  get gridMinWidth(): string {
+    const cols = Math.max(1, this.gruposFiltrados()?.length ?? 0);
+    // 100px coluna horário + cols * 220px largura mínima por profissional
+    return `${100 + cols * 220}px`;
+  }
+
   // Drag & Drop helpers
   dropListId(hora: string, profissionalId: number): string {
     return `drop-${profissionalId}-${(hora || '').replace(':', '-')}`;
@@ -488,10 +494,11 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     // e o listener do elemento filho pode nunca disparar.
     if (!this.removeScrollMoveGuardListener) {
       let _globalTouchStartY = 0;
+      let _globalTouchStartX = 0;
 
       const globalTouchStartHandler = (ev: TouchEvent) => {
         const t = ev.touches[0];
-        if (t) _globalTouchStartY = t.clientY;
+        if (t) { _globalTouchStartY = t.clientY; _globalTouchStartX = t.clientX; }
         // Reseta o flag de scroll junto com o touchstart
         this._isTouchMoving = false;
       };
@@ -500,20 +507,32 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
         if (this._isTouchMoving) return;
         const t = ev.touches[0];
         if (!t) return;
+        const dx = Math.abs(t.clientX - _globalTouchStartX);
         const dy = Math.abs(t.clientY - _globalTouchStartY);
-        if (dy > 10) {
+        if (dx > 10 || dy > 10) {
           this._isTouchMoving = true;
-          // Atualiza imediatamente para que o click guard já funcione
+          this._lastTouchEndAt = Date.now();
+        }
+      };
+
+      const globalTouchEndHandler = () => {
+        // Sempre atualiza o timestamp no touchend.
+        // Se houve scroll (_isTouchMoving=true), o guard de click já está ativo.
+        // Se não houve scroll, o browser vai gerar um click sintético — que queremos deixar passar.
+        // Para isso: só atualiza _lastTouchEndAt se houve movimento.
+        if (this._isTouchMoving) {
           this._lastTouchEndAt = Date.now();
         }
       };
 
       document.addEventListener('touchstart', globalTouchStartHandler, { passive: true, capture: true });
       document.addEventListener('touchmove', globalTouchMoveHandler, { passive: true, capture: true });
+      document.addEventListener('touchend', globalTouchEndHandler, { passive: true, capture: true });
 
       this.removeScrollMoveGuardListener = () => {
         document.removeEventListener('touchstart', globalTouchStartHandler, true);
         document.removeEventListener('touchmove', globalTouchMoveHandler, true);
+        document.removeEventListener('touchend', globalTouchEndHandler, true);
       };
     }
 
