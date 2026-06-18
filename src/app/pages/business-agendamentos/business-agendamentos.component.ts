@@ -242,11 +242,34 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   private _isTouchMoving = false;
   // Timestamp do último touchend — usado para bloquear o click sintético gerado pelo browser
   private _lastTouchEndAt = 0;
+  // Long press: timer e timestamp do último touchstart para bloquear clicks de touch
+  private _pendingLongPress: any = null;
+  private _lastTouchStartAt = 0;
 
   onCellTouchStart(e: TouchEvent): void {
     const t = e.touches[0];
     if (t) this._cellTouchStart = { x: t.clientX, y: t.clientY };
     this._isTouchMoving = false;
+  }
+
+  /** Inicia o timer de long press (1.5s). Chame no (touchstart) do elemento. */
+  startLongPress(fn: () => void): void {
+    this.cancelLongPress();
+    this._pendingLongPress = setTimeout(() => {
+      this._pendingLongPress = null;
+      if (!this._isTouchMoving) {
+        try { (navigator as any).vibrate?.(50); } catch {}
+        this.ngZone.run(() => fn());
+      }
+    }, 1500);
+  }
+
+  /** Cancela o timer de long press. Chame no (touchend) e ao detectar scroll. */
+  cancelLongPress(): void {
+    if (this._pendingLongPress !== null) {
+      clearTimeout(this._pendingLongPress);
+      this._pendingLongPress = null;
+    }
   }
 
   onCellTouchMove(e: TouchEvent): void {
@@ -501,6 +524,8 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
         if (t) { _globalTouchStartY = t.clientY; _globalTouchStartX = t.clientX; }
         // Reseta o flag de scroll junto com o touchstart
         this._isTouchMoving = false;
+        // Registra o momento do toque para bloquear clicks sintéticos de touch
+        this._lastTouchStartAt = Date.now();
       };
 
       const globalTouchMoveHandler = (ev: TouchEvent) => {
@@ -512,14 +537,12 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
         if (dx > 10 || dy > 10) {
           this._isTouchMoving = true;
           this._lastTouchEndAt = Date.now();
+          this.cancelLongPress(); // scroll detectado: cancela long press
         }
       };
 
       const globalTouchEndHandler = () => {
-        // Sempre atualiza o timestamp no touchend.
-        // Se houve scroll (_isTouchMoving=true), o guard de click já está ativo.
-        // Se não houve scroll, o browser vai gerar um click sintético — que queremos deixar passar.
-        // Para isso: só atualiza _lastTouchEndAt se houve movimento.
+        this.cancelLongPress(); // dedo levantou antes de 1.5s: cancela
         if (this._isTouchMoving) {
           this._lastTouchEndAt = Date.now();
         }
@@ -695,6 +718,8 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
       this.removeScrollClickGuardListener?.();
     } catch {}
     this.removeScrollClickGuardListener = null;
+
+    this.cancelLongPress();
 
     try {
       this.removeScrollMoveGuardListener?.();
@@ -1403,8 +1428,10 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     this.loadBlockedDayStatus();
   }
 
-  onAgendamentoClick(horario: string, profissionalId: number): void {
+  onAgendamentoClick(horario: string, profissionalId: number, fromLongPress = false): void {
     try {
+      // Em touch: long press dispara a ação diretamente; clicks sintéticos de touch são bloqueados
+      if (!fromLongPress && Date.now() - this._lastTouchStartAt < 3000) return;
       // Evita disparos duplicados (pointerdown + click)
       const now = Date.now();
       if (now - this.lastScheduleClickAt < 350) return;
@@ -1713,6 +1740,8 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
   }
 
   onAgendamentoCardClick(event: Event, agendamento: any): void {
+    // Em touch: long press dispara a ação diretamente; click sintético deve ser bloqueado
+    if (Date.now() - this._lastTouchStartAt < 3000) return;
     // Bloqueia o click sintético gerado pelo browser após um touchend
     if (event instanceof MouseEvent && Date.now() - this._lastTouchEndAt < 600) {
       return;

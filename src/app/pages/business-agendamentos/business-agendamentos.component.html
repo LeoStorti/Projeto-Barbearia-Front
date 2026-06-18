@@ -337,6 +337,8 @@
                     data-action="select-agendamento"
                     [attr.data-agendamento-id]="agendamento.id ?? agendamento.AgendamentoId ?? agendamento.agendamentoId ?? agendamento.Id"
                     [ngClass]="'status-' + (agendamento.status || 'pendente').toLowerCase()"
+                    (touchstart)="startLongPress(() => openAgendamentoDetails(agendamento, null))"
+                    (touchend)="cancelLongPress()"
                     (click)="onAgendamentoCardClick($event, agendamento)"
                   >
                     <div class="agendamento-top">
@@ -382,6 +384,8 @@
                     data-action="agendar"
                     [attr.data-hora]="hora"
                     [attr.data-profissional-id]="grupo.profissional.id"
+                    (touchstart)="startLongPress(() => onAgendamentoClick(hora, grupo.profissional.id, true))"
+                    (touchend)="cancelLongPress()"
                     (click)="onAgendamentoClick(hora, grupo.profissional.id)"
                   >
                     Disponível

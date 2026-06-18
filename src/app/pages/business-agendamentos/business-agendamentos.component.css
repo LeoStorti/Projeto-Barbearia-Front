@@ -396,6 +396,15 @@
 .agendamento-card,
 .slot-disponivel {
   touch-action: pan-x pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Feedback visual durante long press */
+.agendamento-card:active,
+.slot-disponivel:active {
+  filter: brightness(1.15);
+  transition: filter 1.5s ease;
 }
 
 .time-cell.alt-row {
