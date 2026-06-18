@@ -48,7 +48,8 @@
 
   <!-- Tabela de clientes -->
   <div class="table-container">
-    <table mat-table [dataSource]="dataSourceClientes" class="clients-table">
+    <div class="desktop-table-wrap">
+      <table mat-table [dataSource]="dataSourceClientes" class="clients-table">
 
       <!-- Coluna Nome -->
       <ng-container matColumnDef="nome">
@@ -121,10 +122,59 @@
         </td>
       </ng-container>
 
-      <!-- Header e Rows -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes;" class="table-row"></tr>
-    </table>
+        <!-- Header e Rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes;" class="table-row"></tr>
+      </table>
+    </div>
+
+    <!-- Cards mobile -->
+    <div class="mobile-cards" *ngIf="dataSourceClientes.data.length > 0">
+      <article class="client-card" *ngFor="let cliente of clientesVisiveisMobile(); trackBy: trackByClienteId">
+        <header class="client-card-header">
+          <h3 class="client-card-name">{{ cliente.Nome }}</h3>
+          <span class="allergy-badge" *ngIf="cliente.Alergias; else semAlergiaMobile">{{ cliente.Alergias }}</span>
+          <ng-template #semAlergiaMobile>
+            <span class="no-allergy">Sem alergias</span>
+          </ng-template>
+        </header>
+
+        <div class="client-card-grid">
+          <div class="card-field">
+            <span class="card-label">Email</span>
+            <a href="mailto:{{ cliente.Email }}" class="email-link">{{ cliente.Email || '-' }}</a>
+          </div>
+          <div class="card-field">
+            <span class="card-label">Telefone</span>
+            <span>{{ cliente.Telefone || '-' }}</span>
+          </div>
+          <div class="card-field card-field-full">
+            <span class="card-label">Endereço</span>
+            <span>{{ cliente.Endereco || '-' }}</span>
+          </div>
+          <div class="card-field">
+            <span class="card-label">Nascimento</span>
+            <span class="date-text">{{ cliente.DataNascimento | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="card-field card-field-full">
+            <span class="card-label">Observações</span>
+            <span class="notes-text">{{ cliente.Observacoes || '-' }}</span>
+          </div>
+        </div>
+
+        <footer class="client-card-actions">
+          <button mat-icon-button class="action-btn view-btn" matTooltip="Visualizar">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalCliente(cliente)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn delete-btn" (click)="excluirCliente(cliente)" matTooltip="Excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </footer>
+      </article>
+    </div>
 
     <!-- Estado vazio -->
     <div *ngIf="dataSourceClientes.data.length === 0" class="empty-state">

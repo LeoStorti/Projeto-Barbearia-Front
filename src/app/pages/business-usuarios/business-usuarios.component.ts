@@ -221,6 +221,19 @@ export class BusinessUsuarios implements OnInit, AfterViewInit {
     this.dataSourceUsuarios.filter = (this.filtro ?? '').trim().toLowerCase();
   }
 
+  usuariosVisiveisMobile(): UsuarioDto[] {
+    const source = this.dataSourceUsuarios.filteredData ?? this.dataSourceUsuarios.data;
+    if (!this.paginator) return source;
+    const pageSize = Number(this.paginator.pageSize || 10);
+    const pageIndex = Number(this.paginator.pageIndex || 0);
+    const start = pageIndex * pageSize;
+    return source.slice(start, start + pageSize);
+  }
+
+  trackByUsuarioId(_index: number, usuario: UsuarioDto): number {
+    return Number(usuario?.usuarioId ?? 0);
+  }
+
   getCurrentDate(): string {
     return new Date().toLocaleDateString('pt-BR', {
       year: 'numeric',

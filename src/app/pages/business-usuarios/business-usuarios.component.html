@@ -36,6 +36,7 @@
 
   <!-- Tabela -->
   <div class="table-container">
+    <div class="desktop-table-wrap">
     <table mat-table [dataSource]="dataSourceUsuarios" class="clients-table">
 
       <!-- Nome -->
@@ -85,6 +86,39 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
     </table>
+    </div>
+
+    <div class="mobile-cards" *ngIf="dataSourceUsuarios.data.length > 0">
+      <article class="entity-card" *ngFor="let u of usuariosVisiveisMobile(); trackBy: trackByUsuarioId">
+        <header class="entity-card-header">
+          <h3 class="entity-card-title">{{ u.nomeUsuario || '-' }}</h3>
+          <span class="status-badge">{{ getNivelAcessoLabel(u.nivelAcesso) }}</span>
+        </header>
+
+        <div class="entity-card-grid">
+          <div class="card-field card-field-full">
+            <span class="card-label">Email</span>
+            <span>{{ u.email || '-' }}</span>
+          </div>
+        </div>
+
+        <footer class="entity-card-actions">
+          <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalUsuario(u)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            *ngIf="podeExcluir"
+            mat-icon-button
+            class="action-btn delete-btn"
+            (click)="excluirUsuario(u)"
+            matTooltip="Excluir"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </footer>
+      </article>
+    </div>
 
     <!-- Estado vazio -->
     <div *ngIf="dataSourceUsuarios.data.length === 0" class="empty-state">

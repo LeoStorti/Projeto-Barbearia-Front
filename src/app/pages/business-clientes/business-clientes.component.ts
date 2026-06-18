@@ -421,6 +421,25 @@ export class BusinessClientes implements OnInit, AfterViewInit {
     this.alergias = '';
   }
 
+  clientesVisiveisMobile(): Clientes[] {
+    const source = this.dataSourceClientes.filteredData?.length
+      ? this.dataSourceClientes.filteredData
+      : this.dataSourceClientes.data;
+
+    if (!this.paginator) {
+      return source;
+    }
+
+    const pageSize = Number(this.paginator.pageSize || 10);
+    const pageIndex = Number(this.paginator.pageIndex || 0);
+    const start = pageIndex * pageSize;
+    return source.slice(start, start + pageSize);
+  }
+
+  trackByClienteId(_index: number, cliente: Clientes): number {
+    return Number(cliente?.ClienteId ?? 0);
+  }
+
   getCurrentDate(): string {
     return new Date().toLocaleDateString('pt-BR', {
       year: 'numeric',

@@ -368,6 +368,19 @@ export class BusinessProfissionais implements OnInit, AfterViewInit {
     return data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
   }
 
+  profissionaisVisiveisMobile(): Profissional[] {
+    const source = this.dataSourceProfissionais.filteredData ?? this.dataSourceProfissionais.data;
+    if (!this.paginator) return source;
+    const pageSize = Number(this.paginator.pageSize || 10);
+    const pageIndex = Number(this.paginator.pageIndex || 0);
+    const start = pageIndex * pageSize;
+    return source.slice(start, start + pageSize);
+  }
+
+  trackByProfissionalId(_index: number, p: Profissional): number {
+    return Number(p?.id ?? p?.ProfissionalId ?? 0);
+  }
+
   getCurrentDate(): string {
     return new Date().toLocaleDateString('pt-BR', {
       year: 'numeric',

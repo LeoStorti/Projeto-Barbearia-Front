@@ -223,6 +223,19 @@ dataSource: { data: Produto[] } = { data: [] }
     return ((precoVenda - precoCompra) / precoCompra) * 100;
   }
 
+  produtosVisiveisMobile(): Produto[] {
+    const source = this.dataSourceProdutos.filteredData ?? this.dataSourceProdutos.data;
+    if (!this.paginator) return source;
+    const pageSize = Number(this.paginator.pageSize || 10);
+    const pageIndex = Number(this.paginator.pageIndex || 0);
+    const start = pageIndex * pageSize;
+    return source.slice(start, start + pageSize);
+  }
+
+  trackByProdutoId(_index: number, produto: Produto): number {
+    return Number(produto?.id ?? produto?.ProdutoId ?? 0);
+  }
+
   getCurrentDate(): string {
     return new Date().toLocaleDateString('pt-BR', {
       year: 'numeric',

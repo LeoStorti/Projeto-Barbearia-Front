@@ -35,6 +35,7 @@
 
   <!-- Tabela de profissionais -->
   <div class="table-container">
+    <div class="desktop-table-wrap">
     <table mat-table [dataSource]="dataSourceProfissionais" class="clients-table">
 
       <!-- Nome -->
@@ -119,6 +120,66 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
     </table>
+    </div>
+
+    <div class="mobile-cards" *ngIf="dataSourceProfissionais.data.length > 0">
+      <article class="entity-card" *ngFor="let p of profissionaisVisiveisMobile(); trackBy: trackByProfissionalId">
+        <header class="entity-card-header">
+          <div class="prof-name-wrap">
+            <div class="prof-avatar" aria-hidden="true">
+              <img
+                *ngIf="fotoDisponivel(p)"
+                [src]="getFotoSrc(p.fotoUrl)"
+                [alt]="p.nome"
+                loading="lazy"
+                decoding="async"
+                (error)="onFotoError(p)"
+              />
+              <span *ngIf="!fotoDisponivel(p)">{{ getInitial(p.nome) }}</span>
+            </div>
+            <h3 class="entity-card-title">{{ p.nome }}</h3>
+          </div>
+          <span class="status-badge" [class.inactive]="!p.ativo">{{ p.ativo ? 'Ativo' : 'Inativo' }}</span>
+        </header>
+
+        <div class="entity-card-grid">
+          <div class="card-field">
+            <span class="card-label">Especialização</span>
+            <span class="notes-text">{{ p.especializacao || 'Não especificado' }}</span>
+          </div>
+          <div class="card-field">
+            <span class="card-label">Salário</span>
+            <span class="price-text">{{ p.salario | currency:'BRL':'symbol' }}</span>
+          </div>
+          <div class="card-field">
+            <span class="card-label">Telefone</span>
+            <span class="date-text">{{ p.telefone || '-' }}</span>
+          </div>
+          <div class="card-field card-field-full">
+            <span class="card-label">Email</span>
+            <a [href]="'mailto:' + p.email" class="email-link">{{ p.email || '-' }}</a>
+          </div>
+        </div>
+
+        <footer class="entity-card-actions">
+          <button mat-icon-button class="action-btn view-btn" matTooltip="Visualizar">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalProfissional(p)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn" (click)="abrirModalProfissional(p)" matTooltip="Definir foto">
+            <mat-icon>photo_camera</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn" (click)="alternarStatus(p)" [matTooltip]="p.ativo ? 'Desativar' : 'Ativar'">
+            <mat-icon>{{ p.ativo ? 'toggle_on' : 'toggle_off' }}</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn delete-btn" (click)="excluirProfissional(p)" matTooltip="Excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </footer>
+      </article>
+    </div>
 
     <!-- Estado vazio -->
     <div *ngIf="dataSourceProfissionais.data.length === 0" class="empty-state">

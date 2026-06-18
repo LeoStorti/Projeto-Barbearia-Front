@@ -311,6 +311,19 @@ export class BusinessServicos implements OnInit, AfterViewInit  {
     });
   }
 
+  servicosVisiveisMobile(): Servico[] {
+    const source = this.dataSourceServicos.filteredData ?? this.dataSourceServicos.data;
+    if (!this.paginator) return source;
+    const pageSize = Number(this.paginator.pageSize || 10);
+    const pageIndex = Number(this.paginator.pageIndex || 0);
+    const start = pageIndex * pageSize;
+    return source.slice(start, start + pageSize);
+  }
+
+  trackByServicoId(_index: number, servico: Servico): number {
+    return Number(servico?.servicoId ?? 0);
+  }
+
     carregarServicos(): void {
       console.log('Carregando serviços...');
   this.http.get<Servico[]>(`/api/Servicos`).subscribe(

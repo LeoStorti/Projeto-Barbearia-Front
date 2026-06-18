@@ -45,6 +45,7 @@
 
   <!-- Tabela de serviços -->
   <div class="table-container">
+    <div class="desktop-table-wrap">
     <table mat-table [dataSource]="dataSourceServicos" class="clients-table">
 
       <!-- Coluna Serviço -->
@@ -110,6 +111,46 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumnsServicos"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsServicos;" class="table-row"></tr>
     </table>
+    </div>
+
+    <div class="mobile-cards" *ngIf="dataSourceServicos.data.length > 0">
+      <article class="entity-card" *ngFor="let servico of servicosVisiveisMobile(); trackBy: trackByServicoId">
+        <header class="entity-card-header">
+          <h3 class="entity-card-title">{{ servico.nomeServico || 'Serviço' }}</h3>
+          <span class="duration-badge">{{ servico.duracao || 0 }} min</span>
+        </header>
+
+        <div class="entity-card-grid">
+          <div class="card-field">
+            <span class="card-label">Preço</span>
+            <span class="price-text">{{ servico.preco | currency:'BRL':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="card-field">
+            <span class="card-label">Categoria</span>
+            <span class="category-badge" *ngIf="servico.categoria; else semCategoriaMobile">{{ servico.categoria }}</span>
+            <ng-template #semCategoriaMobile>
+              <span class="no-allergy">Sem categoria</span>
+            </ng-template>
+          </div>
+          <div class="card-field card-field-full">
+            <span class="card-label">Descrição</span>
+            <span class="notes-text">{{ servico.descricao || '-' }}</span>
+          </div>
+        </div>
+
+        <footer class="entity-card-actions">
+          <button mat-icon-button class="action-btn view-btn" matTooltip="Visualizar">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalServico(servico)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn delete-btn" (click)="excluirServico(servico)" matTooltip="Excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </footer>
+      </article>
+    </div>
 
     <!-- Estado vazio -->
     <div *ngIf="dataSourceServicos.data.length === 0" class="empty-state">

@@ -45,6 +45,7 @@
 
         <!-- Tabela -->
         <div class="table-container">
+            <div class="desktop-table-wrap">
             <table mat-table [dataSource]="dataSourceProdutos" class="clients-table">
 
                 <!-- Coluna Produto -->
@@ -103,6 +104,55 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
             </table>
+            </div>
+
+            <div class="mobile-cards" *ngIf="dataSourceProdutos.data.length > 0">
+                <article class="entity-card" *ngFor="let produto of produtosVisiveisMobile(); trackBy: trackByProdutoId">
+                    <header class="entity-card-header">
+                        <h3 class="entity-card-title">{{ produto.nomeProduto || 'Produto' }}</h3>
+                        <span class="qty-badge">{{ produto.quantidadeEmEstoque || 0 }} un</span>
+                    </header>
+
+                    <div class="entity-card-grid">
+                        <div class="card-field card-field-full">
+                            <span class="card-label">Descrição</span>
+                            <span>{{ produto.descricao || '-' }}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Compra</span>
+                            <span class="price-text">{{ produto.precoCompra | currency:'BRL' }}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Venda</span>
+                            <span class="price-text">{{ produto.precoVenda | currency:'BRL' }}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Total</span>
+                            <span class="price-text">{{ calcularTotal(produto) | currency:'BRL' }}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Categoria</span>
+                            <span>{{ produto.categoria || '-' }}</span>
+                        </div>
+                        <div class="card-field card-field-full">
+                            <span class="card-label">Fornecedor</span>
+                            <span>{{ produto.fornecedor || '-' }}</span>
+                        </div>
+                    </div>
+
+                    <footer class="entity-card-actions">
+                        <button mat-icon-button class="action-btn view-btn" matTooltip="Visualizar">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-icon-button class="action-btn edit-btn" (click)="abrirModalProduto(produto)" matTooltip="Editar">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="action-btn delete-btn" (click)="excluirProduto(produto)" matTooltip="Excluir">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </footer>
+                </article>
+            </div>
 
             <!-- Paginação -->
             <mat-paginator #paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
