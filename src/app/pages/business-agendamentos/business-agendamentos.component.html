@@ -284,7 +284,7 @@
           >
             <!-- Header row -->
             <div class="time-header">Horário</div>
-            <div class="prof-header" *ngFor="let grupo of gruposFiltrados()">
+            <div class="prof-header" *ngFor="let grupo of gruposFiltrados(); trackBy: trackByProfissionalId">
               <div class="prof-header-inner">
                 <div class="prof-avatar">
                   <img
@@ -318,7 +318,7 @@
             </button>
           </div>
 
-          <ng-container *ngFor="let grupo of gruposFiltrados()">
+          <ng-container *ngFor="let grupo of gruposFiltrados(); trackBy: trackByProfissionalId">
             <div
               class="slot-cell"
               [class.alt-row]="rowIndex % 2 === 1"
@@ -337,7 +337,7 @@
                     data-action="select-agendamento"
                     [attr.data-agendamento-id]="agendamento.id ?? agendamento.AgendamentoId ?? agendamento.agendamentoId ?? agendamento.Id"
                     [ngClass]="'status-' + (agendamento.status || 'pendente').toLowerCase()"
-                    (touchstart)="startLongPress(() => openAgendamentoDetails(agendamento, null))"
+                    (touchstart)="startLongPressAgendamento(agendamento)"
                     (touchend)="cancelLongPress()"
                     (click)="onAgendamentoCardClick($event, agendamento)"
                   >
@@ -384,7 +384,7 @@
                     data-action="agendar"
                     [attr.data-hora]="hora"
                     [attr.data-profissional-id]="grupo.profissional.id"
-                    (touchstart)="startLongPress(() => onAgendamentoClick(hora, grupo.profissional.id, true))"
+                    (touchstart)="startLongPressSlot(hora, grupo.profissional.id)"
                     (touchend)="cancelLongPress()"
                     (click)="onAgendamentoClick(hora, grupo.profissional.id)"
                   >

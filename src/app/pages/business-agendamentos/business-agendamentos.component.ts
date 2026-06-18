@@ -129,6 +129,10 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     'Content-Type': 'application/json'
   });
 
+  trackByProfissionalId(_index: number, grupo: { profissional: any }): number {
+    return grupo.profissional.id;
+  }
+
   get gridTemplateColumns(): string {
     const cols = this.gruposFiltrados()?.length ?? 0;
     const profCols = Array.from({ length: cols }, () => 'minmax(220px, 1fr)').join(' ');
@@ -262,6 +266,14 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
         this.ngZone.run(() => fn());
       }
     }, 1500);
+  }
+
+  startLongPressAgendamento(agendamento: any): void {
+    this.startLongPress(() => this.openAgendamentoDetails(agendamento, undefined));
+  }
+
+  startLongPressSlot(hora: string, profissionalId: number): void {
+    this.startLongPress(() => this.onAgendamentoClick(hora, profissionalId, true));
   }
 
   /** Cancela o timer de long press. Chame no (touchend) e ao detectar scroll. */
@@ -451,26 +463,23 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     if (!this.removeAnyCaptureListener) {
       const anyHandler = (ev: Event) => {
         try {
-          this.ngZone.run(() => {
-            this.debugAnyClickCount++;
-            const anyEv = ev as any;
-            const x = typeof anyEv?.clientX === 'number' ? anyEv.clientX : null;
-            const y = typeof anyEv?.clientY === 'number' ? anyEv.clientY : null;
-            let topDesc = '';
-            try {
-              if (x !== null && y !== null && (document as any).elementsFromPoint) {
-                const els = (document as any).elementsFromPoint(x, y) as Element[];
-                const top = els?.[0] as HTMLElement | undefined;
-                const second = els?.[1] as HTMLElement | undefined;
+          this.debugAnyClickCount++;
+          const anyEv = ev as any;
+          const x = typeof anyEv?.clientX === 'number' ? anyEv.clientX : null;
+          const y = typeof anyEv?.clientY === 'number' ? anyEv.clientY : null;
+          let topDesc = '';
+          try {
+            if (x !== null && y !== null && (document as any).elementsFromPoint) {
+              const els = (document as any).elementsFromPoint(x, y) as Element[];
+              const top = els?.[0] as HTMLElement | undefined;
 
-                if (top) {
-                  const cls = (top.className && typeof top.className === 'string') ? `.${top.className.split(' ').filter(Boolean).slice(0, 2).join('.')}` : '';
-                  topDesc = `${top.tagName.toLowerCase()}${cls}`;
-                }
+              if (top) {
+                const cls = (top.className && typeof top.className === 'string') ? `.${top.className.split(' ').filter(Boolean).slice(0, 2).join('.')}` : '';
+                topDesc = `${top.tagName.toLowerCase()}${cls}`;
               }
-            } catch {}
-            this.debugAnyLast = `any:${String((ev as any)?.type || 'event')} ${topDesc} @${new Date().toLocaleTimeString()}`;
-          });
+            }
+          } catch {}
+          this.debugAnyLast = `any:${String((ev as any)?.type || 'event')} ${topDesc} @${new Date().toLocaleTimeString()}`;
         } catch {}
       };
       window.addEventListener('pointerdown', anyHandler, true);
@@ -685,9 +694,7 @@ export class BusinessAgendamento implements OnInit, OnDestroy {
     if (!this.heartbeatIntervalId) {
       this.heartbeatIntervalId = setInterval(() => {
         try {
-          this.ngZone.run(() => {
-            this.debugHeartbeat++;
-          });
+          this.debugHeartbeat++;
         } catch {}
       }, 1000);
     }
