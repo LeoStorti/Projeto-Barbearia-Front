@@ -14,6 +14,12 @@ export function app(): express.Express {
   server.disable('x-powered-by');
   server.set('trust proxy', 1);
 
+  const nodeEnv = (process.env['NODE_ENV'] ?? '').trim().toLowerCase();
+  const aspEnv = (process.env['ASPNETCORE_ENVIRONMENT'] ?? '').trim().toLowerCase();
+  const vercelEnv = (process.env['VERCEL_ENV'] ?? '').trim().toLowerCase();
+  const isProduction = nodeEnv === 'production' || aspEnv === 'production' || vercelEnv === 'production';
+  const enforceHttps = isProduction && process.env['DISABLE_HTTPS_REDIRECT'] !== '1';
+
   const isValidPeriod = (month: number, year: number): boolean =>
     Number.isInteger(month) && month >= 1 && month <= 12 && Number.isInteger(year) && year >= 2000 && year <= 2100;
 
@@ -37,11 +43,43 @@ export function app(): express.Express {
     return origin === `${proto}://${host}`;
   };
 
+  const getRequestProto = (req: express.Request): string => {
+    const forwardedProto = req.get('x-forwarded-proto');
+    if (forwardedProto) {
+      return forwardedProto.split(',')[0]?.trim().toLowerCase() || 'http';
+    }
+    return (req.protocol || 'http').trim().toLowerCase();
+  };
+
+  if (enforceHttps) {
+    server.use((req, res, next) => {
+      if (getRequestProto(req) === 'https') {
+        next();
+        return;
+      }
+
+      const host = req.get('host');
+      if (!host) {
+        res.status(400).send('Bad Request');
+        return;
+      }
+
+      res.redirect(301, `https://${host}${req.originalUrl}`);
+    });
+  }
+
   server.use(express.json({ limit: '100kb' }));
   server.use(express.urlencoded({ extended: false, limit: '100kb' }));
 
   server.use(
     helmet({
+      hsts: isProduction
+        ? {
+            maxAge: 31536000,
+            includeSubDomains: true,
+            preload: true,
+          }
+        : false,
       contentSecurityPolicy: {
         directives: {
           defaultSrc: ["'self'"],
@@ -52,7 +90,7 @@ export function app(): express.Express {
           imgSrc: ["'self'", 'data:', 'https:'],
           scriptSrc: ["'self'", "'unsafe-inline'"],
           styleSrc: ["'self'", "'unsafe-inline'", 'https:'],
-          connectSrc: ["'self'", 'http:', 'https:'],
+          connectSrc: isProduction ? ["'self'", 'https:'] : ["'self'", 'http:', 'https:'],
           fontSrc: ["'self'", 'https:', 'data:'],
         },
       },
@@ -60,6 +98,37 @@ export function app(): express.Express {
       crossOriginEmbedderPolicy: false,
     })
   );
+
+  server.use((req, res, next) => {
+    if (!req.path.startsWith('/api')) {
+      next();
+      return;
+    }
+
+    const startedAt = Date.now();
+    const correlationId = req.get('x-correlation-id') || `srv-${startedAt}-${Math.random().toString(16).slice(2)}`;
+    const proto = getRequestProto(req);
+
+    res.setHeader('X-Correlation-Id', correlationId);
+    res.on('finish', () => {
+      const elapsedMs = Date.now() - startedAt;
+      const logEntry = {
+        type: 'api_audit',
+        ts: new Date(startedAt).toISOString(),
+        correlationId,
+        method: req.method,
+        path: req.originalUrl,
+        status: res.statusCode,
+        durationMs: elapsedMs,
+        ip: req.ip,
+        userAgent: req.get('user-agent') || '',
+        proto,
+      };
+      console.log(JSON.stringify(logEntry));
+    });
+
+    next();
+  });
 
   const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,

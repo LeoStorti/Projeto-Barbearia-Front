@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,16 +21,20 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './tela-de-login.component.html',
   styleUrls: ['./tela-de-login.component.css']
 })
-export class TelaDeLoginComponent {
+export class TelaDeLoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string | null = null;
   isSubmitting = false;
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      login: ['leostorti@example.com', [Validators.required, Validators.email]],
-      senha: ['123', [Validators.required]]
+      login: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required]]
     });
+  }
+
+  ngOnInit(): void {
+    this.authService.warmupBackend();
   }
 
   onLogin() {

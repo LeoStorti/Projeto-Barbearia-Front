@@ -18,9 +18,13 @@ export class FuncionarioRestrictionGuard implements CanActivate {
     // Admin pode tudo
     if (this.auth.isAdmin()) return true;
 
-    const cached = (this.auth.getCachedRole() ?? '').trim();
-    // Se há cache não-admin, tentamos sincronizar com a API para evitar falso bloqueio
-    // em casos de cache antigo/inconsistente.
+    const roleHint = this.auth.getRoleHint();
+    if (roleHint) {
+      const isAdminRole = roleHint === 'admin' || roleHint === 'gerente' || roleHint === '1';
+      this.auth.setCachedRole(isAdminRole ? 'Admin' : 'Funcionario');
+      if (isAdminRole) return true;
+      return this.deny(route, state);
+    }
 
     // Se não conseguimos determinar via token/cache, consultamos a API (sincroniza com o backend real)
     const loginEmail = (this.auth.getLogin() ?? '').trim().toLowerCase();

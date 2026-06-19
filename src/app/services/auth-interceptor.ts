@@ -5,6 +5,8 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuthToken } from './auth-token.util';
 
+const STRICT_TENANT_ISOLATION = true;
+
 function generateCorrelationId(): string {
   try {
     // Navegadores modernos
@@ -121,9 +123,7 @@ function isTenantScopedPath(url: string): boolean {
 function filterArrayByEmpresaId(items: any[], empresaId: number): any[] {
   return items.filter((item) => {
     const itemEmpresaId = getEmpresaIdFromAny(item);
-    // Se o item não expõe marcador de tenant, não remove no frontend.
-    // A separação definitiva deve ocorrer no backend.
-    if (itemEmpresaId <= 0) return true;
+    if (itemEmpresaId <= 0) return !STRICT_TENANT_ISOLATION;
     return itemEmpresaId === empresaId;
   });
 }
@@ -160,6 +160,20 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn) {
 
     const token = getAuthToken();
     const empresaId = getEmpresaId(token);
+
+    if (STRICT_TENANT_ISOLATION && !isPublicApiCall && isTenantScopedPath(req.url) && empresaId <= 0) {
+      return throwError(
+        () =>
+          new HttpErrorResponse({
+            status: 428,
+            statusText: 'Tenant context missing',
+            url: req.url,
+            error: {
+              message: 'Contexto de tenant ausente. Faça login novamente para continuar.',
+            },
+          })
+      );
+    }
 
     const correlationId = generateCorrelationId();
 

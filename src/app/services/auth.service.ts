@@ -1,7 +1,7 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { clearAuthToken, getAuthToken, setAuthToken } from './auth-token.util';
 
@@ -32,6 +32,7 @@ export class AuthService {
   private readonly SHOP_NAME_KEY = 'nome_barbearia';
   private readonly EMPRESA_ID_KEY = 'empresa_id';
   private readonly SESSION_ACTIVE_KEY = 'auth_session_active';
+  private warmupTriggered = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -169,6 +170,28 @@ export class AuthService {
       return authToken !== null;
     }
     return false;
+  }
+
+  /**
+   * Faz uma chamada leve para reduzir latência do primeiro login
+   * quando o backend hospedado está em cold start.
+   */
+  warmupBackend(): void {
+    if (!this.isBrowser() || this.warmupTriggered) return;
+    this.warmupTriggered = true;
+
+    this.http
+      .get(`${this.apiUrl}`, {
+        responseType: 'text',
+        withCredentials: true,
+      })
+      .pipe(
+        catchError(() => {
+          // Falhas no warmup não devem impactar UX nem fluxo de login.
+          return of('');
+        })
+      )
+      .subscribe();
   }
 
   getLogin(): string | null {
@@ -334,6 +357,16 @@ export class AuthService {
     const role = this.getRoleFromToken();
     // compat: gerente == admin
     return role === 'admin' || role === 'gerente' || role === '1';
+  }
+
+  /**
+   * Sinaliza o papel atual (cache -> token), em lowercase.
+   * Retorna string vazia quando não é possível inferir.
+   */
+  getRoleHint(): string {
+    const cached = this.getCachedRole();
+    if (cached) return cached.trim().toLowerCase();
+    return this.getRoleFromToken();
   }
 
   getCachedRole(): string {
