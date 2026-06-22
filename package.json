@@ -14,6 +14,8 @@
     "smoke:docker": "powershell -ExecutionPolicy Bypass -File scripts\\docker-smoke-test.ps1",
     "seed:docker": "powershell -ExecutionPolicy Bypass -File scripts\\docker-seed-dev.ps1",
     "build": "ng build",
+    "health:ssr": "powershell -ExecutionPolicy Bypass -File scripts\\warmup-ssr.ps1 -OnlyHealth",
+    "warmup:ssr": "powershell -ExecutionPolicy Bypass -File scripts\\warmup-ssr.ps1",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:projectangular": "node dist/projectangular/server/server.mjs"

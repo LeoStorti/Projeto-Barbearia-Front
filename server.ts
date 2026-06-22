@@ -13,6 +13,7 @@ export function app(): express.Express {
   const server = express();
   server.disable('x-powered-by');
   server.set('trust proxy', 1);
+  const serverStartedAt = Date.now();
 
   const nodeEnv = (process.env['NODE_ENV'] ?? '').trim().toLowerCase();
   const aspEnv = (process.env['ASPNETCORE_ENVIRONMENT'] ?? '').trim().toLowerCase();
@@ -157,6 +158,22 @@ export function app(): express.Express {
   server.use('/api', apiLimiter);
 
   server.use('/api/auth/login', authLimiter);
+
+  server.get('/healthz', (_req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
+    res.status(200).json({
+      ok: true,
+      service: 'projectangular-ssr',
+      uptimeSec: Math.floor(process.uptime()),
+      startedAt: new Date(serverStartedAt).toISOString(),
+      now: new Date().toISOString(),
+    });
+  });
+
+  server.get('/readyz', (_req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
+    res.status(200).json({ ok: true });
+  });
 
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
   const browserDistFolder = resolve(serverDistFolder, '../browser');
