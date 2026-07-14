@@ -31,6 +31,10 @@ export class TelaDeLoginComponent implements OnInit {
       login: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
     });
+
+    // Impede que o navegador/autofill preencha credenciais (caso venha preenchendo ao abrir o link).
+    // Também evita manter qualquer valor residual caso exista em memória.
+    this.loginForm.patchValue({ login: '', senha: '' }, { emitEvent: false });
   }
 
   ngOnInit(): void {

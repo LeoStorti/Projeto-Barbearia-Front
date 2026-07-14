@@ -575,11 +575,20 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  transition: border-color 180ms ease, box-shadow 220ms ease, transform 220ms ease, background-color 180ms ease;
 }
 
 .agendamento-card.is-selected {
-  outline: 3px solid color-mix(in srgb, var(--text-primary) 70%, transparent);
-  outline-offset: 2px;
+  border-color: color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 62%, var(--border-color));
+  background: color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 8%, var(--surface-color));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 34%, transparent),
+    inset 4px 0 0 color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 60%, transparent);
+}
+
+.agendamento-card:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 45%, var(--border-color));
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 18%, transparent);
 }
 
 
@@ -619,28 +628,68 @@
   border-radius: 10px;
   background: color-mix(in srgb, var(--background-color) 55%, transparent);
   border: 1px solid var(--border-color);
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 
 .details-open-btn mat-icon {
   font-size: 20px;
   width: 20px;
   height: 20px;
-  line-height: 20px;
-  display: inline-block;
+  line-height: 1;
+  display: block;
+  margin: 0;
+  transform: translateX(1px);
+  transition: transform 160ms ease;
+}
+
+.details-open-btn:hover {
+  background: color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 16%, var(--background-color));
+  border-color: color-mix(in srgb, var(--agendamento-accent, var(--text-primary)) 52%, var(--border-color));
+}
+
+.details-open-btn:hover mat-icon {
+  transform: translateX(3px);
+}
+
+.details-open-btn:active {
+  transform: scale(0.98);
+}
+
+.details-open-btn.mat-mdc-icon-button {
+  --mdc-icon-button-state-layer-size: 100%;
+  --mat-icon-button-state-layer-size: 100%;
+  padding: 0;
+}
+
+.details-open-btn .mat-mdc-button-touch-target,
+.details-open-btn .mat-mdc-button-persistent-ripple,
+.details-open-btn .mat-mdc-button-ripple,
+.details-open-btn .mat-mdc-focus-indicator {
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 .agendamento-status-chip {
   background: var(--background-color);
   color: var(--text-primary);
   border-radius: 9999px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-size: 12px;
-  padding: 2px 8px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  min-height: 22px;
+  padding: 1px 9px;
   width: fit-content;
   border: 1px solid var(--border-color);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 9%, transparent);
 }
 .agendamento-cliente { font-weight: 600; }
 .agendamento-servico { font-size: 12px; opacity: 0.9; }
@@ -684,9 +733,20 @@
   border-color: var(--error-color);
 }
 
-.status-finalizado .agendamento-card { border-left: 4px solid var(--text-primary); }
-.status-pendente .agendamento-card { border-left: 4px solid var(--warning-color); }
-.status-cancelado .agendamento-card { border-left: 4px solid var(--error-color); }
+.status-finalizado .agendamento-card {
+  --agendamento-accent: var(--text-primary);
+  border-left: 4px solid var(--text-primary);
+}
+
+.status-pendente .agendamento-card {
+  --agendamento-accent: var(--warning-color);
+  border-left: 4px solid var(--warning-color);
+}
+
+.status-cancelado .agendamento-card {
+  --agendamento-accent: var(--error-color);
+  border-left: 4px solid var(--error-color);
+}
 
 /* Tooltip personalizado */
 
@@ -715,5 +775,6 @@
 
 .agenda-grid2.compact-mode .agendamento-status-chip {
   font-size: 11px;
+  min-height: 20px;
   padding: 1px 8px;
 }

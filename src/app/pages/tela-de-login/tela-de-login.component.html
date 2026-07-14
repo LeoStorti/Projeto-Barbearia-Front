@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-container" data-nosnippet>
   <div class="login-card w-full max-w-md" data-v0-t="card">
     <div class="login-card-header">
       <div class="flex items-center justify-center">
@@ -14,7 +14,7 @@
       <div class="login-brand">Billy Software</div>
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form" autocomplete="off" novalidate>
       <div class="login-field">
         <label class="login-label" for="login">Email</label>
         <input
@@ -23,7 +23,7 @@
           formControlName="login"
           placeholder="seuemail@exemplo.com"
           required
-          type="email" />
+          type="email" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
       </div>
 
       <div class="login-field">
@@ -34,7 +34,7 @@
           formControlName="senha"
           placeholder="Sua senha"
           required
-          type="password" />
+          type="password" autocomplete="new-password" />
       </div>
 
       <p *ngIf="errorMessage" class="login-error">{{ errorMessage }}</p>
